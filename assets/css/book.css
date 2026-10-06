@@ -1137,19 +1137,51 @@ body {
 }
 
 /* =========================================================
-   CUMPLE 8 · POWER AVENTURA
+   CUMPLE 8 · MARIO DENTRO DE LA HOJA
 ========================================================= */
 
+.book-page.page-right:has(.experience-cumple-8),
+.book-page.page-right:has(.experience-cumple-8) .page-content {
+  overflow: hidden !important;
+}
+
 .experience-cumple-8 {
-  position: relative;
+  overflow: hidden !important;
+}
 
-  background: #080b22;
+.experience-cumple-8 .experience-game-scene {
+  position: absolute;
+  inset: 0;
 
-  color: white;
+  width: 100%;
+  height: 100%;
 
-  overflow: visible !important;
+  overflow: hidden !important;
+
+  border-radius: inherit;
 
   isolation: isolate;
+}
+
+/* =========================================================
+   CUMPLE 8 · MARIO
+========================================================= */
+
+/* =========================================================
+   CUMPLE 8 · MARIO
+   Ajuste de tamaño durante el salto
+========================================================= */
+
+.experience-cumple-8 .game-character {
+  bottom: -1%;
+
+  width: 68%;
+
+  transform: translateX(-50%) translateY(48%) scale(0.92);
+}
+
+.experience-cumple-8:hover .game-character {
+  transform: translateX(-50%) translateY(0) scale(0.78);
 }
 
 /* =========================================================
@@ -1484,4 +1516,92 @@ body {
 .experience-cumple-8,
 .experience-cumple-8 .experience-game-scene {
   overflow: visible !important;
+}
+
+/* =========================================================
+   FIX · TRANSICIÓN DE PÁGINAS
+   Superficie estable durante el page flip
+========================================================= */
+
+.experience-page {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background: #000;
+
+  isolation: isolate;
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* La imagen permanece siempre dentro de la página */
+.experience-page .experience-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  z-index: 1;
+
+  transform: translateZ(0);
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Velo de la experiencia */
+.experience-page::after {
+  z-index: 2;
+}
+
+/* Información siempre por encima */
+.experience-page .experience-info {
+  position: absolute;
+
+  z-index: 10;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* La hoja que gira también debe ser una superficie sólida */
+.flip-page,
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transform-style: preserve-3d;
+
+  background-color: var(--paper);
+}
+
+/* Evita que el navegador muestre transparencias
+   durante la composición 3D */
+.flip-front {
+  background: var(--paper);
+}
+
+.flip-back {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.08),
+      transparent 18%,
+      transparent 85%,
+      rgba(0, 0, 0, 0.05)
+    ),
+    var(--paper-dark);
 }

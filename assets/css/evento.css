@@ -1782,3 +1782,646 @@ body.tema-cumple-8 footer {
     font-size: 40px;
   }
 }
+
+/* =========================================================
+   CUMPLE 8 · UNIVERSOS
+========================================================= */
+
+body.tema-cumple-8 {
+  background: #f3f5f1;
+
+  transition:
+    background 0.8s ease,
+    color 0.8s ease;
+}
+
+/* =========================================================
+   TRANSICIONES GENERALES
+========================================================= */
+
+body.tema-cumple-8 .hero,
+body.tema-cumple-8 .intro,
+body.tema-cumple-8 .styles-section,
+body.tema-cumple-8 .process,
+body.tema-cumple-8 .final-cta,
+body.tema-cumple-8 footer {
+  transition:
+    background 0.8s ease,
+    color 0.8s ease,
+    border-color 0.8s ease;
+}
+
+body.tema-cumple-8 .hero-line {
+  transition:
+    background 0.8s ease,
+    width 0.5s ease;
+}
+
+/* =========================================================
+   DINOSAURIOS
+========================================================= */
+
+body.tema-cumple-8.cumple8-dinosaurios {
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(76, 111, 73, 0.16),
+      transparent 42%
+    ),
+    linear-gradient(180deg, #edf2ea, #e4ebe1);
+
+  color: #243327;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .hero-line {
+  background: #587b58;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .eyebrow {
+  color: #587b58;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .hero-button {
+  border-color: rgba(63, 91, 65, 0.35);
+  color: #304832;
+}
+
+/* =========================================================
+   SELECCIÓN
+========================================================= */
+
+body.tema-cumple-8.cumple8-seleccion {
+  background:
+    radial-gradient(
+      circle at 50% 5%,
+      rgba(108, 183, 224, 0.22),
+      transparent 45%
+    ),
+    linear-gradient(180deg, #ffffff, #eef8fc);
+
+  color: #273d4c;
+}
+
+body.tema-cumple-8.cumple8-seleccion .hero-line {
+  background: #74b8da;
+}
+
+body.tema-cumple-8.cumple8-seleccion .eyebrow {
+  color: #5aa5cd;
+}
+
+body.tema-cumple-8.cumple8-seleccion .hero-button {
+  border-color: rgba(90, 165, 205, 0.4);
+  color: #367fa8;
+}
+
+/* =========================================================
+   SUPERHÉROES
+========================================================= */
+
+body.tema-cumple-8.cumple8-superheroes {
+  background:
+    radial-gradient(circle at 50% 8%, rgba(185, 35, 48, 0.18), transparent 42%),
+    linear-gradient(180deg, #f7eeee, #eee0df);
+
+  color: #351d20;
+}
+
+body.tema-cumple-8.cumple8-superheroes .hero-line {
+  background: #b82c3b;
+}
+
+body.tema-cumple-8.cumple8-superheroes .eyebrow {
+  color: #a42636;
+}
+
+body.tema-cumple-8.cumple8-superheroes .hero-button {
+  border-color: rgba(170, 35, 50, 0.4);
+  color: #a42636;
+}
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+body.tema-cumple-8 .cumple8-card {
+  overflow: hidden;
+
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
+}
+
+body.tema-cumple-8 .cumple8-card:hover {
+  transform: translateY(-9px);
+}
+
+/* =========================================================
+   PREVIEW BASE
+========================================================= */
+
+body.tema-cumple-8 .cumple8-preview {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 330px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  isolation: isolate;
+}
+
+.cumple8-preview-number {
+  position: absolute;
+
+  top: 22px;
+  left: 22px;
+
+  z-index: 10;
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* =========================================================
+   DINOSAURIOS · PREVIEW
+========================================================= */
+
+.dinosaurios-preview {
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(147, 177, 119, 0.25),
+      transparent 42%
+    ),
+    linear-gradient(135deg, #17251a, #3d593d 50%, #1c2c20);
+
+  color: #edf2e5;
+}
+
+.dino-circle {
+  position: absolute;
+
+  width: 210px;
+  height: 210px;
+
+  border: 1px solid rgba(189, 215, 153, 0.45);
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 50px rgba(126, 166, 105, 0.18);
+
+  transform: rotate(18deg);
+}
+
+.dino-symbol {
+  position: relative;
+
+  z-index: 3;
+
+  font-size: 88px;
+
+  filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.35));
+}
+
+.dino-title {
+  position: absolute;
+
+  bottom: 55px;
+
+  z-index: 4;
+
+  font-family: var(--serif);
+
+  font-size: 28px;
+
+  letter-spacing: 7px;
+}
+
+.dino-subtitle {
+  position: absolute;
+
+  bottom: 30px;
+
+  font-size: 7px;
+
+  letter-spacing: 4px;
+
+  color: rgba(231, 241, 218, 0.65);
+}
+
+/* =========================================================
+   SELECCIÓN · PREVIEW
+========================================================= */
+
+.seleccion-preview {
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(112, 190, 226, 0.28),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #ffffff, #dff1fa 52%, #ffffff);
+
+  color: #438db5;
+}
+
+.seleccion-preview .cumple8-preview-number {
+  color: rgba(52, 113, 148, 0.55);
+}
+
+.seleccion-rays {
+  position: absolute;
+
+  width: 290px;
+  height: 290px;
+
+  border-radius: 50%;
+
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(104, 181, 219, 0.12) 0deg 12deg,
+    transparent 12deg 24deg
+  );
+
+  opacity: 0.7;
+}
+
+.seleccion-ball {
+  position: relative;
+
+  z-index: 4;
+
+  font-size: 76px;
+
+  filter: drop-shadow(0 14px 18px rgba(67, 130, 163, 0.22));
+}
+
+.seleccion-number {
+  position: absolute;
+
+  right: 25px;
+  top: 35px;
+
+  font-family: var(--serif);
+
+  font-size: 72px;
+
+  font-weight: 400;
+
+  color: rgba(84, 159, 196, 0.2);
+}
+
+.seleccion-title {
+  position: absolute;
+
+  bottom: 55px;
+
+  z-index: 5;
+
+  font-family: var(--serif);
+
+  font-size: 27px;
+
+  letter-spacing: 5px;
+
+  color: #3984ac;
+}
+
+.seleccion-subtitle {
+  position: absolute;
+
+  bottom: 30px;
+
+  font-size: 7px;
+
+  letter-spacing: 3px;
+
+  color: rgba(50, 111, 145, 0.55);
+}
+
+/* =========================================================
+   SUPERHÉROES · PREVIEW
+========================================================= */
+
+.superheroes-preview {
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 212, 69, 0.18),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #2a1719, #861f2d 52%, #32171b);
+
+  color: white;
+}
+
+.hero-rays {
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 213, 69, 0.16) 0deg 9deg,
+    transparent 9deg 18deg
+  );
+}
+
+.hero-shield {
+  position: relative;
+
+  z-index: 4;
+
+  width: 105px;
+  height: 120px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(145deg, #e7e7e7, #858585 48%, #d5d5d5);
+
+  color: #c92335;
+
+  clip-path: polygon(50% 0%, 92% 18%, 82% 70%, 50% 100%, 18% 70%, 8% 18%);
+
+  font-size: 45px;
+
+  text-shadow: 0 2px 0 #ffffff;
+}
+
+.hero-title {
+  position: absolute;
+
+  bottom: 55px;
+
+  z-index: 5;
+
+  font-family: var(--serif);
+
+  font-size: 30px;
+
+  letter-spacing: 8px;
+}
+
+.hero-subtitle {
+  position: absolute;
+
+  bottom: 30px;
+
+  font-size: 7px;
+
+  letter-spacing: 4px;
+
+  color: rgba(255, 221, 85, 0.72);
+}
+
+/* =========================================================
+   HOVER · TARJETAS
+========================================================= */
+
+.dinosaurios-card:hover {
+  box-shadow: 0 28px 65px rgba(45, 78, 51, 0.24);
+}
+
+.seleccion-card:hover {
+  box-shadow: 0 28px 65px rgba(69, 150, 195, 0.22);
+}
+
+.superheroes-card:hover {
+  box-shadow: 0 28px 65px rgba(155, 35, 50, 0.25);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+  body.tema-cumple-8 .cumple8-preview {
+    min-height: 260px;
+  }
+
+  .dino-symbol {
+    font-size: 70px;
+  }
+
+  .seleccion-ball {
+    font-size: 60px;
+  }
+
+  .hero-shield {
+    width: 85px;
+    height: 98px;
+  }
+}
+
+/* =========================================================
+   CUMPLE 8 · CAMBIO DE IDENTIDAD COMPLETA AL HACER HOVER
+========================================================= */
+
+/* ---------------------------------------------------------
+   TRANSICIÓN GENERAL
+--------------------------------------------------------- */
+
+body.tema-cumple-8,
+body.tema-cumple-8 .hero,
+body.tema-cumple-8 .intro,
+body.tema-cumple-8 .styles-section,
+body.tema-cumple-8 .process,
+body.tema-cumple-8 .final-cta,
+body.tema-cumple-8 footer,
+body.tema-cumple-8 .navbar {
+  transition:
+    background-color 0.8s ease,
+    color 0.8s ease,
+    border-color 0.8s ease;
+}
+
+/* =========================================================
+   DINOSAURIOS · VERDE
+========================================================= */
+
+body.tema-cumple-8.cumple8-dinosaurios {
+  background: #edf4ed;
+  color: #18351f;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .hero {
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(74, 120, 76, 0.28),
+      transparent 45%
+    ),
+    #18351f;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .intro,
+body.tema-cumple-8.cumple8-dinosaurios .styles-section,
+body.tema-cumple-8.cumple8-dinosaurios .process {
+  background: #edf4ed;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .final-cta {
+  background: linear-gradient(135deg, #18351f, #315f3a);
+}
+
+body.tema-cumple-8.cumple8-dinosaurios footer {
+  background: #102417;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .eyebrow,
+body.tema-cumple-8.cumple8-dinosaurios .intro-kicker {
+  color: #3f7548;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .hero-line {
+  background: #78a878;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .process-item {
+  border-color: rgba(48, 94, 55, 0.25);
+}
+
+/* =========================================================
+   SELECCIÓN · CELESTE
+========================================================= */
+
+body.tema-cumple-8.cumple8-seleccion {
+  background: #eef8fc;
+  color: #173f52;
+}
+
+body.tema-cumple-8.cumple8-seleccion .hero {
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(116, 190, 220, 0.4),
+      transparent 45%
+    ),
+    linear-gradient(135deg, #dff4fb, #8ccde2);
+}
+
+body.tema-cumple-8.cumple8-seleccion .intro,
+body.tema-cumple-8.cumple8-seleccion .styles-section,
+body.tema-cumple-8.cumple8-seleccion .process {
+  background: #eef8fc;
+}
+
+body.tema-cumple-8.cumple8-seleccion .final-cta {
+  background: linear-gradient(135deg, #8ccde2, #4da8ca);
+}
+
+body.tema-cumple-8.cumple8-seleccion footer {
+  background: #245f76;
+}
+
+body.tema-cumple-8.cumple8-seleccion .eyebrow,
+body.tema-cumple-8.cumple8-seleccion .intro-kicker {
+  color: #3689aa;
+}
+
+body.tema-cumple-8.cumple8-seleccion .hero-line {
+  background: #ffffff;
+}
+
+body.tema-cumple-8.cumple8-seleccion .process-item {
+  border-color: rgba(54, 137, 170, 0.25);
+}
+
+/* =========================================================
+   SUPERHÉROES · ROJO
+========================================================= */
+
+body.tema-cumple-8.cumple8-superheroes {
+  background: #f7eeee;
+  color: #3b1114;
+}
+
+body.tema-cumple-8.cumple8-superheroes .hero {
+  background:
+    radial-gradient(circle at 70% 30%, rgba(210, 48, 58, 0.4), transparent 45%),
+    linear-gradient(135deg, #4b1014, #a51e27);
+}
+
+body.tema-cumple-8.cumple8-superheroes .intro,
+body.tema-cumple-8.cumple8-superheroes .styles-section,
+body.tema-cumple-8.cumple8-superheroes .process {
+  background: #f7eeee;
+}
+
+body.tema-cumple-8.cumple8-superheroes .final-cta {
+  background: linear-gradient(135deg, #4b1014, #a51e27);
+}
+
+body.tema-cumple-8.cumple8-superheroes footer {
+  background: #27090c;
+}
+
+body.tema-cumple-8.cumple8-superheroes .eyebrow,
+body.tema-cumple-8.cumple8-superheroes .intro-kicker {
+  color: #b32630;
+}
+
+body.tema-cumple-8.cumple8-superheroes .hero-line {
+  background: #f2c94c;
+}
+
+body.tema-cumple-8.cumple8-superheroes .process-item {
+  border-color: rgba(179, 38, 48, 0.25);
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+body.tema-cumple-8.cumple8-dinosaurios .navbar {
+  background: rgba(24, 53, 31, 0.92);
+}
+
+body.tema-cumple-8.cumple8-seleccion .navbar {
+  background: rgba(77, 168, 202, 0.92);
+}
+
+body.tema-cumple-8.cumple8-superheroes .navbar {
+  background: rgba(75, 16, 20, 0.94);
+}
+
+/* =========================================================
+   TARJETAS · UN POCO MÁS DE VIDA
+========================================================= */
+
+body.tema-cumple-8 .cumple8-card {
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.6s ease,
+    border-color 0.6s ease;
+}
+
+body.tema-cumple-8.cumple8-dinosaurios .cumple8-card {
+  border-color: rgba(63, 117, 72, 0.35);
+}
+
+body.tema-cumple-8.cumple8-seleccion .cumple8-card {
+  border-color: rgba(77, 168, 202, 0.35);
+}
+
+body.tema-cumple-8.cumple8-superheroes .cumple8-card {
+  border-color: rgba(179, 38, 48, 0.35);
+}
