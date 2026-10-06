@@ -1,0 +1,1487 @@
+/* =========================================================
+   EXPERIENCIAS
+   BOOK EXPERIENCE
+========================================================= */
+
+:root {
+  --bg: #15120f;
+  --bg-soft: #211c17;
+
+  --paper: #f4eee4;
+  --paper-dark: #e8dfd2;
+
+  --ink: #29231e;
+  --ink-soft: #756b60;
+
+  --gold: #c7a35a;
+  --gold-light: #e4c986;
+
+  --serif: "DM Serif Display", Georgia, serif;
+  --sans: "Montserrat", Arial, sans-serif;
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: white;
+  font-family: var(--sans);
+  overflow: hidden;
+}
+
+/* =========================================================
+   ESCENARIO
+========================================================= */
+
+.book-world {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  min-height: 620px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 50% 45%, rgba(94, 72, 40, 0.28), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.75), transparent 55%),
+    #15120f;
+}
+
+/* Luz ambiental detrás del libro */
+
+.ambient-light {
+  position: absolute;
+
+  width: 70vw;
+  height: 55vh;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: radial-gradient(
+    ellipse,
+    rgba(201, 162, 83, 0.12),
+    rgba(201, 162, 83, 0.03) 40%,
+    transparent 70%
+  );
+
+  filter: blur(20px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   MARCA
+========================================================= */
+
+.brand {
+  position: fixed;
+
+  top: 32px;
+  left: 42px;
+
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.brand span {
+  font-size: 11px;
+  letter-spacing: 4px;
+  font-weight: 600;
+}
+
+.brand small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* =========================================================
+   ESCENARIO DEL LIBRO
+========================================================= */
+
+.book-stage {
+  position: relative;
+
+  width: min(1080px, 82vw);
+  height: min(650px, 72vh);
+
+  perspective: 2200px;
+}
+
+/* =========================================================
+   LIBRO
+========================================================= */
+
+.book {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+
+  transition: transform 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  filter: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.55));
+}
+
+/* =========================================================
+   PÁGINAS
+========================================================= */
+
+.book-page {
+  position: absolute;
+
+  top: 0;
+
+  width: 50%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.05),
+      transparent 8%,
+      transparent 92%,
+      rgba(0, 0, 0, 0.07)
+    ),
+    var(--paper);
+
+  color: var(--ink);
+}
+
+/* izquierda */
+
+.page-left {
+  left: 0;
+
+  border-radius: 5px 0 0 5px;
+
+  box-shadow: inset -20px 0 35px rgba(0, 0, 0, 0.07);
+}
+
+/* derecha */
+
+.page-right {
+  right: 0;
+
+  border-radius: 0 5px 5px 0;
+
+  box-shadow: inset 20px 0 35px rgba(0, 0, 0, 0.07);
+}
+
+/* =========================================================
+   LOMO
+========================================================= */
+
+.book::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  width: 3px;
+  height: 100%;
+
+  transform: translateX(-50%);
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.22),
+    rgba(255, 255, 255, 0.28),
+    rgba(0, 0, 0, 0.22)
+  );
+
+  z-index: 30;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+.cover-page {
+  left: 50%;
+
+  width: 50%;
+
+  z-index: 50;
+
+  transform-origin: left center;
+
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.05), transparent 40%),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(214, 175, 94, 0.15),
+      transparent 35%
+    ),
+    #1b1713;
+
+  color: white;
+
+  border-radius: 0 7px 7px 0;
+
+  box-shadow:
+    inset 10px 0 25px rgba(0, 0, 0, 0.45),
+    15px 0 35px rgba(0, 0, 0, 0.35);
+
+  transition: transform 1.25s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+/* cuando se abre */
+
+.book.open .cover-page {
+  transform: rotateY(-180deg);
+}
+
+/* =========================================================
+   PORTADA CONTENIDO
+========================================================= */
+
+.cover-content {
+  position: absolute;
+
+  inset: 0;
+
+  padding: 12%;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: flex-start;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.025),
+    transparent 45%
+  );
+}
+
+.cover-small {
+  font-size: 9px;
+
+  letter-spacing: 4px;
+
+  color: var(--gold-light);
+
+  margin-bottom: 25px;
+}
+
+.cover-content h1 {
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-weight: 400;
+
+  font-size: clamp(38px, 4.3vw, 68px);
+
+  line-height: 0.98;
+
+  letter-spacing: -1px;
+}
+
+.cover-line {
+  width: 70px;
+  height: 1px;
+
+  background: var(--gold);
+
+  margin: 30px 0 20px;
+}
+
+.cover-content p {
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-size: 21px;
+
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* =========================================================
+   BOTÓN ABRIR
+========================================================= */
+
+.open-book {
+  margin-top: 50px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  border: 0;
+  background: none;
+
+  color: white;
+
+  font-family: var(--sans);
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.open-book i {
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(201, 162, 87, 0.55);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--gold-light);
+
+  font-style: normal;
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease;
+}
+
+.open-book:hover i {
+  transform: translateX(6px);
+
+  background: rgba(201, 162, 87, 0.12);
+}
+
+/* =========================================================
+   NÚMERO PORTADA
+========================================================= */
+
+.cover-number {
+  position: absolute;
+
+  bottom: 28px;
+  right: 35px;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* =========================================================
+   CONTENIDO DE PÁGINAS
+========================================================= */
+
+.page-content {
+  position: absolute;
+
+  inset: 0;
+
+  padding: 12%;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+/* =========================================================
+   PÁGINA DE EXPERIENCIA
+========================================================= */
+
+.experience-page {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+.experience-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 1s ease;
+}
+
+.experience-page:hover .experience-image {
+  transform: scale(1.045);
+}
+
+/* velo */
+
+.experience-page::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72),
+    rgba(0, 0, 0, 0.05) 60%
+  );
+
+  pointer-events: none;
+}
+
+/* información */
+
+.experience-info {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 9%;
+  right: 9%;
+  bottom: 9%;
+
+  color: white;
+}
+
+.experience-category {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-size: 8px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  color: var(--gold-light);
+}
+
+.experience-title {
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-size: clamp(28px, 3vw, 46px);
+
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+.experience-phrase {
+  margin: 13px 0 0;
+
+  max-width: 280px;
+
+  font-size: 11px;
+
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* =========================================================
+   BOTÓN VIVIR
+========================================================= */
+
+.experience-open {
+  margin-top: 22px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  font-family: var(--sans);
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.experience-open span {
+  display: inline-block;
+
+  padding-bottom: 5px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+/* =========================================================
+   PÁGINA SIMPLE
+========================================================= */
+
+.simple-page {
+  height: 100%;
+
+  padding: 12%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: flex-start;
+}
+
+.simple-number {
+  font-size: 9px;
+
+  letter-spacing: 3px;
+
+  color: var(--gold-dark);
+
+  margin-bottom: 25px;
+}
+
+.simple-page h2 {
+  margin: 0;
+
+  font-family: var(--serif);
+
+  font-weight: 400;
+
+  font-size: clamp(32px, 3vw, 50px);
+
+  line-height: 1;
+}
+
+.simple-page p {
+  max-width: 300px;
+
+  margin-top: 20px;
+
+  color: var(--ink-soft);
+
+  font-size: 12px;
+
+  line-height: 1.8;
+}
+
+/* =========================================================
+   NÚMEROS
+========================================================= */
+
+.page-number {
+  position: absolute;
+
+  z-index: 10;
+
+  bottom: 25px;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: rgba(40, 35, 30, 0.42);
+}
+
+.page-left .page-number {
+  left: 30px;
+}
+
+.page-right .page-number {
+  right: 30px;
+}
+
+/* =========================================================
+   CONTROLES
+========================================================= */
+
+.book-controls {
+  position: fixed;
+
+  z-index: 50;
+
+  left: 50%;
+  bottom: 55px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 30px;
+}
+
+.book-controls button {
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  color: rgba(255, 255, 255, 0.72);
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.book-controls button:hover {
+  border-color: var(--gold);
+
+  background: rgba(201, 162, 87, 0.08);
+
+  transform: scale(1.08);
+}
+
+.page-progress {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.progress-line {
+  position: relative;
+
+  width: 80px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#progressBar {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  height: 1px;
+
+  width: 10%;
+
+  background: var(--gold);
+}
+
+/* =========================================================
+   AYUDA
+========================================================= */
+
+.book-hint {
+  position: fixed;
+
+  left: 50%;
+  bottom: 20px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  gap: 12px;
+
+  align-items: center;
+
+  font-size: 8px;
+
+  letter-spacing: 1.5px;
+
+  color: rgba(255, 255, 255, 0.28);
+
+  transition: opacity 0.8s ease;
+}
+
+.book-hint.hidden {
+  opacity: 0;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.book-footer {
+  position: fixed;
+
+  right: 40px;
+  bottom: 30px;
+
+  display: flex;
+
+  gap: 8px;
+
+  font-size: 7px;
+
+  letter-spacing: 2px;
+
+  color: rgba(255, 255, 255, 0.22);
+}
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+@keyframes bookAppear {
+  from {
+    opacity: 0;
+    transform: translateY(35px) rotateX(4deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+.book {
+  animation: bookAppear 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+  body {
+    overflow: hidden;
+  }
+
+  .book-world {
+    min-height: 100svh;
+  }
+
+  .brand {
+    top: 22px;
+    left: 22px;
+  }
+
+  .book-stage {
+    width: 88vw;
+    height: 70vh;
+  }
+
+  .book-page {
+    width: 100%;
+  }
+
+  .page-left {
+    display: none;
+  }
+
+  .page-right {
+    left: 0;
+    right: auto;
+
+    border-radius: 5px;
+
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .book::after {
+    display: none;
+  }
+
+  .cover-page {
+    left: 0;
+
+    width: 100%;
+
+    border-radius: 5px;
+
+    transform-origin: left center;
+  }
+
+  .book.open .cover-page {
+    transform: rotateY(-180deg) translateX(-100%);
+  }
+
+  .cover-content {
+    padding: 11%;
+  }
+
+  .cover-content h1 {
+    font-size: 43px;
+  }
+
+  .cover-content p {
+    font-size: 18px;
+  }
+
+  .book-controls {
+    bottom: 58px;
+  }
+
+  .book-footer {
+    display: none;
+  }
+
+  .book-hint {
+    width: 90%;
+
+    justify-content: center;
+
+    text-align: center;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 801px) {
+  .book-stage {
+    height: 68vh;
+  }
+
+  .book-controls {
+    bottom: 42px;
+  }
+
+  .book-hint {
+    display: none;
+  }
+}
+
+/* =========================================================
+   ACCESIBILIDAD
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   PAGE FLIP — EFECTO FÍSICO
+========================================================= */
+
+.book {
+  transform-style: preserve-3d;
+  perspective: 2200px;
+}
+
+/* Hoja que gira */
+.flip-page {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 50%;
+  height: 100%;
+
+  transform-origin: left center;
+  transform-style: preserve-3d;
+
+  z-index: 100;
+
+  cursor: grab;
+
+  transition:
+    transform 1s cubic-bezier(0.77, 0, 0.18, 1),
+    filter 0.8s ease;
+}
+
+.flip-page:active {
+  cursor: grabbing;
+}
+
+/* frente y dorso */
+.flip-face {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  backface-visibility: hidden;
+
+  border-radius: 0 5px 5px 0;
+
+  box-shadow: inset 12px 0 25px rgba(0, 0, 0, 0.08);
+}
+
+/* frente */
+.flip-front {
+  background: var(--paper);
+}
+
+/* dorso */
+.flip-back {
+  transform: rotateY(180deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.08),
+      transparent 18%,
+      transparent 85%,
+      rgba(0, 0, 0, 0.05)
+    ),
+    var(--paper-dark);
+}
+
+/* sombra que aparece debajo de la hoja */
+.flip-page::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.38),
+    rgba(0, 0, 0, 0.08) 30%,
+    transparent 65%
+  );
+
+  opacity: 0;
+
+  transition: opacity 0.4s ease;
+}
+
+.flip-page.flipping::after {
+  opacity: 1;
+}
+
+/* =========================================================
+   LIBRO ABIERTO
+========================================================= */
+
+.book.is-open {
+  transform: translateY(-8px) scale(1.01);
+}
+
+/* =========================================================
+   PROFUNDIDAD
+========================================================= */
+
+.book-stage::after {
+  content: "";
+
+  position: absolute;
+
+  left: 8%;
+  right: 8%;
+  bottom: -5%;
+
+  height: 12%;
+
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.7), transparent 70%);
+
+  filter: blur(18px);
+
+  z-index: -1;
+}
+
+/* =========================================================
+   ILUMINACIÓN AL PASAR EL MOUSE
+========================================================= */
+
+.book-page,
+.flip-page {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.book-page::before,
+.flip-face::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.12),
+    transparent 30%
+  );
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+
+  z-index: 20;
+}
+
+.book-page:hover::before,
+.flip-page:hover .flip-face::before {
+  opacity: 1;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+  .flip-page {
+    left: 0;
+    width: 100%;
+
+    transform-origin: left center;
+  }
+
+  .flip-face {
+    border-radius: 5px;
+  }
+
+  .book-stage {
+    perspective: 1600px;
+  }
+}
+
+.particle-1 {
+  top: 8%;
+  left: 12%;
+
+  font-size: 20px;
+
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  top: 24%;
+  right: 10%;
+
+  font-size: 15px;
+
+  animation-delay: 0.7s;
+}
+
+.particle-3 {
+  bottom: 32%;
+  left: 8%;
+
+  font-size: 11px;
+
+  color: #ff405b;
+
+  animation-delay: 1.2s;
+}
+
+.particle-4 {
+  bottom: 15%;
+  right: 18%;
+
+  font-size: 18px;
+
+  color: #ffd84d;
+
+  animation-delay: 1.8s;
+}
+
+/* =========================================================
+   CUMPLE 8 · POWER AVENTURA
+========================================================= */
+
+.experience-cumple-8 {
+  position: relative;
+
+  background: #080b22;
+
+  color: white;
+
+  overflow: visible !important;
+
+  isolation: isolate;
+}
+
+/* =========================================================
+   ESCENA
+========================================================= */
+
+.experience-cumple-8 .experience-game-scene {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: visible;
+
+  border-radius: inherit;
+
+  isolation: isolate;
+}
+
+/* =========================================================
+   FONDO · mario-rock.jpg
+========================================================= */
+
+.experience-cumple-8 .game-background {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  z-index: 1;
+
+  transition:
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.65s ease;
+}
+
+/* =========================================================
+   OSCURECIMIENTO
+========================================================= */
+
+.experience-cumple-8 .game-darkness {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  background: linear-gradient(
+    135deg,
+    rgba(7, 8, 25, 0.08),
+    rgba(9, 5, 35, 0.22)
+  );
+
+  transition: background 0.65s ease;
+}
+
+/* =========================================================
+   MARIO · ESTADO NORMAL
+========================================================= */
+
+.experience-cumple-8 .game-character {
+  position: absolute;
+
+  left: 50%;
+  bottom: -3%;
+
+  width: 74%;
+  max-width: none;
+  height: auto;
+
+  transform: translateX(-50%) translateY(58%) scale(0.92);
+
+  transform-origin: center bottom;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.35));
+
+  transition:
+    transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1),
+    opacity 0.12s ease,
+    filter 0.18s ease;
+}
+
+/* =========================================================
+   LUZ
+========================================================= */
+
+.experience-cumple-8 .game-glow {
+  position: absolute;
+
+  width: 65%;
+  height: 65%;
+
+  left: 50%;
+  top: 45%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  background: radial-gradient(circle, rgba(80, 100, 255, 0.3), transparent 68%);
+
+  opacity: 0.55;
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.7s ease;
+}
+
+/* =========================================================
+   PARTÍCULAS
+========================================================= */
+
+.experience-cumple-8 .game-particles {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 6;
+
+  pointer-events: none;
+
+  overflow: visible;
+}
+
+.experience-cumple-8 .game-particles .particle {
+  position: absolute;
+
+  font-family: Arial, sans-serif;
+
+  color: white;
+
+  opacity: 0.75;
+
+  text-shadow: 0 0 10px rgba(91, 129, 255, 0.9);
+
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
+}
+
+.experience-cumple-8 .particle-1 {
+  top: 12%;
+  left: 12%;
+
+  font-size: 18px;
+}
+
+.experience-cumple-8 .particle-2 {
+  top: 25%;
+  right: 13%;
+
+  font-size: 14px;
+}
+
+.experience-cumple-8 .particle-3 {
+  bottom: 30%;
+  left: 9%;
+
+  font-size: 10px;
+
+  color: #ff405c;
+}
+
+.experience-cumple-8 .particle-4 {
+  bottom: 16%;
+  right: 15%;
+
+  font-size: 19px;
+
+  color: #ffd84a;
+}
+
+/* =========================================================
+   HOVER · FONDO SE RETRAE
+========================================================= */
+
+.experience-cumple-8:hover .game-background {
+  transform: scale(0.94);
+
+  filter: brightness(0.58) saturate(0.82);
+}
+
+/* =========================================================
+   HOVER · OSCURECE
+========================================================= */
+
+.experience-cumple-8:hover .game-darkness {
+  background: linear-gradient(
+    135deg,
+    rgba(5, 7, 25, 0.3),
+    rgba(18, 5, 40, 0.48)
+  );
+}
+
+/* =========================================================
+   MARIO · SALTO
+========================================================= */
+
+.experience-cumple-8:hover .game-character {
+  transform: translateX(-50%) translateY(2%) scale(1.04);
+
+  opacity: 1;
+
+  filter: drop-shadow(0 28px 24px rgba(0, 0, 0, 0.48))
+    drop-shadow(0 0 22px rgba(75, 105, 255, 0.25));
+}
+
+/* =========================================================
+   HOVER · LUZ
+========================================================= */
+
+.experience-cumple-8:hover .game-glow {
+  opacity: 0.9;
+
+  transform: translate(-50%, -53%) scale(1.12);
+}
+
+/* =========================================================
+   HOVER · PARTÍCULAS
+========================================================= */
+
+.experience-cumple-8:hover .particle-1 {
+  transform: translate(-8px, -12px) scale(1.3);
+
+  opacity: 1;
+}
+
+.experience-cumple-8:hover .particle-2 {
+  transform: translate(8px, -15px) scale(1.25);
+
+  opacity: 1;
+}
+
+.experience-cumple-8:hover .particle-3 {
+  transform: translate(-10px, 8px) scale(1.3);
+
+  opacity: 1;
+}
+
+.experience-cumple-8:hover .particle-4 {
+  transform: translate(10px, -10px) scale(1.3);
+
+  opacity: 1;
+}
+
+/* =========================================================
+   INFORMACIÓN
+========================================================= */
+
+.experience-cumple-8 .experience-info {
+  position: relative;
+
+  z-index: 10;
+}
+
+.experience-cumple-8 .experience-category {
+  color: #6ba7ff;
+
+  font-weight: 600;
+
+  letter-spacing: 2.5px;
+}
+
+.experience-cumple-8 .experience-title {
+  color: white;
+
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.55);
+}
+
+.experience-cumple-8 .experience-phrase {
+  color: #d2d7f4;
+}
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.experience-cumple-8 .experience-open {
+  color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  background: linear-gradient(90deg, #4b32ff, #e52f55);
+
+  box-shadow: 0 10px 30px rgba(67, 43, 220, 0.35);
+}
+
+.experience-cumple-8 .experience-open:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 16px 40px rgba(67, 43, 220, 0.55);
+}
+
+/* =========================================================
+   CUMPLE 8 · AJUSTE DEL CONTENIDO
+========================================================= */
+
+.experience-cumple-8 .experience-info {
+  position: absolute;
+
+  left: 7%;
+  right: 7%;
+  bottom: 7%;
+
+  z-index: 20;
+
+  text-align: left;
+
+  max-width: 82%;
+}
+
+/* =========================================================
+   CUMPLE 8 · PERMITIR QUE MARIO SALGA DEL CUADRO
+========================================================= */
+
+.book-page.page-right:has(.experience-cumple-8),
+.book-page.page-right:has(.experience-cumple-8) .page-content {
+  overflow: visible !important;
+}
+
+.experience-cumple-8,
+.experience-cumple-8 .experience-game-scene {
+  overflow: visible !important;
+}

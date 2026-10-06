@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Experiencias · Invitaciones digitales</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/css/book.css" />
+  </head>
+
+  <body>
+    <main class="book-world">
+      <!-- Luz ambiental -->
+      <div class="ambient-light"></div>
+
+      <!-- Marca -->
+      <div class="brand">
+        <span>EXPERIENCIAS</span>
+        <small>invitaciones digitales</small>
+      </div>
+
+      <!-- =========================
+         LIBRO
+    ========================== -->
+
+      <section class="book-stage" aria-label="Experiencias">
+        <div class="book" id="book">
+          <!-- =========================
+             PORTADA
+        ========================== -->
+
+          <div class="book-page cover-page" data-page="cover">
+            <div class="cover-content">
+              <div class="cover-small">EXPERIENCIAS DIGITALES</div>
+
+              <h1>
+                Cada evento<br />
+                es único.
+              </h1>
+
+              <div class="cover-line"></div>
+
+              <p>Y cuenta su propia historia.</p>
+
+              <button class="open-book" id="openBook">
+                <span>Elegí el evento para contar la tuya</span>
+                <i>→</i>
+              </button>
+            </div>
+
+            <div class="cover-number">01</div>
+          </div>
+
+          <!-- =========================
+             PÁGINA INTERIOR IZQUIERDA
+        ========================== -->
+
+          <div class="book-page page-left" id="leftPage">
+            <div class="page-number">
+              <span id="leftNumber">02</span>
+            </div>
+
+            <div class="page-content" id="leftContent"></div>
+          </div>
+
+          <!-- =========================
+             PÁGINA INTERIOR DERECHA
+        ========================== -->
+
+          <div class="book-page page-right" id="rightPage">
+            <div class="page-number">
+              <span id="rightNumber">03</span>
+            </div>
+
+            <div class="page-content" id="rightContent"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         CONTROLES
+    ========================== -->
+
+      <div class="book-controls">
+        <button id="prevPage" aria-label="Página anterior">←</button>
+
+        <div class="page-progress">
+          <span id="pageCurrent">01</span>
+          <span class="progress-line">
+            <span id="progressBar"></span>
+          </span>
+          <span id="pageTotal">12</span>
+        </div>
+
+        <button id="nextPage" aria-label="Página siguiente">→</button>
+      </div>
+
+      <div class="book-hint" id="bookHint">
+        <span>←</span>
+        <span>Pasá las páginas para descubrir las experiencias</span>
+        <span>→</span>
+      </div>
+
+      <!-- =========================
+         FOOTER MÍNIMO
+    ========================== -->
+
+      <div class="book-footer">
+        <span>CREAMOS EXPERIENCIAS</span>
+        <span>·</span>
+        <span>NO SOLO INVITACIONES</span>
+      </div>
+    </main>
+
+    <script src="assets/js/book.js"></script>
+  </body>
+</html>

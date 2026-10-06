@@ -1,0 +1,1784 @@
+:root {
+  --bg: #f3f0ea;
+  --paper: #faf8f3;
+  --ink: #1c1b19;
+  --muted: #77736c;
+  --line: rgba(28, 27, 25, 0.15);
+  --accent: #8c7963;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.event-page {
+  overflow: hidden;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+  position: fixed;
+  z-index: 100;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(1180px, calc(100% - 40px));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 13px 18px 13px 22px;
+
+  background: rgba(250, 248, 243, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-radius: 100px;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo span {
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.logo small {
+  margin-top: 5px;
+  font-size: 7px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.navbar nav {
+  display: flex;
+  gap: 32px;
+}
+
+.navbar nav a {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #55514b;
+  transition: 0.3s;
+}
+
+.navbar nav a:hover {
+  color: #000;
+}
+
+.nav-button {
+  padding: 11px 20px;
+  background: var(--ink);
+  color: white;
+  border-radius: 50px;
+
+  font-size: 10px;
+  letter-spacing: 1px;
+
+  transition: 0.3s;
+}
+
+.nav-button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+  min-height: 100vh;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(110deg, rgba(20, 18, 16, 0.72), rgba(20, 18, 16, 0.25)),
+    url("../img/casamiento-hero.webp") center / cover no-repeat;
+
+  color: white;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 45%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 70%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(850px, calc(100% - 40px));
+
+  text-align: center;
+
+  padding-top: 60px;
+}
+
+.eyebrow {
+  display: inline-block;
+
+  font-size: 9px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
+.hero h1 {
+  margin-top: 28px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(70px, 11vw, 150px);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.hero-line {
+  width: 60px;
+  height: 1px;
+
+  margin: 35px auto 25px;
+
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.hero p {
+  max-width: 470px;
+
+  margin: auto;
+
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+
+  margin-top: 38px;
+
+  padding: 14px 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50px;
+
+  font-size: 10px;
+  letter-spacing: 1px;
+
+  transition: 0.3s;
+}
+
+.hero-button span {
+  font-size: 16px;
+}
+
+.hero-button:hover {
+  background: white;
+  color: var(--ink);
+}
+
+.hero-number {
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 80px;
+  opacity: 0.18;
+}
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro {
+  display: grid;
+  grid-template-columns: 25% 75%;
+
+  min-height: 700px;
+
+  padding: 130px 9vw;
+
+  background: var(--paper);
+}
+
+.intro-label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.intro-content {
+  max-width: 850px;
+}
+
+.intro-kicker {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--accent);
+}
+
+.intro h2 {
+  margin-top: 25px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+.intro-text {
+  max-width: 570px;
+
+  margin-top: 45px;
+
+  font-size: 14px;
+  line-height: 2;
+  color: #66615a;
+}
+
+/* =========================================
+   STYLES
+========================================= */
+
+.styles-section {
+  padding: 130px 7vw 150px;
+
+  background: #e8e3da;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  margin-bottom: 70px;
+}
+
+.section-heading h2 {
+  margin-top: 20px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(48px, 6vw, 82px);
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+.section-heading > p {
+  max-width: 330px;
+
+  font-size: 12px;
+  line-height: 1.8;
+  color: #67625b;
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.design-card {
+  display: block;
+
+  background: var(--paper);
+
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.design-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.13);
+}
+
+.card-image {
+  height: 510px;
+
+  padding: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.fake-invitation {
+  width: 72%;
+  height: 88%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+
+  transition: transform 0.6s ease;
+}
+
+.design-card:hover .fake-invitation {
+  transform: scale(1.035);
+}
+
+/* EDITORIAL */
+
+.editorial .card-image {
+  background: #d4d0c8;
+}
+
+.editorial-preview {
+  background: #f7f4ee;
+  color: #1b1a18;
+  border: 1px solid #ddd8cf;
+}
+
+.editorial-preview strong {
+  margin: 25px 0;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 38px;
+  line-height: 0.9;
+  font-weight: 400;
+}
+
+.editorial-preview .preview-small {
+  font-size: 7px;
+  letter-spacing: 3px;
+}
+
+.editorial-preview .preview-date {
+  font-size: 7px;
+  letter-spacing: 2px;
+}
+
+/* ROMÁNTICA */
+
+.romantic .card-image {
+  background: #d8c8c0;
+}
+
+.romantic-preview {
+  position: relative;
+
+  background: #eee1db;
+  color: #59433d;
+}
+
+.romantic-preview::before,
+.romantic-preview::after {
+  content: "";
+
+  position: absolute;
+
+  width: 110px;
+  height: 110px;
+
+  border-radius: 100%;
+
+  border: 1px solid rgba(120, 80, 70, 0.25);
+}
+
+.romantic-preview::before {
+  top: 25px;
+  left: 25px;
+}
+
+.romantic-preview::after {
+  bottom: 25px;
+  right: 25px;
+}
+
+.romantic-preview strong {
+  margin: 25px 0;
+
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 37px;
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+.romantic-preview .preview-small {
+  font-size: 7px;
+  letter-spacing: 3px;
+}
+
+.romantic-preview .preview-date {
+  font-family: "Playfair Display", serif;
+  font-size: 12px;
+}
+
+/* CONTEMPORARY */
+
+.contemporary .card-image {
+  background: #272522;
+}
+
+.contemporary-preview {
+  background: #171614;
+  color: #eee7da;
+  border: 1px solid #75664e;
+}
+
+.contemporary-preview strong {
+  margin: 25px 0;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 40px;
+  line-height: 0.88;
+  font-weight: 400;
+}
+
+.contemporary-preview .preview-small {
+  font-size: 7px;
+  letter-spacing: 4px;
+  color: #c8a96b;
+}
+
+.contemporary-preview .preview-date {
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: #c8a96b;
+}
+
+/* CARD INFO */
+
+.card-info {
+  position: relative;
+
+  padding: 30px 30px 35px;
+}
+
+.card-number {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.card-info h3 {
+  margin-top: 8px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 31px;
+  font-weight: 400;
+}
+
+.card-info p {
+  max-width: 310px;
+
+  margin-top: 18px;
+
+  font-size: 11px;
+  line-height: 1.8;
+  color: #706b63;
+}
+
+.card-arrow {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+
+  font-size: 22px;
+
+  transition: 0.3s;
+}
+
+.design-card:hover .card-arrow {
+  transform: translate(5px, -5px);
+}
+
+/* =========================================
+   PROCESS
+========================================= */
+
+.process {
+  padding: 140px 9vw;
+
+  background: var(--paper);
+
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+.process-heading h2 {
+  margin-top: 25px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(50px, 6vw, 80px);
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+.process-list {
+  border-top: 1px solid var(--line);
+}
+
+.process-item {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+
+  padding: 32px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.process-item > span {
+  font-family: "DM Serif Display", serif;
+  font-size: 18px;
+  color: var(--accent);
+}
+
+.process-item h3 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.process-item p {
+  max-width: 480px;
+
+  margin-top: 10px;
+
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* =========================================
+   CTA
+========================================= */
+
+.final-cta {
+  min-height: 650px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    linear-gradient(rgba(25, 23, 20, 0.68), rgba(25, 23, 20, 0.68)),
+    url("../img/casamiento-cta.webp") center / cover no-repeat;
+
+  color: white;
+}
+
+.cta-content h2 {
+  margin-top: 25px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(58px, 8vw, 110px);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.cta-button {
+  display: inline-flex;
+  gap: 25px;
+  align-items: center;
+
+  margin-top: 45px;
+
+  padding: 16px 25px;
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+
+  font-size: 10px;
+  letter-spacing: 1px;
+
+  transition: 0.3s;
+}
+
+.cta-button:hover {
+  background: white;
+  color: #1c1b19;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+  min-height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 35px 7vw;
+
+  background: #171614;
+  color: white;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand span {
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
+.footer-brand small {
+  margin-top: 5px;
+
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: #8d8880;
+}
+
+.footer-copy {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #77736c;
+}
+
+.back-book {
+  font-size: 9px;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.back-book:hover {
+  opacity: 0.6;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .navbar nav {
+    display: none;
+  }
+
+  .design-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .card-image {
+    height: 600px;
+  }
+
+  .intro,
+  .process {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-heading > p {
+    margin-top: 30px;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 25px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    width: calc(100% - 24px);
+    top: 12px;
+  }
+
+  .nav-button {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 70px;
+  }
+
+  .hero-number {
+    right: 20px;
+  }
+
+  .intro,
+  .styles-section,
+  .process {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .card-image {
+    height: 500px;
+  }
+
+  .fake-invitation {
+    width: 70%;
+  }
+}
+
+/* =========================================
+   NAVBAR RESPONSIVE
+========================================= */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-toggle {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(28, 27, 25, 0.15);
+  border-radius: 50%;
+
+  background: transparent;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+
+  width: 16px;
+  height: 1px;
+
+  background: var(--ink);
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .navbar {
+    width: calc(100% - 30px);
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .nav-button {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .mobile-menu {
+    position: absolute;
+
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    background: rgba(250, 248, 243, 0.97);
+
+    border: 1px solid rgba(28, 27, 25, 0.08);
+    border-radius: 24px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-menu a {
+    padding: 14px 10px;
+
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-menu a:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-menu-button {
+    margin-top: 10px;
+
+    padding: 15px 18px !important;
+
+    background: var(--ink);
+    color: white;
+
+    border-radius: 50px;
+
+    text-align: center;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .navbar {
+    top: 12px;
+
+    width: calc(100% - 24px);
+
+    padding: 10px 10px 10px 17px;
+  }
+
+  .logo span {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+  }
+
+  .logo small {
+    font-size: 6px;
+    letter-spacing: 1.5px;
+  }
+
+  .menu-toggle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mobile-menu {
+    top: calc(100% + 8px);
+  }
+}
+
+/* =========================================
+   VOLVER AL LIBRO
+========================================= */
+
+.back-book {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 14px;
+
+  font-size: 9px;
+  letter-spacing: 1px;
+
+  color: #5f5a53;
+
+  border: 1px solid rgba(28, 27, 25, 0.12);
+  border-radius: 50px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.back-book:hover {
+  background: var(--ink);
+  color: white;
+  transform: translateX(-2px);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .back-book {
+    padding: 9px 12px;
+
+    font-size: 8px;
+  }
+}
+
+.mobile-back-book {
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* =========================================================
+   TEMA · CUMPLE 8
+========================================================= */
+
+body.tema-cumple-8 {
+  --bg: #080a18;
+  --paper: #10142b;
+  --ink: #ffffff;
+  --muted: #aeb5d1;
+  --line: rgba(255, 255, 255, 0.12);
+  --accent: #ff304f;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+body.tema-cumple-8 .hero {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(5, 8, 25, 0.88),
+      rgba(43, 15, 91, 0.72),
+      rgba(8, 42, 105, 0.78)
+    ),
+    url("../img/cumple-8-hero.png") center / cover no-repeat;
+}
+
+body.tema-cumple-8 .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(0, 153, 255, 0.35),
+      transparent 28%
+    ),
+    radial-gradient(circle at 80% 25%, rgba(255, 48, 79, 0.3), transparent 25%),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(127, 45, 255, 0.35),
+      transparent 30%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   HERO TYPOGRAPHY
+========================================================= */
+
+body.tema-cumple-8 .hero h1 {
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+body.tema-cumple-8 .hero-line {
+  background: linear-gradient(90deg, #2575ff, #8d35ff, #ff304f);
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+body.tema-cumple-8 .intro {
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(90, 40, 255, 0.12),
+      transparent 25%
+    ),
+    #0b0e20;
+
+  color: white;
+}
+
+body.tema-cumple-8 .intro-text {
+  color: #aeb5d1;
+}
+
+body.tema-cumple-8 .intro-kicker,
+body.tema-cumple-8 .eyebrow {
+  color: #5fa2ff;
+}
+
+/* =========================================================
+   DISEÑOS
+========================================================= */
+
+body.tema-cumple-8 .styles-section {
+  background: #080a18;
+  color: white;
+}
+
+body.tema-cumple-8 .section-heading p {
+  color: #aeb5d1;
+}
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+body.tema-cumple-8 .design-card {
+  background: #11152c;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.tema-cumple-8 .design-card:hover {
+  border-color: rgba(95, 162, 255, 0.45);
+  box-shadow: 0 30px 80px rgba(33, 62, 180, 0.25);
+}
+
+/* =========================================================
+   CARD 01 · AVENTURA
+========================================================= */
+
+body.tema-cumple-8 .design-card.editorial .card-image {
+  background:
+    radial-gradient(
+      circle at 70% 25%,
+      rgba(255, 48, 79, 0.65),
+      transparent 22%
+    ),
+    linear-gradient(135deg, #151a4b, #3c1a91, #091a48);
+}
+
+/* =========================================================
+   CARD 02 · ARCADE
+========================================================= */
+
+body.tema-cumple-8 .design-card.romantic .card-image {
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(0, 166, 255, 0.65),
+      transparent 22%
+    ),
+    linear-gradient(135deg, #071a3c, #182f9b, #7415a8);
+}
+
+/* =========================================================
+   CARD 03 · POWER
+========================================================= */
+
+body.tema-cumple-8 .design-card.contemporary .card-image {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 48, 79, 0.7), transparent 22%),
+    linear-gradient(135deg, #2b0713, #741327, #15104b);
+}
+
+/* =========================================================
+   TEXTOS DE TARJETAS
+========================================================= */
+
+body.tema-cumple-8 .card-info {
+  color: white;
+}
+
+body.tema-cumple-8 .card-info p {
+  color: #aeb5d1;
+}
+
+body.tema-cumple-8 .card-number {
+  color: #5fa2ff;
+}
+
+body.tema-cumple-8 .card-arrow {
+  color: #ff304f;
+}
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+body.tema-cumple-8 .process {
+  background: #0d1024;
+  color: white;
+}
+
+body.tema-cumple-8 .process-item {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.tema-cumple-8 .process-item > span {
+  color: #5fa2ff;
+}
+
+body.tema-cumple-8 .process-item p {
+  color: #aeb5d1;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+body.tema-cumple-8 .final-cta {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(6, 9, 28, 0.78),
+      rgba(67, 18, 116, 0.68),
+      rgba(10, 48, 110, 0.78)
+    ),
+    url("../img/cumple-8-cta.png") center / cover no-repeat;
+}
+
+body.tema-cumple-8 .cta-button {
+  background: #ff304f;
+  color: white;
+}
+
+body.tema-cumple-8 .cta-button:hover {
+  background: #ffffff;
+  color: #11152c;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+body.tema-cumple-8 .navbar {
+  background: rgba(9, 11, 28, 0.88);
+
+  border-color: rgba(255, 255, 255, 0.1);
+
+  color: white;
+}
+
+body.tema-cumple-8 .navbar a {
+  color: white;
+}
+
+body.tema-cumple-8 .back-book {
+  color: #d6dcff;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+body.tema-cumple-8 .back-book:hover {
+  background: #ff304f;
+  color: white;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+body.tema-cumple-8 footer {
+  background: #050611;
+  color: white;
+}
+
+body.tema-cumple-8 .footer-copy {
+  color: #737b9c;
+}
+
+/* =========================================================
+   CUMPLE 8
+   UNIVERSOS VISUALES
+========================================================= */
+
+body.tema-cumple-8 {
+  background: #f3f5f1;
+
+  color: #1d261f;
+
+  transition:
+    background 0.7s ease,
+    color 0.5s ease;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+body.tema-cumple-8 .hero {
+  background:
+    radial-gradient(
+      circle at 18% 25%,
+      rgba(91, 125, 89, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #f8faf6, #e9efe8);
+}
+
+body.tema-cumple-8 .hero-overlay {
+  opacity: 0.15;
+}
+
+body.tema-cumple-8 .hero .eyebrow {
+  color: #58705c;
+}
+
+body.tema-cumple-8 .hero h1 {
+  color: #1b281f;
+}
+
+body.tema-cumple-8 .hero p {
+  color: #657067;
+}
+
+body.tema-cumple-8 .hero-button {
+  background: #304d36;
+
+  color: white;
+
+  box-shadow: 0 12px 30px rgba(48, 77, 54, 0.18);
+}
+
+body.tema-cumple-8 .hero-button:hover {
+  background: #3d6145;
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+body.tema-cumple-8 .intro {
+  background: #f3f5f1;
+}
+
+body.tema-cumple-8 .intro-kicker,
+body.tema-cumple-8 .intro-label {
+  color: #58705c;
+}
+
+body.tema-cumple-8 .intro h2 {
+  color: #1b281f;
+}
+
+body.tema-cumple-8 .intro-text {
+  color: #68726b;
+}
+
+/* =========================================================
+   SECCIÓN ESTILOS
+========================================================= */
+
+body.tema-cumple-8 .styles-section {
+  background: linear-gradient(180deg, #f3f5f1, #edf2ec);
+}
+
+body.tema-cumple-8 .styles-section .eyebrow {
+  color: #58705c;
+}
+
+body.tema-cumple-8 .styles-section h2 {
+  color: #1b281f;
+}
+
+body.tema-cumple-8 .section-heading p {
+  color: #68726b;
+}
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+body.tema-cumple-8 .design-card {
+  border: 1px solid rgba(30, 45, 34, 0.09);
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  box-shadow: 0 16px 45px rgba(31, 48, 35, 0.07);
+
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s ease;
+}
+
+body.tema-cumple-8 .design-card:hover {
+  transform: translateY(-9px);
+
+  box-shadow: 0 28px 65px rgba(31, 48, 35, 0.14);
+}
+
+/* =========================================================
+   VISUAL
+========================================================= */
+
+body.tema-cumple-8 .cumple8-visual {
+  position: relative;
+
+  height: 100%;
+
+  min-height: 290px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+body.tema-cumple-8 .cumple8-number {
+  position: absolute;
+
+  top: 22px;
+
+  left: 24px;
+
+  z-index: 10;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  opacity: 0.65;
+}
+
+/* =========================================================
+   🦖 DINOSAURIOS
+========================================================= */
+
+.dinosaurios-visual {
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(147, 170, 131, 0.3),
+      transparent 40%
+    ),
+    linear-gradient(145deg, #e2e9dc, #a5b99d 45%, #607b61);
+
+  color: #213b27;
+}
+
+.dino-ring {
+  position: absolute;
+
+  width: 185px;
+
+  height: 185px;
+
+  border: 1px solid rgba(34, 67, 40, 0.25);
+
+  border-radius: 50%;
+
+  transition: transform 0.8s ease;
+}
+
+.dino-ring::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 15px;
+
+  border: 1px solid rgba(34, 67, 40, 0.14);
+
+  border-radius: 50%;
+}
+
+.dino-symbol {
+  position: relative;
+
+  z-index: 3;
+
+  font-size: 82px;
+
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+
+  filter: drop-shadow(0 14px 15px rgba(26, 55, 31, 0.18));
+}
+
+.dino-word {
+  position: absolute;
+
+  bottom: 24px;
+
+  right: 25px;
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+
+  opacity: 0.55;
+}
+
+.design-dinosaurios:hover .dino-ring {
+  transform: scale(1.12) rotate(15deg);
+}
+
+.design-dinosaurios:hover .dino-symbol {
+  transform: translateY(-9px) scale(1.08);
+}
+
+/* =========================================================
+   ⚽ FÚTBOL
+========================================================= */
+
+.futbol-visual {
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(117, 192, 226, 0.3),
+      transparent 42%
+    ),
+    linear-gradient(145deg, #ffffff, #edf8fc 55%, #b5ddec);
+
+  color: #1e668d;
+}
+
+.stadium-lines {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.45;
+
+  background: linear-gradient(
+    transparent 67%,
+    rgba(42, 118, 153, 0.12) 67%,
+    rgba(42, 118, 153, 0.12) 68%,
+    transparent 68%
+  );
+}
+
+.stadium-lines::after {
+  content: "";
+
+  position: absolute;
+
+  left: 10%;
+
+  right: 10%;
+
+  bottom: 12%;
+
+  height: 1px;
+
+  background: rgba(30, 102, 141, 0.22);
+
+  box-shadow:
+    0 -42px 0 rgba(30, 102, 141, 0.08),
+    0 -84px 0 rgba(30, 102, 141, 0.05);
+}
+
+.football-ball {
+  position: relative;
+
+  z-index: 3;
+
+  font-size: 82px;
+
+  filter: drop-shadow(0 15px 15px rgba(31, 103, 139, 0.18));
+
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.football-score {
+  position: absolute;
+
+  top: 22px;
+
+  right: 25px;
+
+  font-size: 48px;
+
+  font-weight: 600;
+
+  letter-spacing: -3px;
+
+  color: rgba(30, 102, 141, 0.14);
+}
+
+.design-futbol:hover .football-ball {
+  transform: translateY(-10px) rotate(18deg) scale(1.08);
+}
+
+/* =========================================================
+   🦸 SUPERHÉROES
+========================================================= */
+
+.superheroes-visual {
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(255, 211, 68, 0.38),
+      transparent 28%
+    ),
+    linear-gradient(145deg, #d7d9da, #969a9d 48%, #606468);
+
+  color: white;
+}
+
+.hero-rays {
+  position: absolute;
+
+  inset: -45%;
+
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 211, 62, 0.27) 0deg,
+    rgba(255, 211, 62, 0.27) 8deg,
+    transparent 8deg,
+    transparent 22deg
+  );
+
+  transition: transform 0.8s ease;
+}
+
+.hero-shield {
+  position: relative;
+
+  z-index: 3;
+
+  width: 100px;
+
+  height: 100px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #a7252a;
+
+  color: #ffd33e;
+
+  font-size: 48px;
+
+  clip-path: polygon(
+    50% 0%,
+    61% 34%,
+    100% 34%,
+    69% 56%,
+    81% 100%,
+    50% 72%,
+    19% 100%,
+    31% 56%,
+    0% 34%,
+    39% 34%
+  );
+
+  filter: drop-shadow(0 14px 16px rgba(0, 0, 0, 0.2));
+
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-word {
+  position: absolute;
+
+  right: 25px;
+
+  bottom: 24px;
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+
+  opacity: 0.65;
+}
+
+.design-superheroes:hover .hero-rays {
+  transform: rotate(16deg) scale(1.12);
+}
+
+.design-superheroes:hover .hero-shield {
+  transform: translateY(-9px) scale(1.08) rotate(-3deg);
+}
+
+/* =========================================================
+   INFO TARJETAS
+========================================================= */
+
+body.tema-cumple-8 .design-card .card-info {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+body.tema-cumple-8 .design-card h3 {
+  color: #202a23;
+}
+
+body.tema-cumple-8 .design-card p {
+  color: #69736c;
+}
+
+body.tema-cumple-8 .design-card .card-arrow {
+  color: #4c6552;
+}
+
+/* DINOSAURIOS */
+
+body.tema-cumple-8 .design-dinosaurios .card-number {
+  color: #547359;
+}
+
+/* FÚTBOL */
+
+body.tema-cumple-8 .design-futbol .card-number {
+  color: #2d83b3;
+}
+
+/* SUPERHÉROES */
+
+body.tema-cumple-8 .design-superheroes .card-number {
+  color: #b2292e;
+}
+
+/* =========================================================
+   PROCESO
+========================================================= */
+
+body.tema-cumple-8 .process {
+  background: #edf2ec;
+}
+
+body.tema-cumple-8 .process .eyebrow {
+  color: #58705c;
+}
+
+body.tema-cumple-8 .process h2 {
+  color: #1b281f;
+}
+
+body.tema-cumple-8 .process-item {
+  border-color: rgba(40, 60, 44, 0.1);
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+body.tema-cumple-8 .final-cta {
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(115, 153, 111, 0.25),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #304d36, #1d3022);
+
+  color: white;
+}
+
+body.tema-cumple-8 .final-cta .eyebrow {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+body.tema-cumple-8 .final-cta h2 {
+  color: white;
+}
+
+body.tema-cumple-8 .cta-button {
+  background: #f4f7f2;
+
+  color: #304d36;
+}
+
+body.tema-cumple-8 .cta-button:hover {
+  background: white;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+body.tema-cumple-8 footer {
+  background: #18231b;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  body.tema-cumple-8 .cumple8-visual {
+    min-height: 240px;
+  }
+
+  .dino-symbol,
+  .football-ball {
+    font-size: 68px;
+  }
+
+  .hero-shield {
+    width: 82px;
+
+    height: 82px;
+
+    font-size: 40px;
+  }
+}

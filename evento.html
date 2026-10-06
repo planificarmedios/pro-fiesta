@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Experiencias · Invitaciones digitales</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/css/evento.css" />
+  </head>
+
+  <body>
+    <div class="event-page">
+      <!-- NAVBAR -->
+      <header class="navbar">
+        <a href="index.html" class="logo">
+          <span>EXPERIENCIAS</span>
+          <small>invitaciones digitales</small>
+        </a>
+
+        <nav class="desktop-nav">
+          <a href="#estilos">Estilos</a>
+          <a href="#experiencia">La experiencia</a>
+          <a href="#como-funciona">Cómo funciona</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="index.html" class="back-book"> ← Libro </a>
+
+          <a href="#estilos" class="nav-button"> Ver diseños </a>
+
+          <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+          <a href="#estilos">Estilos</a>
+          <a href="#experiencia">La experiencia</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="index.html" class="mobile-back-book"> ← Volver al libro </a>
+
+          <a href="#estilos" class="mobile-menu-button"> Ver diseños → </a>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+          <span class="eyebrow" id="heroEyebrow">
+            UNA EXPERIENCIA PARA COMPARTIR
+          </span>
+
+          <h1 id="heroTitle">Casamiento</h1>
+
+          <div class="hero-line"></div>
+
+          <p id="heroText">
+            Una invitación puede ser mucho más que una fecha, un lugar y un
+            nombre.
+          </p>
+
+          <a href="#estilos" class="hero-button">
+            Descubrí los diseños
+            <span>↓</span>
+          </a>
+        </div>
+
+        <div class="hero-number">01</div>
+      </section>
+
+      <!-- INTRO -->
+      <section class="intro" id="experiencia">
+        <div class="intro-label">
+          <span>01</span>
+          <span>LA EXPERIENCIA</span>
+        </div>
+
+        <div class="intro-content">
+          <p class="intro-kicker">NO ELEGÍS UNA PLANTILLA.</p>
+
+          <h2>
+            Elegís la forma<br />
+            de contar tu historia.
+          </h2>
+
+          <p class="intro-text">
+            Creamos invitaciones digitales pensadas para que cada evento tenga
+            su propia identidad. Imágenes, música, movimiento, información y
+            pequeños detalles que hacen que cada invitación sea diferente.
+          </p>
+        </div>
+      </section>
+
+      <!-- ESTILOS -->
+      <section class="styles-section" id="estilos">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">02 · ELEGÍ TU ESTILO</span>
+
+            <h2>
+              Tres maneras<br />
+              de comenzar.
+            </h2>
+          </div>
+
+          <p>
+            Cada diseño tiene una personalidad diferente. Elegí el que más se
+            parezca a la historia que querés contar.
+          </p>
+        </div>
+
+        <div class="design-grid">
+          <!-- DISEÑO 1 -->
+          <a
+            href="demo.html?tema=casamiento&diseno=editorial"
+            class="design-card editorial"
+          >
+            <div class="card-image">
+              <div class="fake-invitation editorial-preview">
+                <span class="preview-small"> SAVE THE DATE </span>
+
+                <strong>
+                  Sofía<br />
+                  & Martín
+                </strong>
+
+                <span class="preview-date"> 14 · 11 · 2026 </span>
+              </div>
+            </div>
+
+            <div class="card-info">
+              <div>
+                <span class="card-number">01</span>
+                <h3>Editorial</h3>
+              </div>
+
+              <span class="card-arrow">↗</span>
+
+              <p>
+                Elegante, fotográfico y contemporáneo. Inspirado en el lenguaje
+                visual de las revistas.
+              </p>
+            </div>
+          </a>
+
+          <!-- DISEÑO 2 -->
+          <a
+            href="demo.html?tema=casamiento&diseno=romantica"
+            class="design-card romantic"
+          >
+            <div class="card-image">
+              <div class="fake-invitation romantic-preview">
+                <span class="preview-small"> NOS CASAMOS </span>
+
+                <strong>
+                  Lucía<br />
+                  & Tomás
+                </strong>
+
+                <span class="preview-date"> Una historia que comienza </span>
+              </div>
+            </div>
+
+            <div class="card-info">
+              <div>
+                <span class="card-number">02</span>
+                <h3>Romántica</h3>
+              </div>
+
+              <span class="card-arrow">↗</span>
+
+              <p>
+                Delicada, cálida y emocional. Una estética pensada para celebrar
+                el amor.
+              </p>
+            </div>
+          </a>
+
+          <!-- DISEÑO 3 -->
+          <a
+            href="demo.html?tema=casamiento&diseno=contemporary"
+            class="design-card contemporary"
+          >
+            <div class="card-image">
+              <div class="fake-invitation contemporary-preview">
+                <span class="preview-small"> THE WEDDING </span>
+
+                <strong>
+                  Emma<br />
+                  & Lucas
+                </strong>
+
+                <span class="preview-date"> 22 — 08 — 2026 </span>
+              </div>
+            </div>
+
+            <div class="card-info">
+              <div>
+                <span class="card-number">03</span>
+                <h3>Contemporary</h3>
+              </div>
+
+              <span class="card-arrow">↗</span>
+
+              <p>
+                Intensa, moderna y sofisticada. Para quienes buscan una
+                identidad diferente.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- COMO FUNCIONA -->
+      <section class="process" id="como-funciona">
+        <div class="process-heading">
+          <span class="eyebrow"> 03 · EL PROCESO </span>
+
+          <h2>
+            Así comienza<br />
+            tu experiencia.
+          </h2>
+        </div>
+
+        <div class="process-list">
+          <div class="process-item">
+            <span>01</span>
+
+            <div>
+              <h3>Elegís un diseño</h3>
+              <p>Encontrá el estilo que más representa tu evento.</p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <span>02</span>
+
+            <div>
+              <h3>Personalizamos tu historia</h3>
+              <p>
+                Nombres, imágenes, fechas, música, ubicación, confirmación y
+                todo lo que quieras comunicar.
+              </p>
+            </div>
+          </div>
+
+          <div class="process-item">
+            <span>03</span>
+
+            <div>
+              <h3>Compartís tu invitación</h3>
+              <p>
+                Recibís un enlace único para enviar por WhatsApp, redes sociales
+                o donde quieras.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="final-cta">
+        <div class="cta-content">
+          <span class="eyebrow"> TU EVENTO · TU HISTORIA </span>
+
+          <h2>
+            Hagamos que<br />
+            empiece antes.
+          </h2>
+
+          <a href="#estilos" class="cta-button">
+            Elegir mi diseño
+            <span>→</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="footer-brand">
+          <span>EXPERIENCIAS</span>
+          <small>invitaciones digitales</small>
+        </div>
+
+        <div class="footer-copy">
+          CREAMOS EXPERIENCIAS · NO SOLO INVITACIONES
+        </div>
+
+        <a href="index.html" class="back-book"> ← Volver al libro </a>
+      </footer>
+    </div>
+
+    <script src="assets/js/evento.js"></script>
+  </body>
+</html>
