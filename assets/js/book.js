@@ -325,12 +325,38 @@ function renderPage(index) {
     rightNumber.textContent = String(index + 2).padStart(2, "0");
   }
 
+  /* =========================================
+   TEMA VISUAL DEL BOOK SEGÚN LA HOJA
+========================================= */
+
   /*
-    Actualizamos el estado DESPUÉS
-    de preparar el contenido.
-  */
+  Actualizamos el estado DESPUÉS
+  de preparar el contenido.
+*/
 
   currentIndex = index;
+
+  /* =========================================
+   TEMA VISUAL DEL BOOK SEGÚN LA HOJA
+========================================= */
+
+  document.body.classList.remove(
+    "book-theme-cover",
+    "book-theme-casamiento",
+    "book-theme-cumple8",
+  );
+
+  if (index < 0) {
+    document.body.classList.add("book-theme-cover");
+  }
+
+  if (index === 0) {
+    document.body.classList.add("book-theme-casamiento");
+  }
+
+  if (index === 1) {
+    document.body.classList.add("book-theme-cumple8");
+  }
 
   saveBookState();
 
@@ -418,66 +444,107 @@ function animatePageTurn(direction) {
     return;
   }
 
-  /*
-    Guardamos la posición anterior
-    para construir la hoja que gira.
-  */
+  /* =======================================================
+     NEXT
+     -------------------------------------------------------
+     NO TOCAMOS LA ANIMACIÓN QUE YA FUNCIONA
+  ======================================================= */
 
-  const oldIndex = currentIndex;
+  if (direction === "next") {
+    const currentExperience = experiences[currentIndex];
 
-  const currentExperience =
-    direction === "next" ? experiences[oldIndex] : experiences[nextIndex];
+    renderPage(nextIndex);
 
-  /*
-    Primero preparamos el contenido nuevo.
-    Esto evita que durante la transición
-    aparezca el título anterior.
-  */
+    const page = document.createElement("div");
 
-  renderPage(nextIndex);
+    page.className = "flip-page flipping";
 
-  /*
-    Creamos la hoja que realiza el giro.
-  */
+    page.innerHTML = `
+      <div class="flip-face flip-front">
+        ${currentExperience ? createExperience(currentExperience) : ""}
+      </div>
+
+      <div class="flip-face flip-back"></div>
+    `;
+
+    book.appendChild(page);
+
+    page.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      page.style.transform = "rotateY(-180deg)";
+    });
+
+    setTimeout(() => {
+      page.remove();
+    }, 1000);
+
+    return;
+  }
+
+  /* =======================================================
+     PREV
+     -------------------------------------------------------
+     ACÁ CAMBIAMOS EL ORDEN.
+     
+     Primero animamos la hoja visible.
+     DESPUÉS actualizamos el contenido.
+  ======================================================= */
 
   const page = document.createElement("div");
 
-  page.className = "flip-page flipping";
+  page.className = "flip-page flip-previous";
+
+  /*
+    Tomamos EXACTAMENTE el contenido que actualmente
+    está en la página izquierda.
+
+    No generamos una experiencia nueva.
+    No llamamos todavía a renderPage().
+  */
+
+  const leftPage = document.querySelector(".book-page.page-left .page-content");
 
   page.innerHTML = `
     <div class="flip-face flip-front">
-
-      ${currentExperience ? createExperience(currentExperience) : ""}
-
+      ${leftPage ? leftPage.innerHTML : ""}
     </div>
 
     <div class="flip-face flip-back"></div>
   `;
 
+  /*
+    La hoja comienza girada.
+  */
+
+  page.style.transform = "rotateY(180deg)";
+
   book.appendChild(page);
 
   /*
-    Forzamos al navegador a pintar
-    la hoja antes de iniciar la animación.
+    Forzamos el render.
   */
 
   page.getBoundingClientRect();
 
+  /*
+    Ahora comienza el movimiento.
+  */
+
   requestAnimationFrame(() => {
-    if (direction === "next") {
-      page.style.transform = "rotateY(-180deg)";
-    } else {
-      page.style.transform = "rotateY(0deg)";
-    }
+    page.style.transform = "rotateY(0deg)";
   });
 
   /*
-    Retiramos la hoja una vez
-    terminada la animación.
+    Cuando termina el giro:
+    recién ahí cambiamos el contenido real
+    del libro.
   */
 
   setTimeout(() => {
     page.remove();
+
+    renderPage(nextIndex);
   }, 1000);
 }
 

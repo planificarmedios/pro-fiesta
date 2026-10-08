@@ -1605,3 +1605,202 @@ body {
     ),
     var(--paper-dark);
 }
+
+/* =========================================================
+   BOOK · TEMÁTICA SEGÚN LA HOJA
+========================================================= */
+
+.book-world {
+  transition:
+    background 1.2s ease,
+    color 1s ease;
+}
+
+/* =========================================================
+   PORTADA · DORADO
+========================================================= */
+
+body.book-theme-cover .book-world {
+  background:
+    radial-gradient(
+      ellipse at 50% 20%,
+      rgba(214, 174, 91, 0.2),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 20% 70%,
+      rgba(214, 174, 91, 0.1),
+      transparent 40%
+    ),
+    var(--bg);
+}
+
+/* ESTELA DORADA */
+
+body.book-theme-cover .ambient-light {
+  opacity: 1;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      rgba(224, 184, 94, 0.28),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 75% 60%,
+      rgba(255, 215, 130, 0.16),
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 20% 70%,
+      rgba(191, 145, 58, 0.12),
+      transparent 30%
+    );
+
+  animation: bookGoldenTrail 7s ease-in-out infinite;
+}
+
+@keyframes bookGoldenTrail {
+  0% {
+    transform: translate3d(-3%, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(3%, -2%, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(-3%, 0, 0) scale(1);
+  }
+}
+
+/* =========================================================
+   CASAMIENTO · CHAMPAGNE
+========================================================= */
+
+body.book-theme-casamiento .book-world {
+  background:
+    radial-gradient(
+      ellipse at 50% 25%,
+      rgba(214, 174, 91, 0.14),
+      transparent 42%
+    ),
+    var(--bg);
+}
+
+body.book-theme-casamiento .ambient-light {
+  opacity: 1;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      rgba(230, 204, 151, 0.2),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 80% 65%,
+      rgba(214, 174, 91, 0.1),
+      transparent 30%
+    );
+
+  animation: bookChampagneTrail 8s ease-in-out infinite;
+}
+
+@keyframes bookChampagneTrail {
+  0% {
+    transform: translate3d(2%, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-2%, -1%, 0) scale(1.06);
+  }
+
+  100% {
+    transform: translate3d(2%, 0, 0) scale(1);
+  }
+}
+
+/* =========================================================
+   CUMPLE 8 · VERDE / CELESTE / ROJO
+========================================================= */
+
+body.book-theme-cumple8 .book-world {
+  background:
+    radial-gradient(
+      ellipse at 20% 25%,
+      rgba(66, 140, 82, 0.14),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 80% 35%,
+      rgba(75, 170, 205, 0.14),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 50% 80%,
+      rgba(190, 48, 55, 0.1),
+      transparent 35%
+    ),
+    var(--bg);
+}
+
+body.book-theme-cumple8 .ambient-light {
+  opacity: 1;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 35%,
+      rgba(65, 145, 77, 0.22),
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 80% 40%,
+      rgba(90, 180, 215, 0.2),
+      transparent 28%
+    ),
+    radial-gradient(
+      ellipse at 50% 75%,
+      rgba(210, 55, 60, 0.15),
+      transparent 30%
+    );
+
+  animation: bookAdventureTrail 6s ease-in-out infinite;
+}
+
+@keyframes bookAdventureTrail {
+  0% {
+    transform: translate3d(-2%, 0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate3d(2%, -1%, 0) scale(1.05);
+  }
+
+  66% {
+    transform: translate3d(0, 2%, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(-2%, 0, 0) scale(1);
+  }
+}
+
+/* =========================================================
+   VOLVER PÁGINA · ANIMACIÓN INVERSA
+========================================================= */
+
+.flip-previous {
+  transform-origin: right center;
+  z-index: 110;
+}
+
+/* =========================================================
+   PREVIOUS · HOJA IZQUIERDA
+========================================================= */
+
+.flip-page.flip-previous {
+  left: 0;
+  right: auto;
+  transform-origin: right center;
+  z-index: 110;
+}

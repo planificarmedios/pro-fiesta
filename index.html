@@ -4,123 +4,182 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Experiencias · Invitaciones digitales</title>
+    <title>EXPERIENCIAS · Invitaciones digitales</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="assets/css/book.css" />
+    <link rel="stylesheet" href="./assets/carousel/index.css" />
   </head>
 
   <body>
-    <main class="book-world">
-      <!-- Luz ambiental -->
-      <div class="ambient-light"></div>
+    <main class="experience-world">
+      <!-- =====================================================
+           FONDO AMBIENTAL
+      ====================================================== -->
 
-      <!-- Marca -->
-      <div class="brand">
-        <span>EXPERIENCIAS</span>
-        <small>invitaciones digitales</small>
-      </div>
+      <div class="ambient ambient-1"></div>
+      <div class="ambient ambient-2"></div>
+      <div class="ambient ambient-3"></div>
 
-      <!-- =========================
-         LIBRO
-    ========================== -->
+      <!-- =====================================================
+           HEADER
+      ====================================================== -->
 
-      <section class="book-stage" aria-label="Experiencias">
-        <div class="book" id="book">
-          <!-- =========================
-             PORTADA
-        ========================== -->
+      <header class="experience-header">
+        <div class="brand">
+          <span class="brand-small"> INVITACIONES DIGITALES </span>
 
-          <div class="book-page cover-page" data-page="cover">
-            <div class="cover-content">
-              <div class="cover-small">EXPERIENCIAS DIGITALES</div>
+          <span class="brand-name"> EXPERIENCIAS </span>
+        </div>
 
-              <h1>
-                Tu evento<br />
-                es único.
-              </h1>
+        <div class="header-line"></div>
 
-              <div class="cover-line"></div>
+        <div class="header-number">
+          <span id="headerCurrent">01</span>
 
-              <p>Tu invitación inicia su historia.</p>
+          <span class="slash">/</span>
 
-              <button class="open-book" id="openBook">
-                <span>Elegí el evento para contar la tuya</span>
-                <i>→</i>
+          <span id="headerTotal">11</span>
+        </div>
+      </header>
+
+      <!-- =====================================================
+           HERO
+      ====================================================== -->
+
+      <section class="hero">
+        <div class="hero-content">
+          <h1 id="heroTitle">
+            Tu invitación
+            <em>es única.</em>
+          </h1>
+
+          <div id="hero-line" class="hero-line"></div>
+
+          <p id="heroPhrase">
+            <em>Tu historia también</em>
+            <span>merece una invitación única.</span>
+          </p>
+        </div>
+
+        <!-- ===================================================
+       EXPERIENCIA / CARRUSEL
+  ==================================================== -->
+
+        <div class="world-loader" id="worldLoader">
+          <div class="world-loader-inner">
+            <div class="world-loader-number" id="worldLoaderNumber">01</div>
+            <div class="world-loader-line"></div>
+            <div class="world-loader-text" id="worldLoaderText">CARGANDO</div>
+          </div>
+        </div>
+
+        <div class="experience-carousel">
+          <!-- Flecha izquierda -->
+
+          <button
+            class="carousel-arrow carousel-prev"
+            id="prevExperience"
+            aria-label="Experiencia anterior"
+          >
+            ←
+          </button>
+
+          <!-- Tarjeta lateral izquierda -->
+
+          <div class="side-card side-card-left" id="sideLeft">
+            <img id="sideLeftImage" src="" alt="" />
+
+            <div class="side-overlay"></div>
+
+            <div class="side-info">
+              <span id="sideLeftNumber"> 11 </span>
+
+              <span id="sideLeftTitle"> Otro evento </span>
+            </div>
+          </div>
+
+          <!-- Tarjeta lateral derecha -->
+
+          <div class="side-card side-card-right" id="sideRight">
+            <img id="sideRightImage" src="" alt="" />
+
+            <div class="side-overlay"></div>
+
+            <div class="side-info">
+              <span id="sideRightNumber"> 02 </span>
+
+              <span id="sideRightTitle"> Cumple 8 </span>
+            </div>
+          </div>
+
+          <!-- =================================================
+               EXPERIENCIA PRINCIPAL
+          ================================================== -->
+
+          <article class="main-experience" id="mainExperience">
+            <div class="particle-layer"></div>
+
+            <div class="main-image-wrapper">
+              <img id="mainImage" class="main-image" src="" alt="" />
+
+              <img id="mainImageHover" class="main-image-hover" src="" alt="" />
+
+              <div class="main-image-overlay"></div>
+
+              <div class="main-image-glow"></div>
+            </div>
+
+            <div class="main-content">
+              <div class="experience-category">EXPERIENCIA</div>
+
+              <h2 id="mainTitle">Casamiento</h2>
+
+              <div class="title-line"></div>
+
+              <p id="mainPhrase">Se renueva una historia.</p>
+
+              <button class="experience-button" id="openExperience">
+                <span> Vivir esta experiencia </span>
+
+                <strong> → </strong>
               </button>
             </div>
+          </article>
 
-            <div class="cover-number">01</div>
-          </div>
+          <!-- Flecha derecha -->
 
-          <!-- =========================
-             PÁGINA INTERIOR IZQUIERDA
-        ========================== -->
-
-          <div class="book-page page-left" id="leftPage">
-            <div class="page-number">
-              <span id="leftNumber">02</span>
-            </div>
-
-            <div class="page-content" id="leftContent"></div>
-          </div>
-
-          <!-- =========================
-             PÁGINA INTERIOR DERECHA
-        ========================== -->
-
-          <div class="book-page page-right" id="rightPage">
-            <div class="page-number">
-              <span id="rightNumber">03</span>
-            </div>
-
-            <div class="page-content" id="rightContent"></div>
-          </div>
+          <button
+            class="carousel-arrow carousel-next"
+            id="nextExperience"
+            aria-label="Siguiente experiencia"
+          >
+            →
+          </button>
         </div>
       </section>
 
-      <!-- =========================
-         CONTROLES
-    ========================== -->
+      <!-- =====================================================
+           CTA
+      ====================================================== -->
 
-      <div class="book-controls">
-        <button id="prevPage" aria-label="Página anterior">←</button>
+      <!-- =====================================================
+           FOOTER
+      ====================================================== -->
 
-        <div class="page-progress">
-          <span id="pageCurrent">01</span>
-          <span class="progress-line">
-            <span id="progressBar"></span>
-          </span>
-          <span id="pageTotal">12</span>
+      <footer class="experience-footer">
+        <div class="progress">
+          <span class="progress-number" id="progressCurrent"> 01 </span>
+
+          <div class="progress-line">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <span class="progress-number"> 11 </span>
         </div>
 
-        <button id="nextPage" aria-label="Página siguiente">→</button>
-      </div>
-
-      <div class="book-hint" id="bookHint">
-        <span>←</span>
-        <span>Pasá las páginas para descubrir las experiencias</span>
-        <span>→</span>
-      </div>
-
-      <!-- =========================
-         FOOTER MÍNIMO
-    ========================== -->
-
-      <div class="book-footer">
-        <span>CREAMOS EXPERIENCIAS</span>
-        <span>·</span>
-        <span>NO SOLO INVITACIONES</span>
-      </div>
+        <div class="footer-hint">Deslizá · explorá · elegí</div>
+      </footer>
     </main>
 
-    <script src="assets/js/book.js"></script>
+    <script src="./assets/carousel/index.js"></script>
   </body>
 </html>
