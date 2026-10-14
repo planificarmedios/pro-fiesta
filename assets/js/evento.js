@@ -1,368 +1,457 @@
-const params = new URLSearchParams(window.location.search);
-const tema = params.get("tema") || "casamiento";
-
-const configuraciones = {
-  casamiento: {
-    nombre: "Casamiento",
-    eyebrow: "UNA EXPERIENCIA PARA COMPARTIR",
-    texto:
-      "Una invitación puede ser mucho más que una fecha, un lugar y un nombre.",
-  },
+/* =========================================================
+   EXPERIENCIAS · EVENTO.JS
+   Configuración de temas, tarjetas, navegación y transición
+========================================================= */
+
+(() => {
+  "use strict";
+
+  /* =======================================================
+     1. TEMA ACTUAL
+  ======================================================= */
+
+  const params = new URLSearchParams(window.location.search);
+  const tema = params.get("tema") || "casamiento";
+
+  const configuraciones = {
+    casamiento: {
+      nombre: "Casamiento",
+      eyebrow: "UNA EXPERIENCIA PARA COMPARTIR",
+      texto:
+        "Una invitación puede ser mucho más que una fecha, un lugar y un nombre.",
+    },
+
+    cumpleanos: {
+      nombre: "Cumpleaños",
+      eyebrow: "UNA EXPERIENCIA PARA CELEBRAR",
+      texto:
+        "Una forma diferente de comenzar la celebración antes de que llegue el gran día.",
+    },
+
+    "cumple-8": {
+      nombre: "Cumple 10",
+      eyebrow: "UNA NUEVA AVENTURA COMIENZA",
+      texto:
+        "Es un día para una aventura enorme con una invitación que empieza hoy con tu fiesta.",
+    },
+
+    15: {
+      nombre: "15 años",
+      eyebrow: "UNA EXPERIENCIA PARA RECORDAR",
+      texto:
+        "Una invitación pensada para transformar una celebración en una experiencia.",
+    },
+
+    bautismo: {
+      nombre: "Bautismo",
+      eyebrow: "UNA EXPERIENCIA PARA COMPARTIR",
+      texto:
+        "Un momento especial merece una invitación tan especial como el recuerdo.",
+    },
+
+    comunion: {
+      nombre: "Comunión",
+      eyebrow: "UNA EXPERIENCIA PARA CELEBRAR",
+      texto:
+        "Una invitación delicada y personalizada para acompañar un día inolvidable.",
+    },
+  };
+
+  const config = configuraciones[tema] || configuraciones.casamiento;
+
+  /* =======================================================
+     2. APLICAR EL TEMA GENERAL
+  ======================================================= */
+
+  document.body.classList.add(`tema-${tema}`);
+
+  document.title = `${config.nombre} · Experiencias · Invitaciones digitales`;
+
+  const heroTitle = document.getElementById("heroTitle");
+  const heroEyebrow = document.getElementById("heroEyebrow");
+  const heroText = document.getElementById("heroText");
+
+  if (heroTitle) heroTitle.textContent = config.nombre;
+  if (heroEyebrow) heroEyebrow.textContent = config.eyebrow;
+  if (heroText) heroText.textContent = config.texto;
 
-  cumpleanos: {
-    nombre: "Cumpleaños",
-    eyebrow: "UNA EXPERIENCIA PARA CELEBRAR",
-    texto:
-      "Una forma diferente de comenzar la celebración antes de que llegue el gran día.",
-  },
+  console.log("Tema activo:", tema);
+
+  /* =======================================================
+     3. TRANSICIÓN DE ENTRADA A LA INVITACIÓN
+
+     Primer clic:
+     - Intercepta el enlace de una tarjeta.
+     - Muestra la capa de transición.
+
+     Segundo clic:
+     - Prepara la marca para el audio.
+     - Activa la salida.
+     - Espera 5 segundos.
+     - Navega a la invitación seleccionada.
+  ======================================================= */
+
+  (() => {
+    const overlay = document.getElementById("experience-transition");
+    const enterButton = document.getElementById("transition-enter");
+    const buttonLabel = document.getElementById("transition-button-label");
+    const status = document.getElementById("transition-status");
+
+    // Si el HTML no contiene la transición, no interrumpimos la página.
+    if (!overlay || !enterButton || !buttonLabel || !status) {
+      console.warn("No se encontraron todos los elementos de la transición.");
+      return;
+    }
 
-  "cumple-8": {
-    nombre: "Cumple 8",
-    eyebrow: "UNA NUEVA AVENTURA COMIENZA",
-    texto:
-      "Es un día para una aventura enorme con una invitación que empieza hoy con tu fiesta.",
-  },
+    let destination = "";
+    let navigating = false;
+    let navigationTimer = null;
 
-  15: {
-    nombre: "15 años",
-    eyebrow: "UNA EXPERIENCIA PARA RECORDAR",
-    texto:
-      "Una invitación pensada para transformar una celebración en una experiencia.",
-  },
+    const validPages = [
+      "invitacion.html",
+      "romantico.html",
+      "custom.html",
+      "demo.html",
+    ];
 
-  bautismo: {
-    nombre: "Bautismo",
-    eyebrow: "UNA EXPERIENCIA PARA COMPARTIR",
-    texto:
-      "Un momento especial merece una invitación tan especial como el recuerdo.",
-  },
+    /* -------------------------------------------------------
+       Identificar enlaces de tarjetas válidos
+    ------------------------------------------------------- */
 
-  comunion: {
-    nombre: "Comunión",
-    eyebrow: "UNA EXPERIENCIA PARA CELEBRAR",
-    texto:
-      "Una invitación delicada y personalizada para acompañar un día inolvidable.",
-  },
-};
+    function findCardLink(target) {
+      if (!(target instanceof Element)) return null;
 
-const config = configuraciones[tema] || configuraciones.casamiento;
+      const link = target.closest("a.design-card");
 
-/* =========================================
-   TEMA GENERAL
-========================================= */
+      if (!link) return null;
 
-document.body.classList.add(`tema-${tema}`);
+      const href = link.getAttribute("href");
 
-document.title = `${config.nombre} · Experiencias · Invitaciones digitales`;
+      if (!href || href.startsWith("#")) return null;
 
-document.getElementById("heroTitle").textContent = config.nombre;
+      let url;
 
-document.getElementById("heroEyebrow").textContent = config.eyebrow;
+      try {
+        url = new URL(href, window.location.href);
+      } catch (error) {
+        return null;
+      }
 
-document.getElementById("heroText").textContent = config.texto;
+      // Solo se interceptan enlaces del mismo sitio.
+      if (url.origin !== window.location.origin) return null;
 
-/* =========================================
-   CUMPLE 8
-   TRES UNIVERSOS
-========================================= */
+      const page = url.pathname.split("/").pop().toLowerCase();
 
-function construirCumple8() {
-  const grid = document.querySelector(".design-grid");
+      if (!validPages.includes(page)) return null;
 
-  if (!grid) return;
+      return link;
+    }
 
-  grid.innerHTML = `
+    /* -------------------------------------------------------
+       Mostrar la transición
+    ------------------------------------------------------- */
 
-    <!-- ================================
-         DINOSAURIOS
-    ================================= -->
+    function openTransition(href) {
+      destination = href;
+      navigating = false;
 
-    <a
-      href="demo.html?tema=cumple-8&diseno=dinosaurios"
-      class="design-card cumple8-card dinosaurios-card"
-      data-universe="dinosaurios"
-    >
+      if (navigationTimer !== null) {
+        clearTimeout(navigationTimer);
+        navigationTimer = null;
+      }
 
-      <div class="card-image">
+      buttonLabel.textContent = "Tocá para entrar";
+      status.textContent = "Tu experiencia comienza acá.";
 
-        <div class="cumple8-preview dinosaurios-preview">
+      enterButton.disabled = false;
 
-          <span class="cumple8-preview-number">
-            01
-          </span>
+      overlay.classList.remove("leaving");
+      overlay.classList.add("active");
+      overlay.setAttribute("aria-hidden", "false");
 
-          <div class="dino-circle"></div>
+      document.body.classList.add("transition-active");
 
-          <div class="dino-symbol">
-            🦖
-          </div>
+      enterButton.focus({ preventScroll: true });
+    }
 
-          <div class="dino-title">
-            JURASSIC
-          </div>
+    /* -------------------------------------------------------
+       Interceptar el clic de las tarjetas
+    ------------------------------------------------------- */
 
-          <div class="dino-subtitle">
-            ADVENTURE
-          </div>
+    document.addEventListener("click", (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
 
-        </div>
+      const link = findCardLink(event.target);
 
-      </div>
+      if (!link) return;
 
-      <div class="card-info">
+      event.preventDefault();
 
-        <div>
-
-          <span class="card-number">
-            01
-          </span>
-
-          <h3>
-            Dinosaurios
-          </h3>
-
-        </div>
-
-        <span class="card-arrow">
-          ↗
-        </span>
-
-        <p>
-          Verde bosque, naturaleza y aventura.
-          Un mundo perdido para comenzar una nueva historia.
-        </p>
-
-      </div>
-
-    </a>
-
-
-    <!-- ================================
-         SELECCIÓN
-    ================================= -->
-
-    <a
-      href="demo.html?tema=cumple-8&diseno=seleccion"
-      class="design-card cumple8-card seleccion-card"
-      data-universe="seleccion"
-    >
-
-      <div class="card-image">
-
-        <div class="cumple8-preview seleccion-preview">
-
-          <span class="cumple8-preview-number">
-            02
-          </span>
-
-          <div class="seleccion-rays"></div>
-
-          <div class="seleccion-ball">
-            ⚽
-          </div>
-
-          <div class="seleccion-number">
-            08
-          </div>
-
-          <div class="seleccion-title">
-            SELECCIÓN
-          </div>
-
-          <div class="seleccion-subtitle">
-            PASIÓN · FÚTBOL · FIESTA
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card-info">
-
-        <div>
-
-          <span class="card-number">
-            02
-          </span>
-
-          <h3>
-            Selección
-          </h3>
-
-        </div>
-
-        <span class="card-arrow">
-          ↗
-        </span>
-
-        <p>
-          Blanco, celeste y pasión.
-          Una invitación inspirada en la emoción de la Selección.
-        </p>
-
-      </div>
-
-    </a>
-
-
-    <!-- ================================
-         SUPERHÉROES
-    ================================= -->
-
-    <a
-      href="demo.html?tema=cumple-8&diseno=superheroes"
-      class="design-card cumple8-card superheroes-card"
-      data-universe="superheroes"
-    >
-
-      <div class="card-image">
-
-        <div class="cumple8-preview superheroes-preview">
-
-          <span class="cumple8-preview-number">
-            03
-          </span>
-
-          <div class="hero-rays"></div>
-
-          <div class="hero-shield">
-            ★
-          </div>
-
-          <div class="hero-title">
-            HERO
-          </div>
-
-          <div class="hero-subtitle">
-            LEVEL 08
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="card-info">
-
-        <div>
-
-          <span class="card-number">
-            03
-          </span>
-
-          <h3>
-            Superhéroes
-          </h3>
-
-        </div>
-
-        <span class="card-arrow">
-          ↗
-        </span>
-
-        <p>
-          Rojo, amarillo y metal.
-          Una invitación con energía de cómic y espíritu de protagonista.
-        </p>
-
-      </div>
-
-    </a>
-
-  `;
-
-  /* =====================================
-     CAMBIO DE UNIVERSO AL HACER HOVER
-  ===================================== */
-
-  const cards = grid.querySelectorAll(".cumple8-card");
-
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      document.body.classList.remove(
-        "cumple8-dinosaurios",
-        "cumple8-seleccion",
-        "cumple8-superheroes",
-      );
-
-      document.body.classList.add(`cumple8-${card.dataset.universe}`);
+      openTransition(link.href);
     });
 
-    card.addEventListener("mouseleave", () => {
-      document.body.classList.remove(
-        "cumple8-dinosaurios",
-        "cumple8-seleccion",
-        "cumple8-superheroes",
-      );
+    /* -------------------------------------------------------
+       Iniciar la entrada a la invitación
+    ------------------------------------------------------- */
+
+    enterButton.addEventListener("click", () => {
+      if (!destination || navigating) return;
+
+      navigating = true;
+      enterButton.disabled = true;
+
+      buttonLabel.textContent = "Entrando a la fiesta…";
+      status.textContent = "Preparando tu experiencia.";
+
+      overlay.classList.add("leaving");
+
+      // La página de destino usará esta marca para intentar
+      // iniciar el audio después de la navegación.
+      try {
+        sessionStorage.setItem("proFiestaStartAudio", "1");
+      } catch (error) {
+        console.warn("No se pudo guardar la marca de audio.");
+      }
+
+      const target = destination;
+
+      navigationTimer = window.setTimeout(() => {
+        window.location.assign(target);
+      }, 5000);
     });
-  });
-}
 
-/* =========================================
-   ACTIVAR CUMPLE 8
-========================================= */
+    /* -------------------------------------------------------
+       Escape: cerrar la transición antes de entrar
+    ------------------------------------------------------- */
 
-if (tema === "cumple-8") {
-  construirCumple8();
-}
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        overlay.classList.contains("active") &&
+        !navigating
+      ) {
+        overlay.classList.remove("active", "leaving");
+        overlay.setAttribute("aria-hidden", "true");
 
-/* =========================================
-   LINKS DE LOS DISEÑOS
-========================================= */
+        document.body.classList.remove("transition-active");
 
-document.querySelectorAll(".design-card").forEach((card) => {
-  const url = new URL(card.href, window.location.href);
+        destination = "";
+      }
+    });
+  })();
 
-  url.searchParams.set("tema", tema);
+  /* =======================================================
+     4. CONSTRUIR LOS TRES UNIVERSOS DE CUMPLE 8
+  ======================================================= */
 
-  card.href = url.toString();
-});
+  function construirCumple8() {
+    const grid = document.querySelector(".design-grid");
 
-/* =========================================
-   NAVBAR AL HACER SCROLL
-========================================= */
+    if (!grid) return;
 
-const navbar = document.querySelector(".navbar");
+    grid.innerHTML = `
+      <!-- DINOSAURIOS -->
+      <a
+        href="demo.html?tema=cumple-8&diseno=dinosaurios"
+        class="design-card cumple8-card dinosaurios-card"
+        data-universe="dinosaurios"
+      >
+        <div class="card-image">
+          <div class="cumple8-preview dinosaurios-preview">
+            <span class="cumple8-preview-number">01</span>
+            <div class="dino-circle"></div>
+            <div class="dino-symbol">🦖</div>
+            <div class="dino-title">JURASSIC</div>
+            <div class="dino-subtitle">ADVENTURE</div>
+          </div>
+        </div>
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 80) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
+        <div class="card-info">
+          <div>
+            <span class="card-number">01</span>
+            <h3>Dinosaurios</h3>
+          </div>
+
+          <span class="card-arrow">↗</span>
+
+          <p>
+            Verde bosque, naturaleza y aventura.
+            Un mundo perdido para comenzar una nueva historia.
+          </p>
+        </div>
+      </a>
+
+      <!-- SELECCIÓN -->
+      <a
+        href="demo.html?tema=cumple-8&diseno=seleccion"
+        class="design-card cumple8-card seleccion-card"
+        data-universe="seleccion"
+      >
+        <div class="card-image">
+          <div class="cumple8-preview seleccion-preview">
+            <span class="cumple8-preview-number">02</span>
+            <div class="seleccion-rays"></div>
+            <div class="seleccion-ball">⚽</div>
+            <div class="seleccion-number">08</div>
+            <div class="seleccion-title">SELECCIÓN</div>
+            <div class="seleccion-subtitle">
+              PASIÓN · FÚTBOL · FIESTA
+            </div>
+          </div>
+        </div>
+
+        <div class="card-info">
+          <div>
+            <span class="card-number">02</span>
+            <h3>Selección</h3>
+          </div>
+
+          <span class="card-arrow">↗</span>
+
+          <p>
+            Blanco, celeste y pasión.
+            Una invitación inspirada en la emoción de la Selección.
+          </p>
+        </div>
+      </a>
+
+      <!-- SUPERHÉROES -->
+      <a
+        href="demo.html?tema=cumple-8&diseno=superheroes"
+        class="design-card cumple8-card superheroes-card"
+        data-universe="superheroes"
+      >
+        <div class="card-image">
+          <div class="cumple8-preview superheroes-preview">
+            <span class="cumple8-preview-number">03</span>
+            <div class="hero-rays"></div>
+            <div class="hero-shield">★</div>
+            <div class="hero-title">HERO</div>
+            <div class="hero-subtitle">LEVEL 08</div>
+          </div>
+        </div>
+
+        <div class="card-info">
+          <div>
+            <span class="card-number">03</span>
+            <h3>Superhéroes</h3>
+          </div>
+
+          <span class="card-arrow">↗</span>
+
+          <p>
+            Rojo, amarillo y metal.
+            Una invitación con energía de cómic y espíritu de protagonista.
+          </p>
+        </div>
+      </a>
+    `;
+
+    /* -------------------------------------------------------
+       Cambiar el universo visual al pasar el mouse
+    ------------------------------------------------------- */
+
+    const cards = grid.querySelectorAll(".cumple8-card");
+
+    const universeClasses = [
+      "cumple8-dinosaurios",
+      "cumple8-seleccion",
+      "cumple8-superheroes",
+    ];
+
+    function resetUniverse() {
+      document.body.classList.remove(...universeClasses);
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        resetUniverse();
+
+        document.body.classList.add(`cumple8-${card.dataset.universe}`);
+      });
+
+      card.addEventListener("mouseleave", resetUniverse);
+
+      card.addEventListener("focus", () => {
+        resetUniverse();
+
+        document.body.classList.add(`cumple8-${card.dataset.universe}`);
+      });
+
+      card.addEventListener("blur", resetUniverse);
+    });
   }
-});
 
-/* =========================================
-   MENÚ MOBILE
-========================================= */
+  if (tema === "cumple-8") {
+    construirCumple8();
+  }
 
-const menuToggle = document.getElementById("menuToggle");
+  document.querySelectorAll(".design-card").forEach((card) => {
+    try {
+      const url = new URL(card.href, window.location.href);
 
-const mobileMenu = document.getElementById("mobileMenu");
+      url.searchParams.set("tema", tema);
 
-if (menuToggle && mobileMenu) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = mobileMenu.classList.toggle("open");
-
-    menuToggle.setAttribute("aria-expanded", isOpen);
-
-    menuToggle.setAttribute(
-      "aria-label",
-      isOpen ? "Cerrar menú" : "Abrir menú",
-    );
+      card.href = url.toString();
+    } catch (error) {
+      console.warn("No se pudo actualizar un enlace:", card);
+    }
   });
 
-  /*
-    Cerramos el menú automáticamente
-    cuando el usuario selecciona una sección.
-  */
+  /* =======================================================
+     6. NAVBAR AL HACER SCROLL
+  ======================================================= */
 
-  mobileMenu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
+  const navbar = document.querySelector(".navbar");
 
-      menuToggle.setAttribute("aria-expanded", "false");
+  if (navbar) {
+    function updateNavbar() {
+      navbar.classList.toggle("scrolled", window.scrollY > 80);
+    }
 
-      menuToggle.setAttribute("aria-label", "Abrir menú");
+    window.addEventListener("scroll", updateNavbar, {
+      passive: true,
     });
-  });
-}
+
+    updateNavbar();
+  }
+
+  /* =======================================================
+     7. MENÚ MÓVIL
+  ======================================================= */
+
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("open");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Cerrar menú" : "Abrir menú",
+      );
+    });
+
+    // Cerrar el menú cuando se selecciona una sección o enlace.
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menú");
+      });
+    });
+  }
+})();

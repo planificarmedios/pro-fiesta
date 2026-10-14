@@ -1,0 +1,1708 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Nos casamos. El resto es una fiesta.</title>
+    <meta
+      name="description"
+      content="Una boda diferente, sin reglas y con muchas ganas de bailar. ¡Te esperamos!"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --black: #19151f;
+        --paper: #fff8f1;
+        --pink: #f6a9d5;
+        --orange: #ffc6a8;
+        --lime: #d8f3d5;
+        --violet: #c9b8f5;
+        --muted: #c8bfce;
+        --font-body: "DM Sans", sans-serif;
+        --font-display: "Anton", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+      }
+
+      body {
+        background: var(--black);
+        color: var(--paper);
+        font-family: var(--font-body);
+        overflow-x: hidden;
+      }
+
+      body::selection {
+        background: var(--lime);
+        color: var(--black);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      /* ===================================
+       NAVBAR · CLUB FLOTANTE
+    =================================== */
+
+      .navbar {
+        position: fixed;
+        z-index: 1000;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: min(1200px, calc(100% - 32px));
+        min-height: 66px;
+        padding: 12px 18px 12px 22px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 18px;
+
+        background: rgba(16, 14, 20, 0.76);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .brand {
+        font-family: var(--font-display);
+        font-size: 23px;
+        letter-spacing: 1px;
+        white-space: nowrap;
+      }
+
+      .brand span {
+        color: var(--pink);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .nav-links a {
+        color: rgba(255, 255, 255, 0.77);
+        font-size: 12px;
+        font-weight: 600;
+        transition: color 0.25s;
+      }
+
+      .nav-links a:hover {
+        color: var(--lime);
+      }
+
+      .nav-cta {
+        padding: 12px 17px;
+        border-radius: 10px;
+
+        background: var(--lime);
+        color: var(--black);
+
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+
+      .nav-cta:hover {
+        transform: rotate(-2deg) scale(1.04);
+        box-shadow: 0 0 25px rgba(217, 255, 86, 0.25);
+      }
+
+      /* ===================================
+       HERO · FIESTA
+    =================================== */
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        min-height: 100svh;
+        padding: 150px 24px 75px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        overflow: hidden;
+        background: var(--black);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+
+        background:
+          linear-gradient(
+            180deg,
+            rgba(16, 14, 20, 0.38),
+            rgba(16, 14, 20, 0.25) 35%,
+            rgba(16, 14, 20, 0.94) 100%
+          ),
+          url("https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=2200&q=90")
+            center 45% / cover no-repeat;
+
+        transform: scale(1.04);
+        animation: heroZoom 12s ease-out forwards;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+
+        background:
+          radial-gradient(
+            ellipse at 15% 25%,
+            rgba(255, 77, 184, 0.17),
+            transparent 35%
+          ),
+          radial-gradient(
+            ellipse at 85% 45%,
+            rgba(139, 92, 255, 0.2),
+            transparent 35%
+          );
+      }
+
+      @keyframes heroZoom {
+        to {
+          transform: scale(1);
+        }
+      }
+
+      .hero-content {
+        width: 100%;
+        max-width: 1000px;
+        animation: appear 0.9s 0.1s both;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 28px;
+
+        padding: 10px 15px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 100px;
+
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(8px);
+
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .eyebrow .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--lime);
+        box-shadow: 0 0 12px var(--lime);
+        animation: blink 1.5s infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0.35;
+        }
+      }
+
+      .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(68px, 12.5vw, 170px);
+        font-weight: 400;
+        line-height: 0.85;
+        letter-spacing: -2px;
+        text-transform: uppercase;
+        text-wrap: balance;
+      }
+
+      .hero h1 .line-two {
+        display: block;
+        margin-top: 12px;
+        color: var(--pink);
+        text-shadow: 0 0 45px rgba(255, 77, 184, 0.22);
+        transform: rotate(-2deg);
+      }
+
+      .hero h1 .line-three {
+        display: block;
+        margin-top: 12px;
+        color: var(--lime);
+        font-size: 0.65em;
+        letter-spacing: 2px;
+      }
+
+      .hero-subtitle {
+        max-width: 530px;
+        margin: 35px auto 28px;
+
+        color: rgba(255, 255, 255, 0.88);
+        font-size: clamp(15px, 2vw, 19px);
+        line-height: 1.8;
+      }
+
+      .hero-subtitle strong {
+        color: var(--lime);
+      }
+
+      .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 13px;
+      }
+
+      .button {
+        min-height: 54px;
+        padding: 0 23px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        border: 1px solid transparent;
+        border-radius: 12px;
+
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+
+        transition:
+          transform 0.25s ease,
+          background 0.25s ease,
+          color 0.25s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-4px) rotate(-1deg);
+      }
+
+      .button-primary {
+        background: var(--pink);
+        color: #160d16;
+        box-shadow: 0 8px 30px rgba(255, 77, 184, 0.2);
+      }
+
+      .button-primary:hover {
+        background: var(--lime);
+      }
+
+      .button-outline {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+      }
+
+      .button-outline:hover {
+        background: white;
+        color: var(--black);
+      }
+
+      .hero-sticker {
+        position: absolute;
+        right: max(5%, calc((100% - 1200px) / 2));
+        bottom: 90px;
+
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+
+        display: grid;
+        place-items: center;
+        text-align: center;
+
+        background: var(--lime);
+        color: var(--black);
+
+        font-family: var(--font-display);
+        font-size: 20px;
+        line-height: 1.05;
+
+        transform: rotate(12deg);
+        animation: stickerFloat 4s ease-in-out infinite;
+      }
+
+      .hero-sticker span {
+        display: block;
+        font-family: var(--font-body);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1px;
+      }
+
+      @keyframes stickerFloat {
+        50% {
+          transform: rotate(5deg) translateY(-9px);
+        }
+      }
+
+      .scroll-hint {
+        position: absolute;
+        left: 50%;
+        bottom: 23px;
+        transform: translateX(-50%);
+
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      /* ===================================
+       TICKER · TEXTO EN MOVIMIENTO
+    =================================== */
+
+      .ticker {
+        overflow: hidden;
+        padding: 17px 0;
+
+        background: var(--lime);
+        color: var(--black);
+
+        transform: rotate(-1.2deg) scale(1.02);
+      }
+
+      .ticker-track {
+        display: flex;
+        width: max-content;
+        animation: tickerMove 28s linear infinite;
+      }
+
+      .ticker-content {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        gap: 25px;
+        padding-right: 25px;
+
+        font-family: var(--font-display);
+        font-size: clamp(20px, 3vw, 32px);
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .ticker-content span {
+        color: var(--pink);
+      }
+
+      @keyframes tickerMove {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ===================================
+       SECCIONES GENERALES
+    =================================== */
+
+      .section {
+        padding: 115px 24px;
+      }
+
+      .section-inner {
+        width: min(1100px, 100%);
+        margin: 0 auto;
+      }
+
+      .section-label {
+        margin-bottom: 19px;
+        color: var(--pink);
+
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(45px, 7vw, 88px);
+        line-height: 0.98;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+      }
+
+      .section-title em {
+        color: var(--lime);
+        font-style: normal;
+      }
+
+      .section-copy {
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      /* ===================================
+       NUESTRA IDEA
+    =================================== */
+
+      .manifesto {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 70px;
+      }
+
+      .manifesto-copy .section-copy {
+        max-width: 530px;
+        margin-top: 25px;
+      }
+
+      .manifesto-copy .section-copy + .section-copy {
+        margin-top: 15px;
+      }
+
+      .manifesto-art {
+        position: relative;
+        min-height: 380px;
+
+        display: grid;
+        place-items: center;
+      }
+
+      .manifesto-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 390px;
+        padding: 38px 30px;
+
+        background: var(--pink);
+        color: var(--black);
+
+        transform: rotate(4deg);
+        box-shadow: 14px 14px 0 var(--violet);
+      }
+
+      .manifesto-card small {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .manifesto-card h3 {
+        margin: 25px 0;
+        font-family: var(--font-display);
+        font-size: clamp(38px, 5vw, 59px);
+        line-height: 0.98;
+        text-transform: uppercase;
+      }
+
+      .manifesto-card p {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.7;
+      }
+
+      .star {
+        position: absolute;
+        color: var(--lime);
+        font-size: 70px;
+        animation: starSpin 18s linear infinite;
+      }
+
+      .star-one {
+        top: 0;
+        right: 0;
+      }
+
+      .star-two {
+        bottom: 0;
+        left: 0;
+        color: var(--pink);
+        font-size: 52px;
+        animation-direction: reverse;
+      }
+
+      @keyframes starSpin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ===================================
+       DRESS CODE
+    =================================== */
+
+      .dresscode {
+        position: relative;
+        overflow: hidden;
+
+        background:
+          radial-gradient(
+            circle at 85% 15%,
+            rgba(139, 92, 255, 0.25),
+            transparent 35%
+          ),
+          #19151f;
+      }
+
+      .dresscode-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 65px;
+      }
+
+      .dresscode .section-title em {
+        color: var(--pink);
+      }
+
+      .dresscode .section-copy {
+        margin-top: 23px;
+        max-width: 470px;
+      }
+
+      .no-rules {
+        margin-top: 30px;
+        padding: 16px 19px;
+        display: inline-block;
+
+        border: 1px dashed rgba(217, 255, 86, 0.6);
+        border-radius: 10px;
+        color: var(--lime);
+
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+
+        transform: rotate(-2deg);
+      }
+
+      .dress-examples {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 13px;
+      }
+
+      .dress-item {
+        min-height: 150px;
+        padding: 23px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.045);
+
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
+      }
+
+      .dress-item:hover {
+        transform: translateY(-5px) rotate(1deg);
+        background: rgba(255, 255, 255, 0.09);
+      }
+
+      .dress-item .emoji {
+        font-size: 34px;
+      }
+
+      .dress-item strong {
+        font-size: 13px;
+      }
+
+      .dress-item small {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      /* ===================================
+       DATOS DE LA FIESTA
+    =================================== */
+
+      .party-details {
+        background: var(--paper);
+        color: var(--black);
+      }
+
+      .party-details .section-label {
+        color: #8b3cb5;
+      }
+
+      .party-details .section-title em {
+        color: #a73c9a;
+      }
+
+      .details-grid {
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .detail-card {
+        min-height: 235px;
+        padding: 28px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        border: 1px solid rgba(16, 14, 20, 0.12);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.55);
+
+        transition: transform 0.3s ease;
+      }
+
+      .detail-card:hover {
+        transform: translateY(-6px) rotate(-1deg);
+      }
+
+      .detail-icon {
+        width: 45px;
+        height: 45px;
+        display: grid;
+        place-items: center;
+
+        border-radius: 12px;
+        background: var(--lime);
+        font-size: 21px;
+      }
+
+      .detail-card:nth-child(2) .detail-icon {
+        background: #ffc3e5;
+      }
+
+      .detail-card:nth-child(3) .detail-icon {
+        background: #d4c2ff;
+      }
+
+      .detail-card h3 {
+        margin-top: 28px;
+        font-family: var(--font-display);
+        font-size: 29px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      .detail-card p {
+        margin-top: 8px;
+        color: #68616b;
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
+      .detail-card a {
+        display: inline-block;
+        margin-top: 17px;
+        font-size: 11px;
+        font-weight: 800;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      /* ===================================
+       CUENTA REGRESIVA
+    =================================== */
+
+      .countdown-section {
+        text-align: center;
+        background:
+          radial-gradient(
+            ellipse at center,
+            rgba(255, 77, 184, 0.12),
+            transparent 60%
+          ),
+          var(--black);
+      }
+
+      .countdown-section .section-title {
+        font-size: clamp(42px, 7vw, 76px);
+      }
+
+      .countdown {
+        width: min(700px, 100%);
+        margin: 42px auto 0;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .countdown-box {
+        padding: 25px 8px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        border-radius: 13px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .countdown-number {
+        display: block;
+        font-family: var(--font-display);
+        font-size: clamp(34px, 6vw, 58px);
+        line-height: 1;
+        color: var(--lime);
+      }
+
+      .countdown-label {
+        display: block;
+        margin-top: 12px;
+
+        color: var(--muted);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      /* ===================================
+       RSVP
+    =================================== */
+
+      .rsvp {
+        padding: 110px 24px;
+        text-align: center;
+
+        background:
+          linear-gradient(135deg, rgba(139, 92, 255, 0.2), transparent 45%),
+          #19151f;
+      }
+
+      .rsvp-inner {
+        width: min(850px, 100%);
+        margin: 0 auto;
+      }
+
+      .rsvp .section-title {
+        font-size: clamp(55px, 10vw, 112px);
+      }
+
+      .rsvp .section-title em {
+        color: var(--pink);
+      }
+
+      .rsvp p {
+        max-width: 500px;
+        margin: 25px auto 30px;
+
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .rsvp .button {
+        min-height: 60px;
+        padding: 0 28px;
+      }
+
+      .rsvp-note {
+        margin-top: 19px;
+        color: rgba(255, 255, 255, 0.48);
+        font-size: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      /* ===================================
+       FOOTER
+    =================================== */
+
+      .footer {
+        padding: 38px 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+      }
+
+      .footer-logo {
+        font-family: var(--font-display);
+        font-size: 32px;
+        text-transform: uppercase;
+      }
+
+      .footer-logo span {
+        color: var(--pink);
+      }
+
+      .footer p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .footer .footer-credit {
+        margin-top: 24px;
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 9px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* ===================================
+       ANIMACIONES AL HACER SCROLL
+    =================================== */
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.75s ease,
+          transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===================================
+       RESPONSIVE
+    =================================== */
+
+      @media (max-width: 900px) {
+        .nav-links {
+          gap: 15px;
+        }
+
+        .nav-links a {
+          font-size: 11px;
+        }
+
+        .manifesto,
+        .dresscode-layout {
+          gap: 35px;
+        }
+
+        .hero-sticker {
+          right: 25px;
+          bottom: 70px;
+          width: 88px;
+          height: 88px;
+          font-size: 16px;
+        }
+      }
+
+      @media (max-width: 680px) {
+        html {
+          scroll-padding-top: 85px;
+        }
+
+        .navbar {
+          top: 10px;
+          width: calc(100% - 20px);
+          min-height: 60px;
+          padding: 10px 14px;
+        }
+
+        .brand {
+          font-size: 21px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .nav-cta {
+          padding: 11px 13px;
+          font-size: 10px;
+        }
+
+        .hero {
+          min-height: 92svh;
+          padding: 125px 20px 95px;
+        }
+
+        .hero::before {
+          background-position: 53% center;
+        }
+
+        .hero h1 {
+          font-size: clamp(61px, 15vw, 96px);
+          letter-spacing: -1px;
+        }
+
+        .eyebrow {
+          margin-bottom: 24px;
+          font-size: 9px;
+          letter-spacing: 1.5px;
+        }
+
+        .hero-subtitle {
+          margin-top: 28px;
+          font-size: 14px;
+        }
+
+        .hero-sticker {
+          right: 17px;
+          bottom: 53px;
+          width: 72px;
+          height: 72px;
+          font-size: 13px;
+        }
+
+        .hero-sticker span {
+          font-size: 7px;
+        }
+
+        .scroll-hint {
+          left: 20px;
+          bottom: 26px;
+          transform: none;
+          font-size: 8px;
+        }
+
+        .section {
+          padding: 78px 22px;
+        }
+
+        .manifesto,
+        .dresscode-layout {
+          grid-template-columns: 1fr;
+          gap: 35px;
+        }
+
+        .manifesto-art {
+          min-height: 340px;
+          padding: 10px 5px;
+        }
+
+        .manifesto-card {
+          max-width: 340px;
+          padding: 30px 25px;
+        }
+
+        .dress-examples {
+          gap: 10px;
+        }
+
+        .dress-item {
+          min-height: 135px;
+          padding: 18px;
+        }
+
+        .details-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+          margin-top: 30px;
+        }
+
+        .detail-card {
+          min-height: 195px;
+          padding: 23px;
+        }
+
+        .countdown {
+          gap: 7px;
+        }
+
+        .countdown-box {
+          padding: 19px 3px;
+        }
+
+        .countdown-number {
+          font-size: clamp(28px, 8vw, 43px);
+        }
+
+        .countdown-label {
+          font-size: 8px;
+          letter-spacing: 0.6px;
+        }
+
+        .rsvp {
+          padding: 85px 22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* Brillos pastel flotantes */
+      .sparkle-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 900;
+        overflow: hidden;
+        pointer-events: none;
+        contain: strict;
+      }
+
+      .sparkle {
+        position: absolute;
+        top: -10vh;
+        left: var(--x);
+        width: var(--size);
+        height: var(--size);
+        color: var(--tone);
+        opacity: 0;
+        text-shadow:
+          0 0 7px currentColor,
+          0 0 16px currentColor;
+        animation: sparkleFall var(--duration) linear var(--delay) infinite;
+        will-change: transform, opacity;
+      }
+
+      .sparkle::before {
+        content: "✦";
+        display: block;
+        font-size: var(--size);
+      }
+
+      @keyframes sparkleFall {
+        0% {
+          transform: translate3d(0, -5vh, 0) rotate(0deg) scale(0.45);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.75;
+        }
+        55% {
+          opacity: 0.55;
+        }
+        100% {
+          transform: translate3d(var(--drift), 110vh, 0) rotate(300deg)
+            scale(1.15);
+          opacity: 0;
+        }
+      }
+
+      /* Billetes que caen de forma suave, como parte de la fiesta */
+      .money-rain {
+        position: fixed;
+        inset: 0;
+        z-index: 850;
+        overflow: hidden;
+        pointer-events: none;
+        contain: strict;
+      }
+
+      .falling-bill {
+        position: absolute;
+        top: -15vh;
+        left: var(--x);
+        width: clamp(28px, 3.1vw, 48px);
+        height: clamp(15px, 1.8vw, 25px);
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        border-radius: 4px;
+        color: #477c66;
+        font: 800 9px/1 var(--font-body);
+        letter-spacing: 0.5px;
+        background:
+          radial-gradient(
+            ellipse at center,
+            rgba(255, 255, 255, 0.95) 0 16%,
+            transparent 18%
+          ),
+          linear-gradient(135deg, #e5f6d9, #a9d7b9 45%, #f5f2cb);
+        box-shadow:
+          0 2px 9px rgba(20, 30, 20, 0.22),
+          inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+        opacity: 0;
+        animation: billFall var(--duration) linear var(--delay) infinite;
+        will-change: transform, opacity;
+      }
+
+      .falling-bill::before,
+      .falling-bill::after {
+        content: "";
+        position: absolute;
+        inset: 3px 5px;
+        border: 1px solid rgba(71, 124, 102, 0.55);
+        border-radius: 2px;
+      }
+
+      .falling-bill::after {
+        inset: 6px 13px;
+        border-radius: 50%;
+      }
+
+      @keyframes billFall {
+        0% {
+          transform: translate3d(0, -8vh, 0) rotate(0deg);
+          opacity: 0;
+        }
+        8% {
+          opacity: 0.85;
+        }
+        48% {
+          transform: translate3d(var(--drift), 52vh, 0) rotate(230deg);
+        }
+        92% {
+          opacity: 0.7;
+        }
+        100% {
+          transform: translate3d(calc(var(--drift) * -0.65), 115vh, 0)
+            rotate(620deg);
+          opacity: 0;
+        }
+      }
+
+      .hero::after {
+        background:
+          radial-gradient(
+            ellipse at 15% 25%,
+            rgba(246, 169, 213, 0.24),
+            transparent 38%
+          ),
+          radial-gradient(
+            ellipse at 85% 45%,
+            rgba(201, 184, 245, 0.26),
+            transparent 38%
+          ),
+          radial-gradient(
+            ellipse at 50% 85%,
+            rgba(216, 243, 213, 0.11),
+            transparent 42%
+          );
+      }
+
+      .hero,
+      .dresscode,
+      .rsvp,
+      .countdown-section {
+        background-color: var(--black);
+      }
+
+      .button-primary {
+        box-shadow:
+          0 8px 30px rgba(246, 169, 213, 0.28),
+          0 0 22px rgba(201, 184, 245, 0.16);
+      }
+
+      .manifesto-card {
+        box-shadow:
+          14px 14px 0 var(--violet),
+          0 0 35px rgba(246, 169, 213, 0.2);
+      }
+
+      .ticker {
+        background: linear-gradient(90deg, #d8f3d5, #f6d6e9, #e4dafa, #d8f3d5);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .sparkle,
+        .falling-bill {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="sparkle-layer" id="sparkleLayer" aria-hidden="true"></div>
+    <div class="money-rain" id="moneyRain" aria-hidden="true"></div>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <a href="#inicio" class="brand"> LUCÍA <span>+</span> MATEO </a>
+
+      <nav class="nav-links">
+        <a href="#historia">La idea</a>
+        <a href="#look">Sin dress code</a>
+        <a href="#fiesta">La fiesta</a>
+        <a href="evento.html#estilos">Volver</a>
+      </nav>
+
+      <a href="#rsvp" class="nav-cta">¿Venís? ↗</a>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-content">
+          <div class="eyebrow">
+            <span class="dot"></span>
+            Atención: nos casamos
+          </div>
+
+          <h1>
+            NOS CASAMOS.
+            <span class="line-two">¡Y QUÉ!</span>
+            <span class="line-three">EL RESTO ES UNA FIESTA.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            No hace falta traje. No hace falta vestido. No hace falta saber
+            bailar.
+            <br />
+            <strong>Solo tenés que venir con ganas de pasarla bien.</strong>
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#fiesta" class="button button-primary">
+              Quiero saber todo ↘
+            </a>
+
+            <a href="#look" class="button button-outline"> ¿Qué me pongo? </a>
+          </div>
+        </div>
+
+        <div class="hero-sticker">
+          100%
+          <span>SIN REGLAS</span>
+        </div>
+
+        <div class="scroll-hint">Bajá. Se pone mejor ↓</div>
+      </section>
+
+      <!-- TEXTO EN MOVIMIENTO -->
+      <div class="ticker" aria-label="Amor, música y fiesta">
+        <div class="ticker-track">
+          <div class="ticker-content" aria-hidden="true">
+            AMOR REAL <span>✳</span> CERO PROTOCOLO <span>✳</span> MÚSICA FUERTE
+            <span>✳</span> PISTA LLENA <span>✳</span> AMOR REAL
+            <span>✳</span> CERO PROTOCOLO <span>✳</span> MÚSICA FUERTE
+            <span>✳</span> PISTA LLENA <span>✳</span>
+          </div>
+
+          <div class="ticker-content" aria-hidden="true">
+            AMOR REAL <span>✳</span> CERO PROTOCOLO <span>✳</span> MÚSICA FUERTE
+            <span>✳</span> PISTA LLENA <span>✳</span> AMOR REAL
+            <span>✳</span> CERO PROTOCOLO <span>✳</span> MÚSICA FUERTE
+            <span>✳</span> PISTA LLENA <span>✳</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LA IDEA -->
+      <section class="section" id="historia">
+        <div class="section-inner manifesto">
+          <div class="manifesto-copy reveal">
+            <div class="section-label">01 / Nuestra declaración</div>
+
+            <h2 class="section-title">
+              Una boda<br />
+              <em>a nuestra manera.</em>
+            </h2>
+
+            <p class="section-copy">
+              Nos queremos. Nos elegimos. Y decidimos festejarlo con la gente
+              que queremos tener cerca.
+            </p>
+
+            <p class="section-copy">
+              Pero no somos de las bodas tradicionales. Así que olvidate de los
+              protocolos, de los horarios solemnes y de tener que comportarte de
+              determinada manera.
+            </p>
+
+            <p class="section-copy">
+              Queremos abrazos, anécdotas, brindis, música y una pista en la que
+              terminemos todos mezclados.
+            </p>
+          </div>
+
+          <div class="manifesto-art reveal">
+            <span class="star star-one">✳</span>
+            <span class="star star-two">✦</span>
+
+            <div class="manifesto-card">
+              <small>Comunicado oficial</small>
+
+              <h3>
+                El amor<br />
+                es cosa<br />
+                seria.<br />
+                La fiesta,<br />
+                no tanto.
+              </h3>
+
+              <p>
+                Vení como sos. Queremos celebrar con vos, no evaluar tu outfit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VESTIMENTA -->
+      <section class="section dresscode" id="look">
+        <div class="section-inner dresscode-layout">
+          <div class="reveal">
+            <div class="section-label">02 / Código de vestimenta</div>
+
+            <h2 class="section-title">
+              Vení como<br />
+              <em>se te cante.</em>
+            </h2>
+
+            <p class="section-copy">
+              ¿Querés venir de traje? Genial. ¿Con zapatillas y una remera?
+              También. ¿Con brillos, colores imposibles o ese outfit que nunca
+              encontrás dónde usar? ESTA ES TU NOCHE.
+            </p>
+
+            <div class="no-rules">Dress code: ser vos mismo/a ✳</div>
+          </div>
+
+          <div class="dress-examples reveal">
+            <article class="dress-item">
+              <span class="emoji">👟</span>
+              <div>
+                <strong>Zapatillas cómodas</strong>
+                <small>La pista nos espera.</small>
+              </div>
+            </article>
+
+            <article class="dress-item">
+              <span class="emoji">🪩</span>
+              <div>
+                <strong>Brillos y colores</strong>
+                <small>Cuanto más vos, mejor.</small>
+              </div>
+            </article>
+
+            <article class="dress-item">
+              <span class="emoji">🕶️</span>
+              <div>
+                <strong>Modo estrella</strong>
+                <small>Hoy vale llamar la atención.</small>
+              </div>
+            </article>
+
+            <article class="dress-item">
+              <span class="emoji">🖤</span>
+              <div>
+                <strong>Tu estilo de siempre</strong>
+                <small>No hace falta disfrazarse.</small>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATOS -->
+      <section class="section party-details" id="fiesta">
+        <div class="section-inner">
+          <div class="reveal">
+            <div class="section-label">03 / La información importante</div>
+
+            <h2 class="section-title">
+              El cuándo,<br />
+              el dónde y <em>el cómo.</em>
+            </h2>
+          </div>
+
+          <div class="details-grid">
+            <article class="detail-card reveal">
+              <div class="detail-icon">📅</div>
+
+              <div>
+                <h3>La fecha</h3>
+                <p>
+                  Sábado 14 de noviembre<br />
+                  Desde las 21:00 hs
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-card reveal">
+              <div class="detail-icon">📍</div>
+
+              <div>
+                <h3>El lugar</h3>
+                <p>
+                  Club / salón / espacio<br />
+                  Dirección a confirmar
+                </p>
+
+                <a href="#rsvp">Consultar ubicación ↗</a>
+              </div>
+            </article>
+
+            <article class="detail-card reveal">
+              <div class="detail-icon">🎧</div>
+
+              <div>
+                <h3>El plan</h3>
+                <p>
+                  Brindis, música, baile y gente querida. Lo demás lo
+                  improvisamos.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CUENTA REGRESIVA -->
+      <section class="section countdown-section">
+        <div class="section-inner reveal">
+          <div class="section-label">La cuenta regresiva empezó</div>
+
+          <h2 class="section-title">Cada vez falta <em>menos.</em></h2>
+
+          <div class="countdown" id="countdown">
+            <div class="countdown-box">
+              <span class="countdown-number" id="days">000</span>
+              <span class="countdown-label">Días</span>
+            </div>
+
+            <div class="countdown-box">
+              <span class="countdown-number" id="hours">00</span>
+              <span class="countdown-label">Horas</span>
+            </div>
+
+            <div class="countdown-box">
+              <span class="countdown-number" id="minutes">00</span>
+              <span class="countdown-label">Minutos</span>
+            </div>
+
+            <div class="countdown-box">
+              <span class="countdown-number" id="seconds">00</span>
+              <span class="countdown-label">Segundos</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONFIRMACIÓN -->
+      <section class="rsvp" id="rsvp">
+        <div class="rsvp-inner reveal">
+          <div class="section-label">04 / Necesitamos saber algo</div>
+
+          <h2 class="section-title">
+            ¿Contamos<br />
+            <em>con vos?</em>
+          </h2>
+
+          <p>
+            Confirmá tu asistencia y preparate. La idea es que vengas a celebrar
+            con nosotros y que al día siguiente tengas una buena historia para
+            contar.
+          </p>
+
+          <a
+            class="button button-primary"
+            id="rsvpButton"
+            href="https://wa.me/5490000000000?text=Hola%20Luc%C3%ADa%20y%20Mateo%21%20Confirmo%20mi%20asistencia%20a%20la%20fiesta."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ¡Ahí estaré! 🪩
+          </a>
+
+          <div class="rsvp-note">
+            POR FAVOR, CONFIRMÁ ANTES DEL 1 DE NOVIEMBRE
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-logo">LUCÍA <span>+</span> MATEO</div>
+
+      <p>Nos elegimos para siempre. La fiesta empieza ahora.</p>
+
+      <div class="footer-credit">
+        Una invitación hecha para celebrar diferente.
+      </div>
+    </footer>
+
+    <script>
+      /* ===================================
+       CUENTA REGRESIVA
+       Cambiar por la fecha real de la boda.
+       Formato: AAAA-MM-DDTHH:MM:SS-03:00
+    =================================== */
+
+      const weddingDate = new Date("2026-11-14T21:00:00-03:00");
+
+      const countdownElements = {
+        days: document.getElementById("days"),
+        hours: document.getElementById("hours"),
+        minutes: document.getElementById("minutes"),
+        seconds: document.getElementById("seconds"),
+      };
+
+      function updateCountdown() {
+        const now = Date.now();
+        const difference = weddingDate.getTime() - now;
+
+        if (difference <= 0) {
+          Object.values(countdownElements).forEach((element) => {
+            element.textContent = "00";
+          });
+
+          document.querySelector(
+            ".countdown-section .section-title",
+          ).innerHTML = "¡QUE EMPIECE <em>LA FIESTA!</em>";
+
+          return;
+        }
+
+        const days = Math.floor(difference / 86400000);
+        const hours = Math.floor((difference % 86400000) / 3600000);
+        const minutes = Math.floor((difference % 3600000) / 60000);
+        const seconds = Math.floor((difference % 60000) / 1000);
+
+        countdownElements.days.textContent = String(days).padStart(3, "0");
+
+        countdownElements.hours.textContent = String(hours).padStart(2, "0");
+
+        countdownElements.minutes.textContent = String(minutes).padStart(
+          2,
+          "0",
+        );
+
+        countdownElements.seconds.textContent = String(seconds).padStart(
+          2,
+          "0",
+        );
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      /* ===================================
+       ANIMACIONES AL HACER SCROLL
+    =================================== */
+
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.12,
+            rootMargin: "0px 0px -35px 0px",
+          },
+        );
+
+        revealElements.forEach((element) => {
+          revealObserver.observe(element);
+        });
+      } else {
+        revealElements.forEach((element) => {
+          element.classList.add("visible");
+        });
+      }
+
+      /* ===================================
+       MOVIMIENTO DEL TICKER
+    =================================== */
+
+      const ticker = document.querySelector(".ticker-track");
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        ticker.style.animation = "none";
+      }
+
+      /* Brillitos y billetes flotando: decorativos y sin bloquear los clics */
+      (function createPartyEffects() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
+
+        const sparkleLayer = document.getElementById("sparkleLayer");
+        const moneyRain = document.getElementById("moneyRain");
+        const tones = ["#fff0b8", "#f6a9d5", "#d8f3d5", "#c9b8f5", "#ffffff"];
+
+        for (let i = 0; i < 34; i++) {
+          const star = document.createElement("span");
+          star.className = "sparkle";
+          star.style.setProperty("--x", `${Math.random() * 100}%`);
+          star.style.setProperty("--size", `${8 + Math.random() * 13}px`);
+          star.style.setProperty(
+            "--tone",
+            tones[Math.floor(Math.random() * tones.length)],
+          );
+          star.style.setProperty("--duration", `${8 + Math.random() * 13}s`);
+          star.style.setProperty("--delay", `${-Math.random() * 20}s`);
+          star.style.setProperty("--drift", `${-70 + Math.random() * 140}px`);
+          sparkleLayer.appendChild(star);
+        }
+
+        for (let i = 0; i < 11; i++) {
+          const bill = document.createElement("span");
+          bill.className = "falling-bill";
+          bill.textContent = "$";
+          bill.setAttribute("aria-hidden", "true");
+          bill.style.setProperty("--x", `${Math.random() * 100}%`);
+          bill.style.setProperty("--duration", `${13 + Math.random() * 12}s`);
+          bill.style.setProperty("--delay", `${-Math.random() * 24}s`);
+          bill.style.setProperty("--drift", `${-110 + Math.random() * 220}px`);
+          moneyRain.appendChild(bill);
+        }
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1647 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Power Aventura | Invitación infantil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #9b5cff;
+        --secondary: #f7d34a;
+        --accent: #55e5bd;
+        --dark: #17152e;
+        --paper: #fffdf8;
+        --hero-bg:
+          radial-gradient(circle at 80% 25%, #7345d8 0, transparent 30%),
+          radial-gradient(circle at 15% 80%, #273d9b 0, transparent 38%),
+          linear-gradient(135deg, #17152e, #29204e);
+        --hero-decoration: "⚡";
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 85px;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        color: var(--dark);
+        background: var(--paper);
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 20;
+        padding: 20px 6%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.45rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .brand-icon {
+        display: grid;
+        place-items: center;
+        width: 43px;
+        height: 43px;
+        border-radius: 14px;
+        background: var(--secondary);
+        color: var(--dark);
+        transform: rotate(-7deg);
+        font-size: 1.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        font-size: 0.88rem;
+        font-weight: 800;
+      }
+
+      .nav-links a {
+        opacity: 0.85;
+        transition: opacity 0.2s;
+      }
+
+      .nav-links a:hover {
+        opacity: 1;
+      }
+
+      .nav-rsvp {
+        padding: 12px 19px;
+        border-radius: 30px;
+        background: var(--secondary);
+        color: var(--dark);
+      }
+
+      .menu-toggle {
+        display: none;
+        border: 0;
+        background: transparent;
+        color: white;
+        font-size: 1.8rem;
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        min-height: 740px;
+        min-height: min(790px, 100svh);
+        display: flex;
+        align-items: center;
+        padding: 130px 7% 90px;
+        overflow: hidden;
+        color: white;
+        background: var(--hero-bg);
+        transition: background 0.5s ease;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.18;
+        background-image: radial-gradient(#fff 1px, transparent 1px);
+        background-size: 25px 25px;
+      }
+
+      .hero::after {
+        content: var(--hero-decoration);
+        position: absolute;
+        right: 8%;
+        top: 16%;
+        font-size: clamp(8rem, 22vw, 19rem);
+        opacity: 0.1;
+        transform: rotate(-14deg);
+        pointer-events: none;
+      }
+
+      .hero-inner {
+        width: min(1200px, 100%);
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 15px;
+        margin-bottom: 22px;
+        border: 1px solid #ffffff36;
+        border-radius: 30px;
+        background: #ffffff10;
+        color: var(--secondary);
+        font-size: 0.77rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        max-width: 680px;
+        font-family: "Baloo 2", sans-serif;
+        font-size: clamp(3.7rem, 7.7vw, 7.2rem);
+        line-height: 0.91;
+        letter-spacing: -4px;
+        font-weight: 800;
+      }
+
+      .hero h1 span {
+        display: block;
+        color: var(--secondary);
+        transform: rotate(-2deg);
+        transform-origin: left center;
+      }
+
+      .hero-description {
+        max-width: 450px;
+        margin-top: 27px;
+        color: #e2e0f4;
+        font-size: 1.08rem;
+        line-height: 1.8;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        margin-top: 30px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 52px;
+        padding: 14px 23px;
+        border: 0;
+        border-radius: 15px;
+        font-size: 0.94rem;
+        font-weight: 900;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+
+      .btn-primary {
+        background: var(--secondary);
+        color: var(--dark);
+        box-shadow: 0 8px 0 #00000022;
+      }
+
+      .btn-secondary {
+        border: 1px solid #ffffff45;
+        background: #ffffff12;
+        color: white;
+      }
+
+      .hero-note {
+        margin-top: 24px;
+        color: #bcb9d8;
+        font-size: 0.83rem;
+      }
+
+      .hero-art {
+        position: relative;
+        min-height: 450px;
+        display: grid;
+        place-items: center;
+      }
+
+      .art-halo {
+        position: absolute;
+        width: min(410px, 85%);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: var(--primary);
+        opacity: 0.3;
+        filter: blur(2px);
+        transition: background 0.5s;
+      }
+
+      .art-card {
+        position: relative;
+        width: min(350px, 85%);
+        aspect-ratio: 0.82;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 25px;
+        overflow: hidden;
+        border: 2px solid #ffffff60;
+        border-radius: 32px;
+        background:
+          linear-gradient(160deg, #ffffff28, transparent 45%), #ffffff12;
+        box-shadow: 0 30px 90px #00000040;
+        backdrop-filter: blur(8px);
+        transform: rotate(4deg);
+        transition: transform 0.5s;
+      }
+
+      .art-card:hover {
+        transform: rotate(0deg) translateY(-8px);
+      }
+
+      .art-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .art-label {
+        padding: 7px 12px;
+        border-radius: 20px;
+        background: var(--secondary);
+        color: var(--dark);
+        font-size: 0.7rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .art-stars {
+        font-size: 1.25rem;
+        letter-spacing: 4px;
+      }
+
+      .art-emoji {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        font-size: clamp(7rem, 14vw, 11rem);
+        line-height: 1.1;
+        filter: drop-shadow(0 15px 15px #00000025);
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .art-bottom {
+        padding: 18px;
+        border-radius: 20px;
+        background: #ffffffeb;
+        color: var(--dark);
+      }
+
+      .art-bottom small {
+        display: block;
+        color: #6c6680;
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+      }
+
+      .art-bottom strong {
+        display: block;
+        margin-top: 3px;
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.8rem;
+        line-height: 1.2;
+      }
+
+      .floating {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        width: 67px;
+        height: 67px;
+        border-radius: 23px;
+        background: white;
+        box-shadow: 0 15px 35px #00000028;
+        font-size: 2rem;
+        animation: float 4s ease-in-out infinite;
+      }
+
+      .float-one {
+        top: 13%;
+        left: 1%;
+        transform: rotate(-12deg);
+      }
+
+      .float-two {
+        right: 0;
+        top: 33%;
+        animation-delay: 0.8s;
+        transform: rotate(12deg);
+      }
+
+      .float-three {
+        bottom: 4%;
+        left: 8%;
+        animation-delay: 1.4s;
+        transform: rotate(-8deg);
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          translate: 0 0;
+        }
+        50% {
+          translate: 0 -12px;
+        }
+      }
+
+      /* FRANJA DE DATOS */
+
+      .quick-info {
+        position: relative;
+        z-index: 3;
+        width: min(1050px, 88%);
+        margin: -38px auto 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-radius: 24px;
+        background: white;
+        box-shadow: 0 18px 55px #21143d12;
+      }
+
+      .quick-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 13px;
+        padding: 23px 18px;
+      }
+
+      .quick-item + .quick-item {
+        border-left: 1px solid #eeeaf4;
+      }
+
+      .quick-icon {
+        display: grid;
+        place-items: center;
+        flex: 0 0 47px;
+        height: 47px;
+        border-radius: 15px;
+        background: #f1e9ff;
+        font-size: 1.4rem;
+      }
+
+      .quick-item:nth-child(2) .quick-icon {
+        background: #fff4ce;
+      }
+
+      .quick-item:nth-child(3) .quick-icon {
+        background: #dff9ee;
+      }
+
+      .quick-item small {
+        display: block;
+        color: #898397;
+        font-size: 0.73rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .quick-item strong {
+        display: block;
+        margin-top: 3px;
+        font-size: 0.98rem;
+      }
+
+      /* SECCIONES */
+
+      .section {
+        padding: 105px 7%;
+      }
+
+      .section-inner {
+        width: min(1120px, 100%);
+        margin: auto;
+      }
+
+      .section-heading {
+        max-width: 660px;
+        margin: 0 auto 45px;
+        text-align: center;
+      }
+
+      .kicker {
+        color: var(--primary);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .section-heading h2 {
+        margin-top: 12px;
+        font-family: "Baloo 2", sans-serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1;
+        letter-spacing: -1.5px;
+      }
+
+      .section-heading p {
+        margin-top: 16px;
+        color: #777185;
+        line-height: 1.8;
+      }
+
+      /* ELEGIR UNIVERSO */
+
+      .universes {
+        background: #f8f5ff;
+      }
+
+      .universe-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .universe-card {
+        position: relative;
+        min-height: 340px;
+        padding: 27px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        border: 2px solid transparent;
+        border-radius: 27px;
+        background: white;
+        text-align: left;
+        box-shadow: 0 12px 35px #2b1b4c0a;
+        transition:
+          transform 0.25s,
+          border-color 0.25s,
+          box-shadow 0.25s;
+      }
+
+      .universe-card:hover,
+      .universe-card.active {
+        transform: translateY(-7px);
+        border-color: var(--card-color);
+        box-shadow: 0 20px 45px #2b1b4c13;
+      }
+
+      .universe-card::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        right: -65px;
+        top: -55px;
+        border-radius: 50%;
+        background: var(--card-color);
+        opacity: 0.12;
+      }
+
+      .universe-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .universe-number {
+        color: #a09aac;
+        font-size: 0.8rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .universe-symbol {
+        display: grid;
+        place-items: center;
+        width: 112px;
+        height: 112px;
+        margin: 18px auto;
+        border-radius: 32px;
+        background: var(--card-bg);
+        font-size: 4.4rem;
+        transform: rotate(-5deg);
+        transition: transform 0.3s;
+      }
+
+      .universe-card:hover .universe-symbol {
+        transform: rotate(5deg) scale(1.08);
+      }
+
+      .universe-card h3 {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.8rem;
+        line-height: 1.1;
+      }
+
+      .universe-card p {
+        margin-top: 8px;
+        color: #777185;
+        font-size: 0.9rem;
+        line-height: 1.65;
+      }
+
+      .universe-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 19px;
+        color: var(--card-color);
+        font-size: 0.85rem;
+        font-weight: 900;
+      }
+
+      /* CUENTA REGRESIVA */
+
+      .countdown-section {
+        position: relative;
+        overflow: hidden;
+        background: var(--dark);
+        color: white;
+      }
+
+      .countdown-section::before {
+        content: "✦";
+        position: absolute;
+        right: 8%;
+        top: -50px;
+        color: var(--secondary);
+        opacity: 0.12;
+        font-size: 20rem;
+      }
+
+      .countdown-content {
+        position: relative;
+        text-align: center;
+      }
+
+      .countdown-content .kicker {
+        color: var(--secondary);
+      }
+
+      .countdown-content h2 {
+        margin-top: 12px;
+        font-family: "Baloo 2", sans-serif;
+        font-size: clamp(2.3rem, 5vw, 4rem);
+        line-height: 1.1;
+      }
+
+      .countdown-content > p {
+        margin-top: 12px;
+        color: #c7c2de;
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin: 38px 0 30px;
+      }
+
+      .time-box {
+        width: 105px;
+        padding: 18px 10px;
+        border: 1px solid #ffffff22;
+        border-radius: 19px;
+        background: #ffffff0c;
+      }
+
+      .time-box strong {
+        display: block;
+        color: var(--secondary);
+        font-family: "Baloo 2", sans-serif;
+        font-size: 2.8rem;
+        line-height: 1;
+      }
+
+      .time-box span {
+        display: block;
+        margin-top: 8px;
+        color: #d0cce1;
+        font-size: 0.7rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      /* DETALLES */
+
+      .details {
+        background: white;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .detail-card {
+        display: flex;
+        gap: 18px;
+        padding: 26px;
+        border: 1px solid #eeeaf4;
+        border-radius: 23px;
+        background: #fff;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+
+      .detail-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px #21143d0d;
+      }
+
+      .detail-icon {
+        display: grid;
+        place-items: center;
+        flex: 0 0 57px;
+        height: 57px;
+        border-radius: 18px;
+        background: #f1e9ff;
+        font-size: 1.65rem;
+      }
+
+      .detail-card:nth-child(2) .detail-icon {
+        background: #fff4ce;
+      }
+      .detail-card:nth-child(3) .detail-icon {
+        background: #dff9ee;
+      }
+      .detail-card:nth-child(4) .detail-icon {
+        background: #ffe6ed;
+      }
+
+      .detail-card h3 {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.35rem;
+      }
+
+      .detail-card p {
+        margin-top: 6px;
+        color: #777185;
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .detail-card a {
+        display: inline-block;
+        margin-top: 11px;
+        color: var(--primary);
+        font-size: 0.85rem;
+        font-weight: 900;
+      }
+
+      /* CONFIRMACIÓN */
+
+      .rsvp {
+        padding: 90px 7%;
+        background:
+          radial-gradient(circle at 0 100%, #e4d8ff 0, transparent 35%),
+          radial-gradient(circle at 100% 0, #fff0bc 0, transparent 32%), #f8f5ff;
+      }
+
+      .rsvp-card {
+        width: min(850px, 100%);
+        margin: auto;
+        padding: clamp(28px, 6vw, 58px);
+        border: 1px solid #ffffff;
+        border-radius: 32px;
+        background: #ffffffd9;
+        text-align: center;
+        box-shadow: 0 20px 70px #2b1b4c0c;
+      }
+
+      .rsvp-emoji {
+        font-size: 3.4rem;
+      }
+
+      .rsvp-card h2 {
+        margin-top: 12px;
+        font-family: "Baloo 2", sans-serif;
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        line-height: 1.05;
+      }
+
+      .rsvp-card p {
+        max-width: 520px;
+        margin: 15px auto 25px;
+        color: #777185;
+        line-height: 1.8;
+      }
+
+      .rsvp-card .btn-primary {
+        background: #25b86a;
+        color: white;
+      }
+
+      .rsvp-note {
+        margin-top: 16px;
+        font-size: 0.78rem;
+      }
+
+      .footer {
+        padding: 28px 7%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        background: #17152e;
+        color: #c7c2de;
+        font-size: 0.82rem;
+      }
+
+      .footer strong {
+        color: white;
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.1rem;
+      }
+
+      /* ANIMACIÓN DE ENTRADA */
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation: none !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      @media (max-width: 850px) {
+        .navbar {
+          padding: 16px 5%;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        .nav-links {
+          position: absolute;
+          top: 74px;
+          left: 5%;
+          right: 5%;
+          display: none;
+          align-items: stretch;
+          gap: 0;
+          padding: 12px;
+          border: 1px solid #ffffff20;
+          border-radius: 18px;
+          background: #201a3c;
+          box-shadow: 0 20px 50px #00000035;
+        }
+
+        .nav-links.open {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .nav-links a {
+          padding: 13px;
+        }
+
+        .nav-rsvp {
+          margin-top: 5px;
+          text-align: center;
+        }
+
+        .hero {
+          padding: 125px 6% 75px;
+        }
+
+        .hero-inner {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .hero-copy {
+          text-align: center;
+        }
+
+        .hero h1 {
+          margin: auto;
+          letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+          transform-origin: center;
+        }
+
+        .hero-description {
+          margin: 23px auto 0;
+        }
+
+        .hero-actions {
+          justify-content: center;
+        }
+
+        .hero-note {
+          margin-bottom: 10px;
+        }
+
+        .hero-art {
+          min-height: 390px;
+        }
+
+        .art-card {
+          width: min(300px, 75%);
+        }
+
+        .universe-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .universe-card {
+          min-height: 285px;
+        }
+
+        .universe-symbol {
+          margin: 12px auto;
+        }
+
+        .quick-info {
+          grid-template-columns: 1fr;
+          margin-top: -22px;
+        }
+
+        .quick-item {
+          justify-content: flex-start;
+          padding: 16px 23px;
+        }
+
+        .quick-item + .quick-item {
+          border-top: 1px solid #eeeaf4;
+          border-left: 0;
+        }
+
+        .section {
+          padding: 75px 6%;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero {
+          min-height: auto;
+        }
+
+        .hero h1 {
+          font-size: clamp(3.4rem, 15vw, 5rem);
+        }
+
+        .hero-description {
+          font-size: 0.98rem;
+        }
+
+        .hero-art {
+          min-height: 350px;
+        }
+
+        .art-card {
+          width: min(270px, 76%);
+          padding: 18px;
+          border-radius: 25px;
+        }
+
+        .art-emoji {
+          font-size: 7.5rem;
+        }
+
+        .floating {
+          width: 52px;
+          height: 52px;
+          border-radius: 17px;
+          font-size: 1.55rem;
+        }
+
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .detail-card {
+          padding: 20px;
+        }
+
+        .countdown {
+          gap: 7px;
+        }
+
+        .time-box {
+          width: 22%;
+          min-width: 0;
+          padding: 15px 5px;
+        }
+
+        .time-box strong {
+          font-size: 2rem;
+        }
+
+        .time-box span {
+          font-size: 0.56rem;
+          letter-spacing: 0.5px;
+        }
+
+        .footer {
+          justify-content: center;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <span class="brand-icon">✦</span>
+        <span>POWER AVENTURA</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#aventuras">Universos</a>
+        <a href="#cuenta">La cuenta regresiva</a>
+        <a href="#detalles">Detalles</a>
+        <a href="#confirmar" class="nav-rsvp">¡Voy a la fiesta! ↗</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero" id="inicio">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span>✦</span>
+            <span id="heroEyebrow">¡Misión cumpleaños activada!</span>
+          </div>
+
+          <h1 id="heroTitle">
+            ¡Preparados,<br />
+            listos...<br />
+            <span>¡a jugar!</span>
+          </h1>
+
+          <p class="hero-description" id="heroDescription">
+            Se viene un día lleno de aventuras, juegos y sorpresas. ¡Quiero
+            compartirlo con vos!
+          </p>
+
+          <div class="hero-actions">
+            <a href="#detalles" class="btn btn-primary">🎉 Ver los detalles</a>
+            <a href="#aventuras" class="btn btn-secondary">Explorar mundos ✦</a>
+          </div>
+
+          <p class="hero-note">
+            Una invitación especial para una fiesta inolvidable.
+          </p>
+        </div>
+
+        <div class="hero-art" aria-label="Ilustración decorativa de la fiesta">
+          <div class="art-halo"></div>
+
+          <div class="floating float-one" id="floatOne">⚡</div>
+          <div class="floating float-two" id="floatTwo">🦖</div>
+          <div class="floating float-three" id="floatThree">⚽</div>
+
+          <div class="art-card">
+            <div class="art-card-top">
+              <span class="art-label" id="artLabel">¡DÍA DE FIESTA!</span>
+              <span class="art-stars">✦ ✦ ✦</span>
+            </div>
+
+            <div class="art-emoji" id="artEmoji">🦸</div>
+
+            <div class="art-bottom">
+              <small>EL GRAN PROTAGONISTA</small>
+              <strong id="childName">¡TU NOMBRE!</strong>
+              <small id="artSubtitle" style="margin-top: 5px"
+                >CUMPLE 8 AÑOS · NIVEL DESBLOQUEADO</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- DATOS RÁPIDOS -->
+    <div class="quick-info">
+      <div class="quick-item">
+        <div class="quick-icon">📅</div>
+        <div>
+          <small>¿Cuándo?</small>
+          <strong id="quickDate">Sábado 24 de octubre</strong>
+        </div>
+      </div>
+
+      <div class="quick-item">
+        <div class="quick-icon">⏰</div>
+        <div>
+          <small>¿A qué hora?</small>
+          <strong id="quickTime">15:00 a 18:00 hs</strong>
+        </div>
+      </div>
+
+      <div class="quick-item">
+        <div class="quick-icon">📍</div>
+        <div>
+          <small>¿Dónde?</small>
+          <strong id="quickPlace">Salón de aventuras</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNIVERSOS TEMÁTICOS -->
+    <section class="section universes" id="aventuras">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="kicker">Elegí tu aventura</span>
+          <h2>¡Tres mundos,<br />una gran fiesta!</h2>
+          <p>
+            Superpoderes, criaturas prehistóricas o pasión por la pelota. Cada
+            cumpleaños puede tener su propio universo.
+          </p>
+        </div>
+
+        <div class="universe-grid">
+          <button
+            class="universe-card active reveal"
+            data-theme="heroes"
+            style="--card-color: #8b54e9; --card-bg: #eee4ff"
+          >
+            <div class="universe-top">
+              <span class="universe-number">MUNDO 01</span>
+              <span>⚡</span>
+            </div>
+            <div class="universe-symbol">🦸</div>
+            <div>
+              <h3>Superhéroes</h3>
+              <p>
+                Fuerza, valentía y poderes extraordinarios. ¡La ciudad necesita
+                un héroe!
+              </p>
+              <span class="universe-link">Elegir este universo ↗</span>
+            </div>
+          </button>
+
+          <button
+            class="universe-card reveal"
+            data-theme="dinos"
+            style="--card-color: #3a9b67; --card-bg: #dff6e5"
+          >
+            <div class="universe-top">
+              <span class="universe-number">MUNDO 02</span>
+              <span>🌋</span>
+            </div>
+            <div class="universe-symbol">🦖</div>
+            <div>
+              <h3>Jurásico</h3>
+              <p>
+                Exploradores, huellas gigantes y dinosaurios. ¡La expedición
+                está por comenzar!
+              </p>
+              <span class="universe-link">Elegir este universo ↗</span>
+            </div>
+          </button>
+
+          <button
+            class="universe-card reveal"
+            data-theme="futbol"
+            style="--card-color: #2185db; --card-bg: #dff0ff"
+          >
+            <div class="universe-top">
+              <span class="universe-number">MUNDO 03</span>
+              <span>🏆</span>
+            </div>
+            <div class="universe-symbol">⚽</div>
+            <div>
+              <h3>Fútbol</h3>
+              <p>
+                Goles, camisetas y festejos. ¡El partido más importante se juega
+                en tu cumpleaños!
+              </p>
+              <span class="universe-link">Elegir este universo ↗</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUENTA REGRESIVA -->
+    <section class="section countdown-section" id="cuenta">
+      <div class="section-inner countdown-content reveal">
+        <span class="kicker">El gran día se acerca</span>
+        <h2 id="countdownTitle">¿Estás preparado para la aventura?</h2>
+        <p>Ya falta poquito para jugar, reír y celebrar juntos.</p>
+
+        <div class="countdown">
+          <div class="time-box">
+            <strong id="days">--</strong>
+            <span>Días</span>
+          </div>
+          <div class="time-box">
+            <strong id="hours">--</strong>
+            <span>Horas</span>
+          </div>
+          <div class="time-box">
+            <strong id="minutes">--</strong>
+            <span>Minutos</span>
+          </div>
+          <div class="time-box">
+            <strong id="seconds">--</strong>
+            <span>Segundos</span>
+          </div>
+        </div>
+
+        <a href="#confirmar" class="btn btn-primary">¡Contá conmigo! 🎉</a>
+      </div>
+    </section>
+
+    <!-- DETALLES DE LA FIESTA -->
+    <section class="section details" id="detalles">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="kicker">Anotá la misión</span>
+          <h2>Todo lo que<br />necesitás saber</h2>
+          <p>
+            Guardá los datos para que no te pierdas ni un minuto de la aventura.
+          </p>
+        </div>
+
+        <div class="details-grid">
+          <article class="detail-card reveal">
+            <div class="detail-icon">📅</div>
+            <div>
+              <h3>El día de la fiesta</h3>
+              <p id="detailDate">Sábado 24 de octubre de 2026.</p>
+              <a href="#" id="calendarLink" target="_blank" rel="noopener"
+                >Agregar al calendario ↗</a
+              >
+            </div>
+          </article>
+
+          <article class="detail-card reveal">
+            <div class="detail-icon">🕒</div>
+            <div>
+              <h3>Horario de la misión</h3>
+              <p id="detailTime">
+                De 15:00 a 18:00 hs. ¡Puntualidad de superhéroe!
+              </p>
+            </div>
+          </article>
+
+          <article class="detail-card reveal">
+            <div class="detail-icon">📍</div>
+            <div>
+              <h3>El lugar secreto</h3>
+              <p id="detailPlace">
+                Salón de aventuras, calle y número, ciudad.
+              </p>
+              <a href="#" id="mapLink" target="_blank" rel="noopener"
+                >Cómo llegar ↗</a
+              >
+            </div>
+          </article>
+
+          <article class="detail-card reveal">
+            <div class="detail-icon">📞</div>
+            <div>
+              <h3>¿Tenés alguna consulta?</h3>
+              <p id="contactText">Mamá o papá te ayudan con cualquier duda.</p>
+              <a href="#" id="contactLink" target="_blank" rel="noopener"
+                >Contactar por WhatsApp ↗</a
+              >
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIRMACIÓN -->
+    <section class="rsvp" id="confirmar">
+      <div class="rsvp-card reveal">
+        <div class="rsvp-emoji">🎈 🎁 🎉</div>
+        <h2>¿Venís a la fiesta?</h2>
+        <p>
+          Tu presencia hace que esta aventura sea todavía más especial. Avisanos
+          si vas a venir para preparar todo.
+        </p>
+
+        <a
+          class="btn btn-primary"
+          id="rsvpButton"
+          href="#"
+          target="_blank"
+          rel="noopener"
+        >
+          💬 ¡Sí, ahí estaré!
+        </a>
+
+        <div class="rsvp-note">¡Preparate para pasarla genial!</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <strong>✦ POWER AVENTURA</strong>
+      <span>Una invitación para jugar, imaginar y celebrar.</span>
+      <span>Creado con ♥ por Pro-Fiesta</span>
+    </footer>
+
+    <script>
+      /* =========================================================
+   PERSONALIZACIÓN DE LA INVITACIÓN
+   Modificá estos datos para cada cumpleaños.
+========================================================= */
+
+      const invitacion = {
+        nombre: "¡TU NOMBRE!",
+        edad: 8,
+
+        // Fecha en formato AAAA-MM-DD
+        fecha: "2026-10-24",
+
+        // Horario mostrado en la invitación
+        horaInicio: "15:00",
+        horaFin: "18:00",
+
+        lugar: "Salón de aventuras",
+        direccion: "Calle y número, ciudad",
+
+        // Teléfono con código de país y área, sin + ni espacios
+        telefono: "5492230000000",
+
+        mensajeWhatsApp: "¡Hola! Confirmo mi asistencia al cumpleaños. 🎉",
+
+        tema: "heroes",
+      };
+
+      /* =========================================================
+   UNIVERSOS VISUALES
+========================================================= */
+
+      const temas = {
+        heroes: {
+          primary: "#9b5cff",
+          secondary: "#f7d34a",
+          accent: "#55e5bd",
+          background:
+            "radial-gradient(circle at 80% 25%, #7345d8 0, transparent 30%), radial-gradient(circle at 15% 80%, #273d9b 0, transparent 38%), linear-gradient(135deg, #17152e, #29204e)",
+          eyebrow: "¡Misión cumpleaños activada!",
+          title: "¡Preparados,<br>listos...<br><span>¡a jugar!</span>",
+          description:
+            "Se viene un día lleno de aventuras, juegos y sorpresas. ¡Quiero compartirlo con vos!",
+          emoji: "🦸",
+          float1: "⚡",
+          float2: "💥",
+          float3: "🛡️",
+          label: "¡DÍA DE FIESTA!",
+          subtitle: "SUPERPODERES · NIVEL DESBLOQUEADO",
+          countdown: "¿Estás preparado para la aventura?",
+        },
+
+        dinos: {
+          primary: "#278953",
+          secondary: "#d9f36a",
+          accent: "#f5b64e",
+          background:
+            "radial-gradient(circle at 80% 25%, #3d9859 0, transparent 33%), radial-gradient(circle at 15% 80%, #174b3b 0, transparent 40%), linear-gradient(135deg, #122d29, #1f5943)",
+          eyebrow: "¡Expedición jurásica!",
+          title: "¡Rugidos,<br>huellas y<br><span>aventura!</span>",
+          description:
+            "Preparate para viajar a la era de los dinosaurios. ¡La expedición más divertida te está esperando!",
+          emoji: "🦖",
+          float1: "🌋",
+          float2: "🥚",
+          float3: "🌿",
+          label: "ZONA JURÁSICA",
+          subtitle: "EXPEDICIÓN · NIVEL EXPERTO",
+          countdown: "¡La expedición está por comenzar!",
+        },
+
+        futbol: {
+          primary: "#2185db",
+          secondary: "#a9f5dc",
+          accent: "#f7d34a",
+          background:
+            "radial-gradient(circle at 80% 25%, #2185db 0, transparent 33%), radial-gradient(circle at 15% 80%, #126b77 0, transparent 40%), linear-gradient(135deg, #102e4c, #155c73)",
+          eyebrow: "¡Se juega la gran final!",
+          title: "¡Un gol,<br>un festejo,<br><span>¡tu fiesta!</span>",
+          description:
+            "Convocamos a la hinchada para celebrar a lo grande. ¡No te quedes afuera del partido!",
+          emoji: "⚽",
+          float1: "🏆",
+          float2: "🥅",
+          float3: "⭐",
+          label: "DÍA DE PARTIDO",
+          subtitle: "FÚTBOL · NIVEL CAMPEÓN",
+          countdown: "¡Se viene el partido del año!",
+        },
+      };
+
+      /* =========================================================
+   APLICAR TEMA
+========================================================= */
+
+      function aplicarTema(nombreTema) {
+        const tema = temas[nombreTema] || temas.heroes;
+        const root = document.documentElement;
+
+        root.style.setProperty("--primary", tema.primary);
+        root.style.setProperty("--secondary", tema.secondary);
+        root.style.setProperty("--accent", tema.accent);
+        root.style.setProperty("--hero-bg", tema.background);
+
+        document.getElementById("heroEyebrow").textContent = tema.eyebrow;
+        document.getElementById("heroTitle").innerHTML = tema.title;
+        document.getElementById("heroDescription").textContent =
+          tema.description;
+        document.getElementById("artEmoji").textContent = tema.emoji;
+        document.getElementById("floatOne").textContent = tema.float1;
+        document.getElementById("floatTwo").textContent = tema.float2;
+        document.getElementById("floatThree").textContent = tema.float3;
+        document.getElementById("artLabel").textContent = tema.label;
+        document.getElementById("artSubtitle").textContent = tema.subtitle;
+        document.getElementById("countdownTitle").textContent = tema.countdown;
+
+        document.querySelectorAll(".universe-card").forEach((card) => {
+          card.classList.toggle("active", card.dataset.theme === nombreTema);
+        });
+
+        invitacion.tema = nombreTema;
+      }
+
+      document.querySelectorAll(".universe-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          aplicarTema(card.dataset.theme);
+
+          // Pequeño desplazamiento para que se perciba el cambio.
+          document.querySelector(".hero").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        });
+      });
+
+      /* =========================================================
+   COMPLETAR LOS DATOS
+========================================================= */
+
+      function configurarInvitacion() {
+        const nombre = invitacion.nombre;
+        const fecha = new Date(invitacion.fecha + "T12:00:00");
+
+        const fechaLarga = new Intl.DateTimeFormat("es-AR", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }).format(fecha);
+
+        const fechaCorta = new Intl.DateTimeFormat("es-AR", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        }).format(fecha);
+
+        const fechaCapitalizada =
+          fechaCorta.charAt(0).toUpperCase() + fechaCorta.slice(1);
+
+        document.getElementById("childName").textContent = nombre;
+        document.getElementById("quickDate").textContent = fechaCapitalizada;
+        document.getElementById("quickTime").textContent =
+          invitacion.horaInicio + " a " + invitacion.horaFin + " hs";
+        document.getElementById("quickPlace").textContent = invitacion.lugar;
+
+        document.getElementById("detailDate").textContent =
+          fechaLarga.charAt(0).toUpperCase() + fechaLarga.slice(1) + ".";
+
+        document.getElementById("detailTime").textContent =
+          "De " +
+          invitacion.horaInicio +
+          " a " +
+          invitacion.horaFin +
+          " hs. ¡Puntualidad de superhéroe!";
+
+        document.getElementById("detailPlace").textContent =
+          invitacion.lugar + ", " + invitacion.direccion + ".";
+
+        document.getElementById("contactText").textContent =
+          "Escribinos si necesitás consultar algo sobre la fiesta.";
+
+        const mapa =
+          "https://www.google.com/maps/search/?api=1&query=" +
+          encodeURIComponent(invitacion.direccion);
+
+        document.getElementById("mapLink").href = mapa;
+
+        const telefonoValido = /^\d{10,15}$/.test(invitacion.telefono);
+
+        const mensaje = encodeURIComponent(invitacion.mensajeWhatsApp);
+        const whatsapp = telefonoValido
+          ? "https://wa.me/" + invitacion.telefono + "?text=" + mensaje
+          : "https://wa.me/?text=" + mensaje;
+
+        document.getElementById("contactLink").href = whatsapp;
+        document.getElementById("rsvpButton").href = whatsapp;
+
+        // Enlace para agregar el evento al calendario.
+        const fechaInicio = invitacion.fecha.replaceAll("-", "");
+        const horaInicio = invitacion.horaInicio.replace(":", "") + "00";
+        const horaFin = invitacion.horaFin.replace(":", "") + "00";
+
+        const inicio = fechaInicio + "T" + horaInicio;
+        const fin = fechaInicio + "T" + horaFin;
+
+        const tituloCalendario = encodeURIComponent(
+          "Cumpleaños de " + invitacion.nombre,
+        );
+
+        const detallesCalendario = encodeURIComponent(
+          "¡Una fiesta llena de aventuras! Lugar: " +
+            invitacion.lugar +
+            ", " +
+            invitacion.direccion,
+        );
+
+        const calendario =
+          "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+          "&text=" +
+          tituloCalendario +
+          "&dates=" +
+          inicio +
+          "/" +
+          fin +
+          "&details=" +
+          detallesCalendario +
+          "&location=" +
+          encodeURIComponent(invitacion.direccion);
+
+        document.getElementById("calendarLink").href = calendario;
+      }
+
+      /* =========================================================
+   CUENTA REGRESIVA
+========================================================= */
+
+      function actualizarCuenta() {
+        // Fecha local de la fiesta, evitando conversiones UTC.
+        const partes = invitacion.fecha.split("-").map(Number);
+        const hora = invitacion.horaInicio.split(":").map(Number);
+
+        const destino = new Date(
+          partes[0],
+          partes[1] - 1,
+          partes[2],
+          hora[0],
+          hora[1],
+        );
+
+        const diferencia = destino.getTime() - Date.now();
+
+        if (diferencia <= 0) {
+          ["days", "hours", "minutes", "seconds"].forEach((id) => {
+            document.getElementById(id).textContent = "0";
+          });
+
+          document.getElementById("countdownTitle").textContent =
+            "¡Llegó el gran día! 🎉";
+
+          return;
+        }
+
+        const dias = Math.floor(diferencia / 86400000);
+        const horas = Math.floor((diferencia % 86400000) / 3600000);
+        const minutos = Math.floor((diferencia % 3600000) / 60000);
+        const segundos = Math.floor((diferencia % 60000) / 1000);
+
+        document.getElementById("days").textContent = dias;
+        document.getElementById("hours").textContent = String(horas).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("minutes").textContent = String(
+          minutos,
+        ).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(
+          segundos,
+        ).padStart(2, "0");
+      }
+
+      /* =========================================================
+   MENÚ MÓVIL
+========================================================= */
+
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      menuToggle.addEventListener("click", () => {
+        const abierto = navLinks.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(abierto));
+        menuToggle.textContent = abierto ? "✕" : "☰";
+      });
+
+      navLinks.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.textContent = "☰";
+        });
+      });
+
+      /* =========================================================
+   ANIMACIONES AL DESPLAZARSE
+========================================================= */
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+
+        document.querySelectorAll(".reveal").forEach((element) => {
+          observer.observe(element);
+        });
+      } else {
+        document.querySelectorAll(".reveal").forEach((element) => {
+          element.classList.add("visible");
+        });
+      }
+
+      /* =========================================================
+   INICIO
+========================================================= */
+
+      configurarInvitacion();
+      aplicarTema(invitacion.tema);
+      actualizarCuenta();
+      setInterval(actualizarCuenta, 1000);
+    </script>
+  </body>
+</html>

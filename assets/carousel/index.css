@@ -526,63 +526,118 @@ body {
 }
 
 /* =========================================================
-   EXPERIENCE BUTTON
+   EXPERIENCE PLAY BUTTON
    ========================================================= */
 
 .experience-button {
-  display: inline-flex;
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 82px;
+  height: 82px;
+
+  padding: 0;
+
+  display: flex;
   align-items: center;
+  justify-content: center;
 
-  gap: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
 
-  padding: 11px 16px;
-
-  border: 1px solid rgba(255, 255, 255, 0.25);
-
-  border-radius: 0;
-
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.28);
 
   color: white;
 
-  font-family: inherit;
-
-  font-size: 10px;
-
-  line-height: 1;
-
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
   cursor: pointer;
 
+  z-index: 20;
+
+  backdrop-filter: blur(4px);
+
   transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease;
+    transform 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-.experience-button strong {
-  font-size: 16px;
+/* PLAY */
 
-  font-weight: 400;
+.play-icon {
+  width: 0;
+  height: 0;
 
-  line-height: 1;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 14px solid white;
 
-  transition: transform 0.3s ease;
+  margin-left: 4px;
+
+  transition:
+    transform 0.35s ease,
+    border-left-color 0.35s ease;
 }
+
+/* HALO */
+
+.experience-button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -9px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  border-radius: 50%;
+
+  animation: experiencePulse 2.4s ease-out infinite;
+
+  pointer-events: none;
+}
+
+/* HOVER */
 
 .experience-button:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+
+  background: rgba(0, 0, 0, 0.45);
+
   border-color: var(--gold);
 
-  background: rgba(214, 174, 91, 0.12);
-
-  color: var(--gold);
+  box-shadow:
+    0 0 0 6px rgba(214, 174, 91, 0.08),
+    0 0 30px rgba(214, 174, 91, 0.25);
 }
 
-.experience-button:hover strong {
-  transform: translateX(4px);
+.experience-button:hover .play-icon {
+  border-left-color: var(--gold);
+
+  transform: scale(1.08);
+}
+
+/* PULSO */
+
+@keyframes experiencePulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.45;
+  }
+
+  70% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
 }
 
 /* =========================================================
@@ -1228,35 +1283,6 @@ body {
   }
 }
 
-.main-image-hover {
-  position: absolute;
-
-  left: 50%;
-  bottom: -10px;
-
-  width: 125%;
-  height: 125%;
-
-  z-index: 20;
-
-  object-fit: contain;
-  object-position: center bottom;
-
-  opacity: 0;
-
-  transform: translate(-50%, 90px) scale(0.58);
-
-  filter: brightness(0.95) saturate(1.08)
-    drop-shadow(0 15px 22px rgba(0, 0, 0, 0.45));
-
-  transition:
-    opacity 500ms ease,
-    transform 850ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 500ms ease;
-
-  pointer-events: none;
-}
-
 .main-experience::after {
   content: "";
 
@@ -1284,33 +1310,8 @@ body {
   opacity: 0.72;
 }
 
-.main-experience:hover .main-image-hover {
-  opacity: 1;
-
-  transform: translate(-50%, 0) scale(0.82);
-
-  filter: brightness(1) saturate(1.1)
-    drop-shadow(0 20px 30px rgba(0, 0, 0, 0.55));
-}
-
 .main-experience:hover::after {
   opacity: 0.55;
-}
-
-.main-image-hover {
-  transition:
-    opacity 450ms ease,
-    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 500ms ease;
-}
-
-.main-experience:hover .main-image-hover {
-  opacity: 1;
-
-  transform: translate(-50%, -5px) scale(0.82);
-
-  filter: brightness(1) saturate(1.1)
-    drop-shadow(0 24px 32px rgba(0, 0, 0, 0.55));
 }
 
 /* =========================================================
@@ -1381,10 +1382,6 @@ body.world-casamiento .main-title {
 body.world-casamiento .main-phrase {
   color: var(--world-primary);
 }
-
-/* =========================================================
-   CUMPLE 8
-   ========================================================= */
 
 body.world-cumple-8 {
   --world-primary: #ffcf32;
@@ -1690,4 +1687,102 @@ body.world-casamiento .progress-fill {
   background: linear-gradient(90deg, #9b7835, #d6ae5b, #fff1c7);
 
   box-shadow: 0 0 10px rgba(214, 174, 91, 0.25);
+}
+
+/* =========================================================
+   EFECTO HOVER — MARIO / EXPERIENCIAS CON IMAGEN SUPERPUESTA
+   ========================================================= */
+
+.main-image-wrapper {
+  perspective: 1000px;
+}
+
+/* Imagen principal */
+.main-image {
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s ease,
+    opacity 0.6s ease;
+}
+
+/* =========================================================
+   EFECTO MARIO
+   SOLO cuando la experiencia actual es cumple-8
+========================================================= */
+
+.main-experience.mario-experience .main-image-wrapper {
+  position: relative;
+  perspective: 1000px;
+}
+
+/* =========================================================
+   IMAGEN DE FONDO — MARIO
+========================================================= */
+
+.main-experience.mario-experience .main-image {
+  position: relative;
+  z-index: 1;
+
+  transform-origin: center bottom;
+
+  transition:
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 600ms ease,
+    opacity 600ms ease;
+}
+
+/* Fondo se recuesta SOLO en Mario */
+
+.main-experience.mario-experience:hover .main-image {
+  transform: perspective(1000px) rotateX(5deg) scale(0.96);
+
+  filter: brightness(0.45) saturate(0.75);
+
+  opacity: 0.88;
+}
+
+/* =========================================================
+   MARIO — IMAGEN QUE SALE DE LA PANTALLA
+========================================================= */
+
+.main-experience.mario-experience .main-image-hover {
+  position: absolute;
+
+  left: 50%;
+  bottom: -10px;
+
+  width: 125%;
+  height: 125%;
+
+  z-index: 20;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  opacity: 0;
+
+  transform: translate(-50%, 90px) scale(0.58);
+
+  transform-origin: center bottom;
+
+  filter: brightness(0.95) saturate(1.08)
+    drop-shadow(0 15px 22px rgba(0, 0, 0, 0.45));
+
+  transition:
+    opacity 500ms ease,
+    transform 850ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 500ms ease;
+
+  pointer-events: none;
+}
+
+/* Mario sale hacia adelante SOLO en cumple-8 */
+
+.main-experience.mario-experience:hover .main-image-hover {
+  opacity: 1;
+
+  transform: translate(-50%, -18px) scale(0.9) rotate(-1deg);
+
+  filter: brightness(1) saturate(1.1)
+    drop-shadow(0 24px 32px rgba(0, 0, 0, 0.55));
 }

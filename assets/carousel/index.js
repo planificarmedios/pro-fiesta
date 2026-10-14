@@ -19,7 +19,7 @@ const experiences = [
   },
   {
     id: "cumple-8",
-    title: "Cumple Temático",
+    title: "Cumples",
     phrase: "Una nueva aventura comienza.",
     image: "assets/img/book/mario-rock-2.jpg",
     hoverImage: "assets/img/book/mario-greeting.png",
@@ -279,22 +279,6 @@ const particleEffects = {
   },
 };
 
-/* =========================================================
-   MANTENER LA EXPERIENCIA DE ORIGEN
-   AL VOLVER DESDE evento.html
-========================================================= */
-
-/*
-  Si estamos en:
-
-  evento.html?tema=cumple-8
-
-  cualquier enlace que vuelva a index.html
-  se transforma automáticamente en:
-
-  index.html?tema=cumple-8
-*/
-
 if (temaInicial) {
   document
     .querySelectorAll('a[href="index.html"], a[href="./index.html"]')
@@ -348,7 +332,7 @@ function updateSideCard(card, image, number, title) {
 const worldCopy = {
   casamiento: {
     titleFirst: "Tu evento",
-    titleSecond: "es único.",
+    titleSecond: "cuenta una historia.",
 
     phraseFirst: "y empieza",
     phraseSecond: "con una invitación única.",
@@ -370,6 +354,49 @@ const worldCopy = {
 function renderExperience(index) {
   const current = experiences[index];
   console.log(current.id);
+
+  mainExperience.classList.toggle(
+    "mario-experience",
+    current.id === "cumple-8",
+  );
+
+  const mainContent = document.querySelector(".main-content");
+
+  // Primero, restablecer los colores originales
+  if (mainContent) {
+    mainContent.style.color = "";
+
+    mainContent
+      .querySelector(".experience-category")
+      ?.style.setProperty("color", "");
+
+    mainContent.querySelector("#mainTitle")?.style.setProperty("color", "");
+
+    mainContent.querySelector("#mainPhrase")?.style.setProperty("color", "");
+  }
+
+  document.body.classList.remove("tema-cumple-8");
+
+  // Aplicar estilos específicos para Cumple-8
+  if (current.id === "cumple-8") {
+    document.body.classList.add("tema-cumple-8");
+
+    if (mainContent) {
+      mainContent.style.color = "#000";
+
+      mainContent
+        .querySelector(".experience-category")
+        ?.style.setProperty("color", "#000");
+
+      mainContent
+        .querySelector("#mainTitle")
+        ?.style.setProperty("color", "#000");
+
+      mainContent
+        .querySelector("#mainPhrase")
+        ?.style.setProperty("color", "#000");
+    }
+  }
 
   if (current.id === "cumple-8") {
     setTimeout(() => {
@@ -526,10 +553,6 @@ function openSelectedExperience() {
 
   if (!experience) return;
 
-  /*
-    Guardamos qué experiencia estaba viendo
-    antes de entrar a evento.html.
-  */
   sessionStorage.setItem("experienciaOrigen", experience.id);
 
   window.location.href = `./evento.html?tema=${encodeURIComponent(experience.id)}`;

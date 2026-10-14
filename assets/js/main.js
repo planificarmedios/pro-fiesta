@@ -353,3 +353,60 @@ function animate() {
 }
 
 animate();
+
+/* =====================================================
+   PRO-FIESTA · RECORRIDO AUTOMÁTICO DE LA INVITACIÓN
+===================================================== */
+
+function iniciarRecorridoInvitacion(opciones = {}) {
+  const {
+    demora = 1800, // Espera antes de comenzar
+    pausa = 2200, // Tiempo de lectura entre secciones
+    selector = "section",
+    velocidad = 700, // Duración aproximada de cada desplazamiento
+  } = opciones;
+
+  const secciones = [...document.querySelectorAll(selector)].filter(
+    (seccion) => seccion.offsetHeight > 0,
+  );
+
+  if (secciones.length < 2) return;
+
+  let indice = 1;
+  let cancelado = false;
+  let temporizador;
+
+  // Si la persona interactúa, deja de forzar el recorrido.
+  const cancelar = () => {
+    cancelado = true;
+    clearTimeout(temporizador);
+
+    window.removeEventListener("wheel", cancelar);
+    window.removeEventListener("touchstart", cancelar);
+    window.removeEventListener("keydown", cancelar);
+  };
+
+  window.addEventListener("wheel", cancelar, { passive: true });
+  window.addEventListener("touchstart", cancelar, { passive: true });
+  window.addEventListener("keydown", cancelar);
+
+  function avanzar() {
+    if (cancelado || indice >= secciones.length) {
+      cancelar();
+      return;
+    }
+
+    const destino = secciones[indice];
+
+    window.scrollTo({
+      top: destino.getBoundingClientRect().top + window.scrollY,
+      behavior: "smooth",
+    });
+
+    indice++;
+
+    temporizador = setTimeout(avanzar, Math.max(pausa, velocidad));
+  }
+
+  temporizador = setTimeout(avanzar, demora);
+}

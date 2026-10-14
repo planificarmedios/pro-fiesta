@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4eee5" />
+    <title>Lucía & Mateo — Nuestra historia continúa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f5efe6;
+        --paper2: #e9dfd1;
+        --ink: #292722;
+        --muted: #777064;
+        --gold: #b58a4b;
+        --gold-light: #d8bd8b;
+        --line: rgba(181, 138, 75, 0.48);
+        --serif: "Playfair Display", Georgia, serif;
+        --sans: "DM Sans", Arial, sans-serif;
+        --ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 75px;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-weight: 300;
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        font: inherit;
+      }
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        pointer-events: none;
+        opacity: 0.11;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      }
+
+      /* =========================================
+                    TOPBAR FLOTANTE
+                  ========================================= */
+
+      .topbar {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: min(1100px, calc(100% - 32px));
+        z-index: 1000;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 12px 22px;
+        border-radius: 16px;
+
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .monogram {
+        font-family: var(--serif);
+        font-size: 27px;
+        line-height: 0.85;
+        color: #ead3a5;
+        font-style: italic;
+      }
+      .monogram small {
+        display: block;
+        text-align: center;
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        margin-top: 8px;
+        font-style: normal;
+      }
+      .nav {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
+      .nav a {
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.17em;
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.86);
+        transition: color 0.25s;
+      }
+      .nav a:hover {
+        color: #e9c98f;
+      }
+      .nav-heart {
+        font-size: 22px;
+        color: #f4e5c9;
+        text-decoration: none;
+      }
+      .hero {
+        min-height: 740px;
+        height: 100svh;
+        max-height: 1000px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background: transparent;
+        color: #fff;
+      }
+      .hero-photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 40%;
+        transform: scale(1.04);
+        animation: heroReveal 2s var(--ease) both;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .hero-copy {
+        position: relative;
+        z-index: 2;
+        width: min(650px, 90%);
+        margin: 65px 0 0 9%;
+        text-align: center;
+        animation: copyReveal 1.2s 0.2s var(--ease) both;
+      }
+      .eyebrow {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.34em;
+        color: #e5c58c;
+      }
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(55px, 7.7vw, 106px);
+        line-height: 0.99;
+        letter-spacing: -0.045em;
+        margin: 22px 0 23px;
+      }
+      .hero h1 em {
+        display: block;
+        color: #d6b174;
+        font-weight: 400;
+      }
+      .ornament {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        color: #d7b57b;
+        margin: 24px auto;
+      }
+      .ornament:before,
+      .ornament:after {
+        content: "";
+        height: 1px;
+        width: 100px;
+        background: linear-gradient(90deg, transparent, #c6a166);
+      }
+      .ornament:after {
+        transform: scaleX(-1);
+      }
+      .ornament span {
+        font-size: 16px;
+      }
+      .hero-sub {
+        font-family: var(--serif);
+        font-size: 16px;
+        line-height: 1.9;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        margin: 25px 0 28px;
+      }
+      .hero-date {
+        font-family: var(--serif);
+        font-size: clamp(20px, 2.2vw, 29px);
+        letter-spacing: 0.18em;
+      }
+      .hero-place {
+        margin-top: 15px;
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        line-height: 2;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .scroll-cue {
+        position: absolute;
+        z-index: 3;
+        right: 5%;
+        bottom: 36px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        writing-mode: vertical-rl;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 8px;
+        color: #fff;
+        text-decoration: none;
+      }
+      .scroll-cue:before {
+        content: "";
+        width: 1px;
+        height: 55px;
+        background: #d3b17a;
+        animation: scrollLine 1.8s infinite;
+      }
+      section {
+        position: relative;
+      }
+      .intro {
+        padding: 115px 7% 95px;
+        /* background: var(--paper); */
+        overflow: hidden;
+      }
+      .section-kicker {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 9px;
+        color: var(--gold);
+      }
+      .section-title {
+        font-family: var(--serif);
+        color: whitesmoke;
+        font-weight: 400;
+        font-size: clamp(38px, 5vw, 62px);
+        line-height: 1.12;
+        text-align: center;
+        margin: 18px 0 22px;
+        letter-spacing: -0.035em;
+      }
+      .section-title em {
+        color: #e0c18b;
+        font-weight: 400;
+      }
+      .intro-grid {
+        max-width: 1040px;
+        margin: 60px auto 0;
+        display: grid;
+        grid-template-columns: 1fr 0.88fr;
+        gap: 8%;
+        align-items: center;
+      }
+      .intro-text {
+        text-align: center;
+        padding: 0 3%;
+      }
+      .intro-text p {
+        font-family: var(--serif);
+        font-size: 17px;
+        line-height: 1.95;
+        color: #faf9f8;
+      }
+      .signature {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 27px;
+        color: #e0c18b;
+        margin-top: 26px;
+      }
+      .photo-frame {
+        position: relative;
+        padding: 13px;
+        background: #fbf7f0;
+        box-shadow: 0 18px 50px #65533a20;
+        transform: rotate(2deg);
+      }
+      .photo-frame:before {
+        content: "";
+        position: absolute;
+        inset: 6px;
+        border: 1px solid #d7c5a5;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .photo-frame img {
+        display: block;
+        width: 100%;
+        height: 390px;
+        object-fit: cover;
+        filter: saturate(0.78);
+      }
+      .photo-caption {
+        text-align: center;
+        font-family: var(--serif);
+        font-style: italic;
+        color: #84745d;
+        font-size: 14px;
+        padding: 15px 0 4px;
+      }
+      .countdown {
+        /* background: #302c26; */
+        color: #f7f0e6;
+        padding: 72px 6% 76px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .countdown:before {
+        content: "";
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border: 1px solid #c3a16c22;
+        border-radius: 50%;
+        top: -240px;
+        left: calc(50% - 210px);
+      }
+      .countdown .section-title {
+        font-size: clamp(32px, 4vw, 48px);
+      }
+      .countdown .section-title em {
+        color: #e0c18b;
+      }
+      .countdown-grid {
+        display: flex;
+        justify-content: center;
+        gap: clamp(22px, 5vw, 65px);
+        margin-top: 36px;
+      }
+      .time-unit {
+        min-width: 62px;
+      }
+      .time-unit strong {
+        display: block;
+        font-family: var(--serif);
+        font-size: clamp(35px, 5vw, 54px);
+        font-weight: 400;
+        color: #e0c18b;
+      }
+      .time-unit span {
+        font-size: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        color: #c9c0b3;
+      }
+      .details {
+        padding: 105px 6% 115px;
+        /* background: #eee5d9; */
+      }
+      .details-head {
+        text-align: center;
+        margin-bottom: 58px;
+      }
+      .detail-grid {
+        max-width: 1120px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .detail {
+        padding: 42px 28px 38px;
+        text-align: center;
+        position: relative;
+      }
+      .detail + .detail:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 22%;
+        height: 56%;
+        width: 1px;
+        background: var(--line);
+      }
+      .detail-icon {
+        font-size: 26px;
+        color: var(--gold);
+        margin-bottom: 19px;
+      }
+      .detail h3 {
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 400;
+        margin: 0 0 12px;
+      }
+      .detail p {
+        font-size: 12px;
+        line-height: 1.9;
+        color: #71685b;
+        margin: 0;
+      }
+      .detail .small-label {
+        display: block;
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 12px;
+      }
+      .pill-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+        padding: 12px 19px;
+        border: 1px solid #c8aa7a;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        transition:
+          background 0.25s,
+          color 0.25s;
+      }
+      .pill-link:hover {
+        background: var(--gold);
+        color: #fff;
+      }
+      .rsvp {
+        padding: 100px 6%;
+        text-align: center;
+        /* background: var(--paper); */
+      }
+      .rsvp-copy {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .rsvp-copy p {
+        font-family: var(--serif);
+        font-size: 17px;
+        line-height: 1.9;
+        color: #6f675c;
+      }
+      .rsvp-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 20px;
+        padding: 18px 29px;
+        border-radius: 50px;
+        background: var(--gold);
+        color: white;
+        text-decoration: none;
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        box-shadow: 0 10px 28px #9b763a30;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s,
+          background 0.3s;
+      }
+      .rsvp-button:hover {
+        transform: translateY(-3px);
+        background: #9f773e;
+        box-shadow: 0 16px 35px #9b763a42;
+      }
+      .rsvp-button span {
+        font-size: 16px;
+      }
+      .footer {
+        position: relative;
+        min-height: 350px;
+        padding: 78px 6% 55px;
+        /* background:
+                      linear-gradient(#29251fbd, #29251fdb),
+                      url("https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1800&q=85")
+                        center 53% / cover; */
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
+      }
+      .footer-quote {
+        font-family: var(--serif);
+        font-size: clamp(30px, 4vw, 46px);
+        font-style: italic;
+        line-height: 1.2;
+      }
+      .footer .monogram {
+        margin: 35px auto 0;
+      }
+      .footer-note {
+        font-size: 8px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #ffffff9c;
+        margin-top: 40px;
+      }
+      .petal {
+        position: fixed;
+        top: -20px;
+        z-index: 15;
+        pointer-events: none;
+        width: 8px;
+        height: 13px;
+        border-radius: 80% 10% 80% 10%;
+        background: linear-gradient(135deg, #fff9e8, #d4b17a);
+        opacity: 0.78;
+        animation: petalFall linear forwards;
+        filter: drop-shadow(0 2px 3px #0002);
+      }
+      .spark {
+        position: fixed;
+        z-index: 16;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        pointer-events: none;
+        background: #e4c17d;
+        box-shadow: 0 0 10px 3px #d4ad6b66;
+        animation: sparkle 0.8s ease-out forwards;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.9s var(--ease),
+          transform 0.9s var(--ease);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes heroReveal {
+        from {
+          transform: scale(1.12);
+          filter: brightness(0.7);
+        }
+        to {
+          transform: scale(1.04);
+          filter: brightness(1);
+        }
+      }
+      @keyframes copyReveal {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes scrollLine {
+        0%,
+        100% {
+          transform: scaleY(0.5);
+          transform-origin: top;
+          opacity: 0.4;
+        }
+        50% {
+          transform: scaleY(1);
+          transform-origin: top;
+          opacity: 1;
+        }
+      }
+      @keyframes petalFall {
+        to {
+          transform: translate3d(var(--drift), 110vh, 0) rotate(680deg);
+          opacity: 0;
+        }
+      }
+      @keyframes sparkle {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+        }
+        25% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--sx), var(--sy)) scale(0);
+          opacity: 0;
+        }
+      }
+      @media (max-width: 760px) {
+        .topbar {
+          padding: 20px 6%;
+        }
+        .nav {
+          gap: 14px;
+        }
+        .nav a {
+          font-size: 8px;
+          letter-spacing: 0.1em;
+        }
+        .nav a:nth-child(2),
+        .nav a:nth-child(3) {
+          display: none;
+        }
+        .monogram {
+          font-size: 23px;
+        }
+        .hero {
+          min-height: 700px;
+          height: 92svh;
+          max-height: 900px;
+          align-items: flex-end;
+        }
+        .hero-photo {
+          object-position: 62% center;
+        }
+        .hero:after {
+          background: linear-gradient(
+            0deg,
+            rgba(23, 20, 16, 0.82) 0%,
+            rgba(23, 20, 16, 0.42) 52%,
+            rgba(23, 20, 16, 0.15) 100%
+          );
+        }
+        .hero-copy {
+          margin: 0 auto 95px;
+          width: 90%;
+        }
+        .hero h1 {
+          font-size: clamp(52px, 13vw, 78px);
+          margin: 17px 0;
+        }
+        .hero-sub {
+          font-size: 12px;
+          letter-spacing: 0.18em;
+        }
+        .hero-date {
+          font-size: 21px;
+        }
+        .scroll-cue {
+          right: 5%;
+          bottom: 17px;
+        }
+        .intro {
+          padding: 78px 7% 75px;
+        }
+        .intro-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          margin-top: 35px;
+        }
+        .intro-text {
+          order: 1;
+        }
+        .photo-frame {
+          order: 2;
+          max-width: 430px;
+          margin: auto;
+        }
+        .photo-frame img {
+          height: 340px;
+        }
+        .section-title {
+          font-size: 42px;
+        }
+        .countdown {
+          padding: 65px 4%;
+        }
+        .countdown-grid {
+          gap: 20px;
+        }
+        .time-unit {
+          min-width: 45px;
+        }
+        .time-unit strong {
+          font-size: 38px;
+        }
+        .time-unit span {
+          font-size: 7px;
+          letter-spacing: 0.12em;
+        }
+        .details {
+          padding: 75px 7%;
+        }
+        .detail-grid {
+          grid-template-columns: 1fr;
+          border-bottom: 0;
+        }
+        .detail {
+          padding: 30px 12px;
+          border-bottom: 1px solid var(--line);
+        }
+        .detail + .detail:before {
+          display: none;
+        }
+        .rsvp {
+          padding: 75px 7%;
+        }
+        .footer {
+          min-height: 310px;
+          padding-top: 65px;
+        }
+      }
+      @media (max-width: 390px) {
+        .nav a {
+          font-size: 7px;
+        }
+        .hero h1 {
+          font-size: 48px;
+        }
+        .countdown-grid {
+          gap: 12px;
+        }
+        .time-unit {
+          min-width: 40px;
+        }
+        .time-unit strong {
+          font-size: 33px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *:before,
+        *:after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        .petal,
+        .spark {
+          display: none;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* =========================================
+               FONDO GLOBAL DE LA INVITACIÓN
+            ========================================= */
+
+      body {
+        position: relative;
+        isolation: isolate;
+        background: transparent;
+      }
+
+      /* Imagen fija detrás de toda la página */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+
+        background-image: url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=90");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        pointer-events: none;
+      }
+
+      /* Las secciones dejan ver el mismo fondo */
+      section,
+      main,
+      footer {
+        background-color: transparent;
+      }
+
+      /* HISTORIA: ocupa todo el ancho disponible */
+      .intro {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 110px 7%;
+        box-sizing: border-box;
+        background: transparent;
+        text-align: center;
+      }
+
+      /* Título */
+      .intro .section-kicker {
+        margin-bottom: 18px;
+      }
+
+      .intro .section-title {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto 55px;
+      }
+
+      /* Contenedor del texto */
+      .intro .intro-grid {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: none;
+        margin: 0 auto;
+      }
+
+      /* Texto centrado, con ancho de lectura cómodo */
+      .intro .intro-text {
+        width: 100%;
+        max-width: 850px;
+        margin: 0 auto;
+      }
+
+      .intro .intro-text p {
+        margin: 0 auto;
+        font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+        line-height: 1.9;
+      }
+
+      .intro .signature {
+        margin-top: 30px;
+      }
+
+      /* Adaptación para celulares */
+      @media (max-width: 768px) {
+        .intro {
+          padding: 75px 24px;
+        }
+
+        .intro .section-title {
+          margin-bottom: 35px;
+        }
+
+        .intro .intro-text p {
+          font-size: 1rem;
+          line-height: 1.8;
+        }
+      }
+
+      /* =========================================
+         ENTRADA INMERSIVA · CASAMIENTO ROMÁNTICO
+      ========================================= */
+
+      #weddingIntro {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 30px;
+        overflow: hidden;
+
+        background:
+          linear-gradient(90deg, rgba(24, 19, 19, 0.7), rgba(36, 26, 25, 0.24)),
+          linear-gradient(0deg, rgba(20, 15, 15, 0.38), transparent 65%),
+          url("./assets/img/invitaciones/balloons-2.png") center center / cover
+            no-repeat;
+
+        opacity: 1;
+        visibility: visible;
+        transition:
+          opacity 1000ms ease,
+          visibility 1000ms ease;
+      }
+
+      #weddingIntro.wedding-intro-leaving {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .wedding-intro-content {
+        width: min(720px, 100%);
+        margin-right: auto;
+        color: #fffaf2;
+        text-align: left;
+        animation: weddingReveal 1.4s ease both;
+      }
+
+      .wedding-intro-eyebrow {
+        margin-bottom: 26px;
+        color: #ead2ac;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 4px;
+      }
+
+      .wedding-intro-content h2 {
+        margin: 0 0 24px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(44px, 7vw, 84px);
+        line-height: 1.02;
+        font-weight: 400;
+        letter-spacing: -1.5px;
+        text-shadow: 0 3px 25px rgba(0, 0, 0, 0.25);
+      }
+
+      .wedding-intro-content h2 em {
+        color: #e8c99f;
+        font-weight: 400;
+      }
+
+      .wedding-intro-content p {
+        max-width: 450px;
+        margin: 0 0 36px;
+        color: rgba(255, 250, 242, 0.88);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: 1.7;
+      }
+
+      #weddingStart {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 9px;
+
+        padding: 18px 26px;
+        border: 1px solid rgba(234, 210, 172, 0.8);
+        border-radius: 2px;
+
+        background: rgba(72, 52, 46, 0.56);
+        color: #fffaf2;
+
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+
+        transition:
+          background 300ms ease,
+          border-color 300ms ease,
+          transform 300ms ease;
+      }
+
+      #weddingStart:hover {
+        background: rgba(139, 103, 82, 0.72);
+        border-color: #f1ddbd;
+        transform: translateY(-2px);
+      }
+
+      .wedding-start-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.8px;
+      }
+
+      .wedding-start-hint {
+        color: rgba(255, 250, 242, 0.75);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 12px;
+        font-style: italic;
+      }
+
+      @keyframes weddingReveal {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 600px) {
+        #weddingIntro {
+          padding: 26px;
+          background-position: 58% center;
+        }
+
+        .wedding-intro-eyebrow {
+          font-size: 9px;
+          letter-spacing: 2.5px;
+          line-height: 1.8;
+        }
+
+        .wedding-intro-content h2 {
+          letter-spacing: -0.5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="topbar">
+      <a href="#inicio" class="monogram" aria-label="Lucía y Mateo, inicio"
+        >L <span style="font-size: 12px">&</span> M<small
+          >14 · 06 · 2027</small
+        ></a
+      >
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#historia">Nuestra historia</a>
+        <a href="#celebracion">La celebración</a>
+        <a href="#confirmacion">Confirmá tu asistencia</a>
+        <a href="/carrousel-4.html">Volver</a>
+      </nav>
+      <a
+        class="nav-heart"
+        href="#confirmacion"
+        aria-label="Confirmar asistencia"
+        >♡</a
+      >
+    </header>
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-copy">
+          <div class="eyebrow">Con mucha alegría, queremos invitarte</div>
+          <h1>Nuestra historia <em>continúa...</em></h1>
+          <div class="ornament"><span>✧</span></div>
+          <div class="hero-sub">
+            Te invitamos a ser parte<br />de nuestro gran día
+          </div>
+          <div class="hero-date">
+            14 <span style="color: #d6b174">·</span> 06
+            <span style="color: #d6b174">·</span> 2027
+          </div>
+          <div class="hero-place">
+            Estancia La Aldea · Sierra de los Padres<br />Mar del Plata, Buenos
+            Aires
+          </div>
+        </div>
+        <a class="scroll-cue" href="#historia">Descubrí la invitación</a>
+      </section>
+
+      <section class="intro" id="historia">
+        <div class="section-kicker reveal">Un nuevo capítulo</div>
+
+        <h2 class="section-title reveal">
+          Una invitación <em>muy especial</em>
+        </h2>
+
+        <div class="intro-grid">
+          <div class="intro-text reveal">
+            <p>
+              Después de tantos momentos compartidos, queremos celebrar juntos
+              uno de los más importantes de nuestras vidas. Nos haría muy
+              felices que nos acompañes a brindar, reír y guardar en el corazón
+              un recuerdo que recién empieza.
+            </p>
+
+            <div class="signature">Con amor, Lucía &amp; Mateo</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="countdown" aria-label="Cuenta regresiva">
+        <div class="section-kicker reveal" style="color: #d6b174">
+          Cada vez falta menos
+        </div>
+        <h2 class="section-title reveal">Nos vemos <em>en...</em></h2>
+        <div class="countdown-grid reveal">
+          <div class="time-unit">
+            <strong id="days">000</strong><span>Días</span>
+          </div>
+          <div class="time-unit">
+            <strong id="hours">00</strong><span>Horas</span>
+          </div>
+          <div class="time-unit">
+            <strong id="minutes">00</strong><span>Minutos</span>
+          </div>
+          <div class="time-unit">
+            <strong id="seconds">00</strong><span>Segundos</span>
+          </div>
+        </div>
+      </section>
+      <section class="details" id="celebracion">
+        <div class="details-head reveal">
+          <div class="section-kicker">Guardá la fecha</div>
+          <h2 class="section-title">Todo lo que necesitás <em>saber</em></h2>
+        </div>
+        <div class="detail-grid reveal">
+          <article class="detail">
+            <div class="detail-icon">♧</div>
+            <span class="small-label">Ceremonia & celebración</span>
+            <h3>Sábado, 14 de junio</h3>
+            <p>
+              Te esperamos a las 19:30 hs<br />para compartir una noche
+              inolvidable.
+            </p>
+          </article>
+          <article class="detail">
+            <div class="detail-icon">⌖</div>
+            <span class="small-label">Dónde nos encontramos</span>
+            <h3>Estancia La Aldea</h3>
+            <p>Sierra de los Padres<br />Mar del Plata, Buenos Aires</p>
+            <a
+              class="pill-link"
+              href="https://www.google.com/maps/search/?api=1&query=Estancia+La+Aldea+Sierra+de+los+Padres"
+              target="_blank"
+              rel="noopener"
+              >Cómo llegar <span>↗</span></a
+            >
+          </article>
+          <article class="detail">
+            <div class="detail-icon">♡</div>
+            <span class="small-label">Una noche para celebrar</span>
+            <h3>Cena, música y baile</h3>
+            <p>
+              Venite con ganas de disfrutar,<br />brindar y bailar con nosotros.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="rsvp" id="confirmacion">
+        <div class="rsvp-copy reveal">
+          <div class="section-kicker">Tu presencia es nuestro regalo</div>
+          <h2 class="section-title">¿Nos acompañás <em>ese día?</em></h2>
+          <p>
+            Por favor, confirmá tu asistencia antes del 1 de junio. Estamos
+            preparando cada detalle con mucho amor y queremos contar con vos.
+          </p>
+          <a class="rsvp-button" id="rsvpButton" href="#"
+            ><span>♡</span> Confirmar por WhatsApp <span>↗</span></a
+          >
+        </div>
+      </section>
+      <!-- ENTRADA ROMÁNTICA -->
+      <div
+        id="weddingIntro"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Entrar a la invitación de casamiento"
+      >
+        <div class="wedding-intro-content">
+          <div class="wedding-intro-eyebrow">
+            UNA HISTORIA · UN AMOR · UN PARA SIEMPRE
+          </div>
+
+          <h2>Hay historias<br />que merecen ser<br /><em>eternas.</em></h2>
+
+          <p>Hoy comienza un capítulo que queremos compartir con vos.</p>
+
+          <button id="weddingStart" type="button">
+            <span class="wedding-start-label">DESCUBRIR NUESTRA HISTORIA</span>
+            <span class="wedding-start-hint"
+              >Una invitación especial para vos</span
+            >
+          </button>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-quote reveal">
+        El mejor regalo...<br />es compartir este día con vos.
+      </div>
+      <div class="ornament"><span>✧</span></div>
+      <div class="monogram">
+        L <span style="font-size: 12px">&</span> M<small>PARA SIEMPRE</small>
+      </div>
+      <div class="footer-note">
+        Con amor · 14.06.2027 · Sierra de los Padres
+      </div>
+    </footer>
+
+    <!-- <script src="/assets/js/main.js"></script> -->
+
+    <script>
+      // =====================================================
+      // PERSONALIZACIÓN: modificá estos datos para cada pareja
+      // =====================================================
+      const wedding = {
+        date: "2027-06-14T19:30:00-03:00",
+        whatsapp: "5492230000000", // Reemplazar por el número real, con código de país y área, sin + ni espacios
+        message:
+          "¡Hola, Lucía y Mateo! 💛 Quiero confirmar mi asistencia a su casamiento del 14 de junio. ¡Gracias por invitarme!",
+      };
+      const rsvpButton = document.getElementById("rsvpButton");
+      rsvpButton.href = `https://wa.me/${wedding.whatsapp}?text=${encodeURIComponent(wedding.message)}`;
+      rsvpButton.addEventListener("click", (event) => {
+        if (wedding.whatsapp === "5492230000000") {
+          event.preventDefault();
+          alert(
+            "Para activar la confirmación, reemplazá el número de ejemplo por el WhatsApp real en el objeto “wedding”, al final del archivo.",
+          );
+        }
+      });
+
+      // Cuenta regresiva: usa la fecha configurada arriba.
+      function updateCountdown() {
+        const distance = new Date(wedding.date).getTime() - Date.now();
+        const values =
+          distance <= 0
+            ? { days: 0, hours: 0, minutes: 0, seconds: 0 }
+            : {
+                days: Math.floor(distance / 86400000),
+                hours: Math.floor((distance % 86400000) / 3600000),
+                minutes: Math.floor((distance % 3600000) / 60000),
+                seconds: Math.floor((distance % 60000) / 1000),
+              };
+        document.getElementById("days").textContent = String(
+          values.days,
+        ).padStart(3, "0");
+        document.getElementById("hours").textContent = String(
+          values.hours,
+        ).padStart(2, "0");
+        document.getElementById("minutes").textContent = String(
+          values.minutes,
+        ).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(
+          values.seconds,
+        ).padStart(2, "0");
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // Revelado suave de secciones al entrar en pantalla.
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.14 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => revealObserver.observe(el));
+
+      // Pétalos flotantes: cantidad moderada para mantener una animación delicada.
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (!reducedMotion) {
+        function makePetal() {
+          const petal = document.createElement("span");
+          petal.className = "petal";
+          petal.style.left = Math.random() * 100 + "vw";
+          petal.style.setProperty("--drift", Math.random() * 180 - 90 + "px");
+          const duration = 8 + Math.random() * 8;
+          petal.style.animationDuration = duration + "s";
+          petal.style.opacity = (0.28 + Math.random() * 0.48).toFixed(2);
+          petal.style.transform = `scale(${0.55 + Math.random() * 0.9})`;
+          document.body.appendChild(petal);
+          setTimeout(() => petal.remove(), duration * 1000);
+        }
+        setInterval(makePetal, 850);
+        // Destellos dorados solo en pantallas con mouse, para no recargar el celular.
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+          let lastSpark = 0;
+          document.addEventListener(
+            "pointermove",
+            (event) => {
+              const now = performance.now();
+              if (now - lastSpark < 45) return;
+              lastSpark = now;
+              const spark = document.createElement("i");
+              spark.className = "spark";
+              spark.style.left = event.clientX + "px";
+              spark.style.top = event.clientY + "px";
+              spark.style.setProperty("--sx", Math.random() * 36 - 18 + "px");
+              spark.style.setProperty("--sy", Math.random() * -34 - 6 + "px");
+              document.body.appendChild(spark);
+              setTimeout(() => spark.remove(), 850);
+            },
+            { passive: true },
+          );
+        }
+      }
+
+      /* =========================================
+   ENTRADA · CASAMIENTO ROMÁNTICO
+========================================= */
+
+      (() => {
+        const intro = document.getElementById("weddingIntro");
+        const startButton = document.getElementById("weddingStart");
+
+        if (!intro || !startButton) return;
+
+        let started = false;
+
+        startButton.addEventListener("click", () => {
+          if (started) return;
+          started = true;
+
+          startButton.disabled = true;
+
+          intro.classList.add("wedding-intro-leaving");
+
+          window.setTimeout(() => {
+            intro.remove();
+          }, 1100);
+        });
+      })();
+    </script>
+  </body>
+</html>

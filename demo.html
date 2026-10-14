@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#11110f" />
+    <title>Experiencias · Invitaciones digitales</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #11110f;
+        --panel: #191916;
+        --cream: #f3eee5;
+        --gold: #c8a66b;
+        --muted: #aaa092;
+        --line: rgba(200, 166, 107, 0.35);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      .portada {
+        min-height: 100vh;
+        min-height: 100svh;
+        width: 100%;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+      }
+      .site {
+        overflow: hidden;
+      }
+      .navbar {
+        height: 88px;
+        padding: 0 5vw;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        gap: 24px;
+        position: relative;
+        z-index: 2;
+      }
+      .logo,
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        letter-spacing: 0.25em;
+        font-size: 0.82rem;
+      }
+      .logo small,
+      .footer-brand small {
+        font-size: 0.58rem;
+        letter-spacing: 0.14em;
+        color: var(--muted);
+      }
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        color: #c4bcaf;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+      }
+      .nav-button,
+      .outline-button {
+        border: 1px solid var(--gold);
+        padding: 13px 19px;
+        color: var(--gold);
+        font-size: 0.66rem;
+        text-transform: uppercase;
+        letter-spacing: 0.17em;
+        transition: 0.2s;
+      }
+      .nav-button:hover,
+      .outline-button:hover {
+        background: var(--gold);
+        color: var(--bg);
+      }
+      .hero {
+        min-height: 590px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 80px 24px;
+        position: relative;
+        background:
+          radial-gradient(
+            ellipse at 50% 42%,
+            rgba(200, 166, 107, 0.13),
+            transparent 48%
+          ),
+          linear-gradient(130deg, #181815, #10100f 65%);
+      }
+      .hero:before,
+      .hero:after {
+        content: "";
+        position: absolute;
+        width: 210px;
+        height: 290px;
+        border: 1px solid rgba(200, 166, 107, 0.23);
+        transform: rotate(18deg);
+        pointer-events: none;
+      }
+      .hero:before {
+        left: 8%;
+        top: 18%;
+      }
+      .hero:after {
+        right: 8%;
+        bottom: 10%;
+        transform: rotate(-18deg);
+      }
+      .hero-inner {
+        max-width: 760px;
+        position: relative;
+        z-index: 1;
+      }
+      .eyebrow {
+        color: var(--gold);
+        font-size: 0.65rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        font:
+          400 clamp(3.7rem, 9vw, 7.8rem)/0.95 "DM Serif Display",
+          Georgia,
+          serif;
+        margin: 27px 0;
+      }
+      .hero p {
+        font:
+          italic 1.2rem/1.7 "Playfair Display",
+          Georgia,
+          serif;
+        color: #d2c7b6;
+        max-width: 540px;
+        margin: 0 auto 32px;
+      }
+      .hero-rule {
+        width: 48px;
+        height: 1px;
+        background: var(--gold);
+        margin: 0 auto 26px;
+      }
+      .intro {
+        padding: 95px 8vw;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 8vw;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .section-label {
+        font-size: 0.64rem;
+        letter-spacing: 0.26em;
+        color: var(--gold);
+      }
+      .intro h2,
+      .process h2,
+      .closing h2 {
+        font:
+          400 clamp(2.4rem, 5vw, 4.6rem)/1.05 "DM Serif Display",
+          Georgia,
+          serif;
+        margin: 18px 0 22px;
+      }
+      .intro p {
+        max-width: 620px;
+        color: #b9b0a3;
+        font-size: 0.9rem;
+        line-height: 1.9;
+      }
+      .styles {
+        padding: 85px 5vw 100px;
+      }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        margin-bottom: 36px;
+      }
+      .section-head h2 {
+        font:
+          400 clamp(2.5rem, 5vw, 4.3rem)/1 "DM Serif Display",
+          Georgia,
+          serif;
+        margin: 12px 0 0;
+      }
+      .section-head p {
+        max-width: 420px;
+        color: #aaa092;
+        line-height: 1.8;
+        font-size: 0.82rem;
+      }
+      .design-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .design-card {
+        display: block;
+        background: #f4f0e9;
+        color: #171714;
+        min-width: 0;
+        cursor: pointer;
+        transition: transform 0.25s;
+      }
+      .design-card:hover {
+        transform: translateY(-7px);
+      }
+      .card-image {
+        height: 520px;
+        display: grid;
+        place-items: center;
+        padding: 35px;
+        position: relative;
+        overflow: hidden;
+      }
+      .editorial .card-image {
+        background: #d7d2c8;
+      }
+      .romantic .card-image {
+        background: #d9c7c0;
+      }
+      .contemporary .card-image {
+        background: #242321;
+      }
+      .mini-invite {
+        width: min(100%, 280px);
+        height: 390px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 25px;
+        position: relative;
+        box-shadow: 0 20px 45px #0002;
+      }
+      .mini-invite .tiny {
+        font-size: 0.48rem;
+        letter-spacing: 0.28em;
+      }
+      .mini-invite strong {
+        font:
+          400 clamp(2.2rem, 4vw, 3.1rem)/0.92 "DM Serif Display",
+          Georgia,
+          serif;
+        margin: 38px 0 22px;
+      }
+      .mini-invite .mini-date {
+        font-size: 0.5rem;
+        letter-spacing: 0.2em;
+      }
+      .editorial .mini-invite {
+        background: #f2eee5;
+        color: #283127;
+        border-radius: 18px;
+      }
+      .editorial .mini-invite:after {
+        content: "";
+        position: absolute;
+        right: 12px;
+        top: 105px;
+        width: 45px;
+        height: 100px;
+        border-right: 1px solid #79836d;
+        border-radius: 50%;
+        transform: rotate(18deg);
+      }
+      .romantic .mini-invite {
+        background: #f1e3df;
+        color: #79534a;
+      }
+      .romantic .mini-invite:before,
+      .romantic .mini-invite:after {
+        content: "";
+        position: absolute;
+        width: 110px;
+        height: 110px;
+        border: 1px solid #d2b7ad;
+        border-radius: 50%;
+      }
+      .romantic .mini-invite:before {
+        top: 20px;
+        left: 20px;
+      }
+      .romantic .mini-invite:after {
+        bottom: 20px;
+        right: 20px;
+      }
+      .contemporary .mini-invite {
+        background: #151513;
+        color: #f3eee5;
+        border: 1px solid #9d8050;
+        box-shadow: none;
+      }
+      .contemporary .mini-invite strong {
+        font-size: 3.4rem;
+      }
+      .contemporary .mini-date {
+        color: var(--gold);
+      }
+      .card-info {
+        padding: 25px 27px 28px;
+        background: #f8f5ef;
+        min-height: 145px;
+      }
+      .card-top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+      }
+      .card-number {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        color: #988a76;
+      }
+      .card-info h3 {
+        font:
+          400 2rem "DM Serif Display",
+          Georgia,
+          serif;
+        margin: 10px 0;
+      }
+      .card-arrow {
+        font-size: 1.6rem;
+      }
+      .card-info p {
+        font-size: 0.76rem;
+        color: #746d63;
+        line-height: 1.6;
+        margin: 8px 0 0;
+      }
+      .process {
+        padding: 90px 8vw;
+        background: #191916;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10vw;
+      }
+      .process-list {
+        border-top: 1px solid var(--line);
+      }
+      .process-item {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        gap: 20px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .process-item > span {
+        color: var(--gold);
+        font-size: 0.7rem;
+      }
+      .process-item h3 {
+        font:
+          400 1.3rem "DM Serif Display",
+          Georgia,
+          serif;
+        margin: 0 0 8px;
+      }
+      .process-item p {
+        color: #aaa092;
+        font-size: 0.78rem;
+        line-height: 1.7;
+        margin: 0;
+      }
+      .closing {
+        text-align: center;
+        padding: 100px 24px;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(200, 166, 107, 0.12),
+          transparent 55%
+        );
+      }
+      .closing h2 {
+        margin: 20px 0 30px;
+      }
+      footer {
+        padding: 30px 5vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .footer-copy {
+        color: #82796d;
+        font-size: 0.56rem;
+        letter-spacing: 0.16em;
+        text-align: center;
+      }
+      /* Invitación de vista plena */
+      .invitation-view {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        background: #11110f;
+        color: var(--cream);
+        display: none;
+        overflow: auto;
+      }
+      .invitation-view.open {
+        display: block;
+      }
+      .invite-topbar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 20px;
+        background: rgba(17, 17, 15, 0.92);
+        border-bottom: 1px solid rgba(200, 166, 107, 0.2);
+        z-index: 2;
+        backdrop-filter: blur(10px);
+      }
+      .invite-topbar span {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .top-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .icon-btn {
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--gold);
+        padding: 9px 12px;
+        cursor: pointer;
+      }
+      .invite-content {
+        min-height: calc(100svh - 55px);
+        max-width: 1000px;
+        margin: auto;
+        padding: 24px;
+      }
+      .invite-frame {
+        border: 1px solid rgba(200, 166, 107, 0.75);
+        min-height: calc(100svh - 105px);
+        padding: clamp(30px, 7vw, 75px);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        background: radial-gradient(
+          ellipse at 50% 12%,
+          rgba(200, 166, 107, 0.1),
+          transparent 48%
+        );
+      }
+      .invite-frame:before {
+        content: "";
+        position: absolute;
+        inset: 15px;
+        border: 1px solid rgba(200, 166, 107, 0.12);
+        pointer-events: none;
+      }
+      .invite-eyebrow {
+        color: var(--gold);
+        font-size: 0.64rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+      }
+      .invite-rule {
+        height: 1px;
+        width: 44px;
+        background: var(--gold);
+        margin: 25px auto;
+      }
+      .invite-frame h2 {
+        font:
+          400 clamp(4.2rem, 12vw, 8.8rem)/0.83 "DM Serif Display",
+          Georgia,
+          serif;
+        letter-spacing: -0.05em;
+        margin: 30px 0;
+      }
+      .invite-date {
+        font-size: 0.8rem;
+        letter-spacing: 0.27em;
+        color: var(--gold);
+      }
+      .invite-city {
+        margin-top: 15px;
+        color: var(--muted);
+        font-size: 0.62rem;
+        letter-spacing: 0.3em;
+      }
+      .invite-phrase {
+        font:
+          italic clamp(1.2rem, 3vw, 1.65rem)/1.5 "Playfair Display",
+          Georgia,
+          serif;
+        margin: 34px 0;
+        color: #e0d6c6;
+      }
+      .countdown {
+        display: flex;
+        gap: clamp(12px, 4vw, 42px);
+        margin: 0 0 32px;
+      }
+      .countdown strong {
+        display: block;
+        font:
+          400 clamp(1.7rem, 5vw, 2.6rem) "DM Serif Display",
+          Georgia,
+          serif;
+      }
+      .countdown small {
+        font-size: 0.53rem;
+        letter-spacing: 0.17em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .invite-details {
+        width: 100%;
+        max-width: 760px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid var(--line);
+        margin-top: auto;
+      }
+      .invite-detail {
+        padding: 22px 12px;
+        border-right: 1px solid var(--line);
+      }
+      .invite-detail:last-child {
+        border: 0;
+      }
+      .invite-detail h3 {
+        font-size: 0.59rem;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        color: var(--gold);
+        text-transform: uppercase;
+        margin: 0 0 12px;
+      }
+      .invite-detail p {
+        font:
+          1rem/1.6 "Playfair Display",
+          Georgia,
+          serif;
+        margin: 0;
+      }
+      .invite-detail small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        line-height: 1.6;
+        margin-top: 5px;
+      }
+      .invite-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 25px 0;
+      }
+      .invite-actions a {
+        padding: 14px 18px;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        font-size: 0.62rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .invite-actions a:hover {
+        background: var(--gold);
+        color: #11110f;
+      }
+      .invite-foot {
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        color: #82796d;
+        text-transform: uppercase;
+        margin: 8px 0 0;
+      }
+      @media (max-width: 800px) {
+        .nav-links {
+          display: none;
+        }
+        .intro,
+        .process {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .design-grid {
+          grid-template-columns: 1fr;
+          max-width: 560px;
+          margin: auto;
+        }
+        .card-image {
+          height: 470px;
+        }
+        .section-head {
+          display: block;
+        }
+        .section-head p {
+          margin-top: 18px;
+        }
+        .hero:before {
+          left: -130px;
+        }
+        .hero:after {
+          right: -130px;
+        }
+        footer {
+          flex-wrap: wrap;
+        }
+        .footer-copy {
+          order: 3;
+          width: 100%;
+        }
+        .invite-content {
+          padding: 10px;
+        }
+        .invite-frame {
+          min-height: calc(100svh - 75px);
+          padding: 34px 16px;
+        }
+        .invite-details {
+          grid-template-columns: 1fr;
+        }
+        .invite-detail {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+          padding: 16px;
+        }
+        .invite-detail:last-child {
+          border-bottom: 0;
+        }
+        .invite-frame h2 {
+          margin: 28px 0;
+        }
+        .invite-phrase {
+          margin: 24px 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site" id="site">
+      <header class="navbar">
+        <a href="#" class="logo"
+          ><span>EXPERIENCIAS</span><small>invitaciones digitales</small></a
+        >
+        <nav class="nav-links">
+          <a href="#estilos">Estilos</a><a href="#experiencia">La experiencia</a
+          ><a href="#proceso">Cómo funciona</a>
+        </nav>
+        <a class="nav-button" href="#estilos">Ver diseños ↗</a>
+      </header>
+      <section class="hero">
+        <div class="hero-inner">
+          <span class="eyebrow">Una experiencia para compartir</span>
+          <div class="hero-rule"></div>
+          <h1>Tu historia.<br />Tu invitación.</h1>
+          <p>
+            Una invitación puede ser mucho más que una fecha, un lugar y un
+            nombre.
+          </p>
+          <a class="outline-button" href="#estilos">Descubrí los diseños ↓</a>
+        </div>
+      </section>
+      <section class="intro" id="experiencia">
+        <div><span class="section-label">01 · LA EXPERIENCIA</span></div>
+        <div>
+          <h2>Elegís la forma<br />de contar tu historia.</h2>
+          <p>
+            Creamos invitaciones digitales pensadas para que cada evento tenga
+            su propia identidad. Imágenes, música, movimiento, información y
+            pequeños detalles que hacen que cada invitación sea diferente.
+          </p>
+        </div>
+      </section>
+      <section class="styles" id="estilos">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">02 · Elegí tu estilo</span>
+            <h2>Una primera impresión<br />inolvidable.</h2>
+          </div>
+          <p>
+            Cada diseño tiene una personalidad diferente. Seleccioná una tarjeta
+            para abrir la invitación en una vista plena, sin salir de esta
+            página.
+          </p>
+        </div>
+        <div class="design-grid">
+          <a
+            href="#invitacion"
+            class="design-card editorial"
+            data-theme="editorial"
+          >
+            <div class="card-image">
+              <div class="mini-invite">
+                <span class="tiny">NUESTRA BODA</span
+                ><strong>Lara<br />&amp;<br />Jonatan</strong
+                ><span class="mini-date">14 · 06 · 2026</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <div class="card-top">
+                <div>
+                  <span class="card-number">01</span>
+                  <h3>Editorial</h3>
+                </div>
+                <span class="card-arrow">↗</span>
+              </div>
+              <p>Orgánica, elegante y con detalles botánicos.</p>
+            </div>
+          </a>
+          <a
+            href="#invitacion"
+            class="design-card romantic"
+            data-theme="romantica"
+          >
+            <div class="card-image">
+              <div class="mini-invite">
+                <span class="tiny">NOS CASAMOS</span
+                ><strong>Ale<br />&amp; Lu</strong
+                ><span class="mini-date">Una historia que comienza</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <div class="card-top">
+                <div>
+                  <span class="card-number">02</span>
+                  <h3>Romántica</h3>
+                </div>
+                <span class="card-arrow">↗</span>
+              </div>
+              <p>Delicada, cálida y emocional.</p>
+            </div>
+          </a>
+          <a
+            href="#invitacion"
+            class="design-card contemporary"
+            data-theme="contemporary"
+          >
+            <div class="card-image">
+              <div class="mini-invite">
+                <span class="tiny">THE WEDDING</span
+                ><strong>Ema<br />&amp; Lu</strong
+                ><span class="mini-date">22 — 08 — 2026</span>
+              </div>
+            </div>
+            <div class="card-info">
+              <div class="card-top">
+                <div>
+                  <span class="card-number">03</span>
+                  <h3>Contemporary</h3>
+                </div>
+                <span class="card-arrow">↗</span>
+              </div>
+              <p>Intensa, moderna y sofisticada.</p>
+            </div>
+          </a>
+        </div>
+      </section>
+      <section class="process" id="proceso">
+        <div>
+          <span class="eyebrow">03 · El proceso</span>
+          <h2>Así comienza<br />tu experiencia.</h2>
+        </div>
+        <div class="process-list">
+          <div class="process-item">
+            <span>01</span>
+            <div>
+              <h3>Elegís un diseño</h3>
+              <p>Encontrá el estilo que más representa tu evento.</p>
+            </div>
+          </div>
+          <div class="process-item">
+            <span>02</span>
+            <div>
+              <h3>Personalizamos tu historia</h3>
+              <p>
+                Nombres, imágenes, fechas, música, ubicación, confirmación y
+                todo lo que quieras comunicar.
+              </p>
+            </div>
+          </div>
+          <div class="process-item">
+            <span>03</span>
+            <div>
+              <h3>Compartís tu invitación</h3>
+              <p>
+                Recibís un enlace único para enviar por WhatsApp, redes sociales
+                o donde quieras.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="closing">
+        <span class="eyebrow">Tu evento · Tu historia</span>
+        <h2>Hagamos que<br />empiece antes.</h2>
+        <a class="outline-button" href="#estilos">Elegir mi diseño →</a>
+      </section>
+      <footer>
+        <a href="#" class="footer-brand"
+          ><span>EXPERIENCIAS</span><small>invitaciones digitales</small></a
+        >
+        <div class="footer-copy">
+          CREAMOS EXPERIENCIAS · NO SOLO INVITACIONES
+        </div>
+        <a href="#estilos" class="section-label">↑ Volver arriba</a>
+      </footer>
+    </div>
+
+    <section class="invitation-view" id="invitationView" aria-hidden="true">
+      <div class="invite-topbar">
+        <span id="previewLabel">Vista previa · Contemporary</span>
+        <div class="top-actions">
+          <button class="icon-btn" id="fullscreenBtn" type="button">
+            ⛶ Pantalla completa</button
+          ><button
+            class="icon-btn"
+            id="closeBtn"
+            type="button"
+            aria-label="Cerrar invitación"
+          >
+            ✕ Cerrar
+          </button>
+        </div>
+      </div>
+      <div class="invite-content">
+        <div class="invite-frame">
+          <span class="invite-eyebrow" id="inviteEyebrow">The wedding</span>
+          <div class="invite-rule"></div>
+          <span
+            class="invite-eyebrow"
+            style="color: var(--muted); letter-spacing: 0.22em"
+            >Con mucha alegría te invitamos a celebrar</span
+          >
+          <h2 id="inviteNames">Ema<br />&amp; Lu</h2>
+          <div class="invite-date" id="inviteDate">22 — 08 — 2026</div>
+          <div class="invite-city" id="inviteCity">
+            BUENOS AIRES · ARGENTINA
+          </div>
+          <p class="invite-phrase" id="invitePhrase">
+            Una historia que comienza…<br />y queremos compartir con vos.
+          </p>
+          <div class="countdown" aria-label="Cuenta regresiva">
+            <div><strong id="days">—</strong><small>Días</small></div>
+            <div><strong id="hours">—</strong><small>Horas</small></div>
+            <div><strong id="minutes">—</strong><small>Minutos</small></div>
+            <div><strong id="seconds">—</strong><small>Segundos</small></div>
+          </div>
+          <div class="invite-details">
+            <article class="invite-detail">
+              <h3>Ceremonia</h3>
+              <p id="venue">Jardín Botánico</p>
+              <small id="address">Av. Santa Fe 3951</small>
+            </article>
+            <article class="invite-detail">
+              <h3>Horario</h3>
+              <p id="time">18:00 hs</p>
+              <small>Te esperamos puntual</small>
+            </article>
+            <article class="invite-detail">
+              <h3>Dress code</h3>
+              <p>Elegante</p>
+              <small>Formal · Evitar blanco y marfil</small>
+            </article>
+          </div>
+          <div class="invite-actions">
+            <a
+              id="mapLink"
+              href="https://www.google.com/maps/search/?api=1&query=Jardin+Botanico+Buenos+Aires"
+              target="_blank"
+              rel="noopener"
+              >Cómo llegar ↗</a
+            ><a
+              id="rsvpLink"
+              href="mailto:confirmaciones@example.com?subject=Confirmaci%C3%B3n%20de%20asistencia"
+              >Confirmar asistencia ↗</a
+            >
+          </div>
+          <p class="invite-foot" id="inviteFoot">
+            Un día para recordar · Ema &amp; Lu
+          </p>
+        </div>
+      </div>
+    </section>
+    <script>
+      const themes = {
+        editorial: {
+          label: "Editorial",
+          eyebrow: "Nuestra boda",
+          names: "Lara<br>&amp;<br>Jonatan",
+          date: "14 — 06 — 2026",
+          phrase:
+            "Nos encantaría que seas parte<br>de este momento tan especial.",
+          venue: "Hacienda Los Robles",
+          address: "Av. Los Robles 123 · Pilar",
+          time: "18:00 hs",
+          city: "BUENOS AIRES · ARGENTINA",
+          target: [2026, 5, 14, 18, 0],
+          map: "Hacienda+Los+Robles+Pilar",
+          couple: "Lara & Jonatan",
+        },
+        romantica: {
+          label: "Romántica",
+          eyebrow: "Nos casamos",
+          names: "Ale<br>&amp; Lu",
+          date: "21 — 11 — 2026",
+          phrase:
+            "Una historia que comienza…<br>y se llena de momentos para siempre.",
+          venue: "Casa de Campo La Reserva",
+          address: "Ruta 8 · km 72",
+          time: "17:30 hs",
+          city: "BUENOS AIRES · ARGENTINA",
+          target: [2026, 10, 21, 17, 30],
+          map: "Casa+de+Campo+La+Reserva",
+          couple: "Ale & Lu",
+        },
+        contemporary: {
+          label: "Contemporary",
+          eyebrow: "The wedding",
+          names: "Ema<br>&amp; Lu",
+          date: "22 — 08 — 2026",
+          phrase: "Una historia que comienza…<br>y queremos compartir con vos.",
+          venue: "Jardín Botánico",
+          address: "Av. Santa Fe 3951",
+          time: "18:00 hs",
+          city: "BUENOS AIRES · ARGENTINA",
+          target: [2026, 7, 22, 18, 0],
+          map: "Jardin+Botanico+Buenos+Aires",
+          couple: "Ema & Lu",
+        },
+      };
+      let activeTheme = "contemporary",
+        targetDate;
+      const view = document.getElementById("invitationView"),
+        site = document.getElementById("site");
+      function openInvitation(key) {
+        const t = themes[key] || themes.contemporary;
+        activeTheme = key;
+        targetDate = new Date(...t.target);
+        document.getElementById("previewLabel").textContent =
+          "Vista previa · " + t.label;
+        document.getElementById("inviteEyebrow").textContent = t.eyebrow;
+        document.getElementById("inviteNames").innerHTML = t.names;
+        document.getElementById("inviteDate").textContent = t.date;
+        document.getElementById("invitePhrase").innerHTML = t.phrase;
+        document.getElementById("venue").textContent = t.venue;
+        document.getElementById("address").textContent = t.address;
+        document.getElementById("time").textContent = t.time;
+        document.getElementById("inviteCity").textContent = t.city;
+        document.getElementById("inviteFoot").textContent =
+          "Un día para recordar · " + t.couple;
+        document.getElementById("mapLink").href =
+          "https://www.google.com/maps/search/?api=1&query=" + t.map;
+        view.classList.add("open");
+        view.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        history.replaceState(
+          null,
+          "",
+          location.pathname + location.search + "#invitacion-" + key,
+        );
+        updateCountdown();
+      }
+      function closeInvitation() {
+        view.classList.remove("open");
+        view.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        history.replaceState(null, "", location.pathname + location.search);
+      }
+      document.querySelectorAll(".design-card").forEach((card) =>
+        card.addEventListener("click", (e) => {
+          e.preventDefault();
+          openInvitation(card.dataset.theme);
+        }),
+      );
+      document
+        .getElementById("closeBtn")
+        .addEventListener("click", closeInvitation);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && view.classList.contains("open"))
+          closeInvitation();
+      });
+      function updateCountdown() {
+        if (!targetDate) return;
+        let left = targetDate.getTime() - Date.now();
+        left = Math.max(0, left);
+        const v = {
+          days: Math.floor(left / 86400000),
+          hours: Math.floor((left % 86400000) / 3600000),
+          minutes: Math.floor((left % 3600000) / 60000),
+          seconds: Math.floor((left % 60000) / 1000),
+        };
+        Object.entries(v).forEach(
+          ([id, n]) =>
+            (document.getElementById(id).textContent = String(n).padStart(
+              2,
+              "0",
+            )),
+        );
+      }
+      setInterval(updateCountdown, 1000);
+      document
+        .getElementById("fullscreenBtn")
+        .addEventListener("click", async () => {
+          try {
+            if (!document.fullscreenElement) {
+              await view.requestFullscreen();
+              document.getElementById("fullscreenBtn").textContent =
+                "⛶ Salir de pantalla completa";
+            } else {
+              await document.exitFullscreen();
+            }
+          } catch (e) {
+            alert(
+              "El navegador no permitió pantalla completa. Podés probar con F11.",
+            );
+          }
+        });
+      document.addEventListener("fullscreenchange", () => {
+        document.getElementById("fullscreenBtn").textContent =
+          document.fullscreenElement
+            ? "⛶ Salir de pantalla completa"
+            : "⛶ Pantalla completa";
+      });
+      if (location.hash.startsWith("#invitacion-"))
+        openInvitation(location.hash.replace("#invitacion-", ""));
+    </script>
+  </body>
+</html>

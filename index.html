@@ -25,9 +25,9 @@
 
       <header class="experience-header">
         <div class="brand">
-          <span class="brand-small"> INVITACIONES DIGITALES </span>
+          <span class="brand-small">INVITACIONES DIGITALES</span>
 
-          <span class="brand-name"> EXPERIENCIAS </span>
+          <span class="brand-name">EXPERIENCIAS</span>
         </div>
 
         <div class="header-line"></div>
@@ -61,16 +61,22 @@
         </div>
 
         <!-- ===================================================
-       EXPERIENCIA / CARRUSEL
-  ==================================================== -->
+             LOADER
+        ==================================================== -->
 
         <div class="world-loader" id="worldLoader">
           <div class="world-loader-inner">
             <div class="world-loader-number" id="worldLoaderNumber">01</div>
+
             <div class="world-loader-line"></div>
+
             <div class="world-loader-text" id="worldLoaderText">CARGANDO</div>
           </div>
         </div>
+
+        <!-- ===================================================
+             EXPERIENCIA / CARRUSEL
+        ==================================================== -->
 
         <div class="experience-carousel">
           <!-- Flecha izquierda -->
@@ -83,7 +89,9 @@
             ←
           </button>
 
-          <!-- Tarjeta lateral izquierda -->
+          <!-- =================================================
+               TARJETA LATERAL IZQUIERDA
+          ================================================== -->
 
           <div class="side-card side-card-left" id="sideLeft">
             <img id="sideLeftImage" src="" alt="" />
@@ -97,7 +105,9 @@
             </div>
           </div>
 
-          <!-- Tarjeta lateral derecha -->
+          <!-- =================================================
+               TARJETA LATERAL DERECHA
+          ================================================== -->
 
           <div class="side-card side-card-right" id="sideRight">
             <img id="sideRightImage" src="" alt="" />
@@ -107,7 +117,7 @@
             <div class="side-info">
               <span id="sideRightNumber"> 02 </span>
 
-              <span id="sideRightTitle"> Cumple 8 </span>
+              <span id="sideRightTitle"> Cumple 9 </span>
             </div>
           </div>
 
@@ -118,6 +128,10 @@
           <article class="main-experience" id="mainExperience">
             <div class="particle-layer"></div>
 
+            <!-- =================================================
+                 IMAGEN PRINCIPAL
+            ================================================== -->
+
             <div class="main-image-wrapper">
               <img id="mainImage" class="main-image" src="" alt="" />
 
@@ -126,7 +140,23 @@
               <div class="main-image-overlay"></div>
 
               <div class="main-image-glow"></div>
+
+              <!-- =================================================
+                   BOTÓN PLAY / VIVIR EXPERIENCIA
+              ================================================== -->
+
+              <button
+                class="experience-button"
+                id="openExperience"
+                aria-label="Vivir esta experiencia"
+              >
+                <span class="play-icon"></span>
+              </button>
             </div>
+
+            <!-- =================================================
+                 INFORMACIÓN DE LA EXPERIENCIA
+            ================================================== -->
 
             <div class="main-content">
               <div class="experience-category">EXPERIENCIA</div>
@@ -135,17 +165,13 @@
 
               <div class="title-line"></div>
 
-              <p id="mainPhrase">Se renueva una historia.</p>
-
-              <button class="experience-button" id="openExperience">
-                <span> Vivir esta experiencia </span>
-
-                <strong> → </strong>
-              </button>
+              <p id="mainPhrase"></p>
             </div>
           </article>
 
-          <!-- Flecha derecha -->
+          <!-- =================================================
+               FLECHA DERECHA
+          ================================================== -->
 
           <button
             class="carousel-arrow carousel-next"
@@ -156,10 +182,6 @@
           </button>
         </div>
       </section>
-
-      <!-- =====================================================
-           CTA
-      ====================================================== -->
 
       <!-- =====================================================
            FOOTER
@@ -179,6 +201,10 @@
         <div class="footer-hint">Deslizá · explorá · elegí</div>
       </footer>
     </main>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script src="./assets/carousel/index.js"></script>
   </body>

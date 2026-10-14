@@ -1,0 +1,1449 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f5efe8" />
+    <title>Pro-Fiesta · Elegí tu experiencia</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap");
+      :root {
+        --accent: #bc7e9e;
+        --accent-rgb: 188, 126, 158;
+        --ink: #27231f;
+        --paper: #f5efe8;
+        --motion: 700ms;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: #e8ded4;
+        color: var(--ink);
+        overflow: hidden;
+      }
+
+      /* Oscurecer todo el fondo del carrusel */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.2);
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+      button {
+        font: inherit;
+      }
+      /* Dos páginas de fondo alternadas: el usuario permanece en carrousel.html */
+      #worlds {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background: var(--paper);
+        overflow: hidden;
+      }
+      #worlds iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition: opacity 900ms ease-in-out;
+        background: var(--paper);
+      }
+
+      #worlds iframe.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+      #worlds iframe.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      #worlds::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(246, 240, 232, 0.38),
+            rgba(246, 240, 232, 0.06) 58%,
+            rgba(246, 240, 232, 0.2)
+          ),
+          linear-gradient(0deg, rgba(25, 23, 22, 0.16), transparent 38%);
+        z-index: 1;
+      }
+      /* Fallback / tint while the themed page loads */
+      #fallback {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 70% 25%,
+            rgba(var(--accent-rgb), 0.28),
+            transparent 45%
+          ),
+          linear-gradient(135deg, #f8f1e9, #e8dcd2);
+        transition: opacity var(--motion) var(--ease);
+        z-index: 0;
+      }
+      #fallback.hidden {
+        opacity: 0;
+      }
+      .interface {
+        position: relative;
+        z-index: 4;
+        height: 100%;
+        pointer-events: none;
+      }
+      .topbar {
+        display: none;
+        height: 82px;
+        margin: 0 34px;
+        border-bottom: 1px solid rgba(40, 34, 28, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: auto;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        color: inherit;
+        text-decoration: none;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--accent);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: var(--accent);
+        font:
+          20px "Playfair Display",
+          serif;
+        transition:
+          color var(--motion),
+          border-color var(--motion);
+      }
+      .brand-copy {
+        display: grid;
+        gap: 3px;
+      }
+      .brand-copy strong {
+        font-size: 11px;
+        letter-spacing: 0.24em;
+      }
+      .brand-copy small {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #6e675f;
+      }
+      .top-note,
+      .counter {
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #514b44;
+      }
+      .counter {
+        color: wheat;
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+      /* Texto editorial breve: deja que el fondo sea protagonista */
+      .headline {
+        position: absolute;
+        top: 10%;
+        left: 4.2%;
+        max-width: 520px;
+        pointer-events: none;
+        animation: rise 0.65s both;
+      }
+      .eyebrow {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 700;
+        display: flex;
+        gap: 11px;
+        align-items: center;
+      }
+      .eyebrow:before {
+        content: "";
+        width: 27px;
+        height: 1px;
+        background: currentColor;
+      }
+      .headline h1 {
+        font:
+          500 clamp(2.5rem, 5.1vw, 5.3rem)/0.94 "Playfair Display",
+          serif;
+        letter-spacing: -0.055em;
+        margin: 20px 0 0;
+        max-width: 510px;
+        text-wrap: balance;
+      }
+      .headline h1 em {
+        font-weight: 500;
+        color: var(--accent);
+        transition: color var(--motion);
+      }
+      .headline p {
+        display: none;
+      }
+      /* Rail inferior izquierdo: navegación y controles agrupados */
+
+      /* Carrusel desplazado hacia la derecha */
+      .gallery {
+        position: absolute;
+        left: clamp(100px, 12vw, 220px);
+        bottom: clamp(24px, 5vh, 52px);
+        width: min(70vw, 900px);
+        pointer-events: auto;
+      }
+      .gallery-top {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 18px;
+        margin: 0 0 10px 2px;
+        color: #514a43;
+      }
+      .carousel-stage {
+        position: relative;
+        padding: 0 46px;
+      }
+      .gallery-bottom {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0 0 2px;
+      }
+      .gallery-bottom .gallery-hint {
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        opacity: 0.75;
+      }
+      .gallery-label {
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .gallery-hint {
+        color: wheat;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        opacity: 0.78;
+      }
+      .rail {
+        height: clamp(205px, 30vh, 292px);
+        position: relative;
+        perspective: 1200px;
+        touch-action: pan-y;
+        overflow: visible;
+      }
+      .tile {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: clamp(165px, 18vw, 245px);
+        height: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        border-radius: 5px;
+        overflow: hidden;
+        padding: 0;
+        background: #c8bcb0;
+        box-shadow: 0 13px 34px rgba(36, 28, 22, 0.17);
+        cursor: pointer;
+        transform-origin: center bottom;
+        transition:
+          transform var(--motion) var(--ease),
+          opacity var(--motion) var(--ease),
+          filter var(--motion) var(--ease),
+          left var(--motion) var(--ease),
+          box-shadow var(--motion) var(--ease);
+        text-align: left;
+        color: white;
+      }
+      .tile img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.7s var(--ease);
+      }
+      .tile:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 28%,
+          rgba(15, 14, 14, 0.08) 45%,
+          rgba(15, 14, 14, 0.78)
+        );
+        pointer-events: none;
+      }
+      .tile-copy {
+        position: absolute;
+        z-index: 1;
+        left: 12px;
+        right: 10px;
+        bottom: 12px;
+        pointer-events: none;
+      }
+      .tile-num {
+        font-size: 8px;
+        letter-spacing: 0.16em;
+        display: block;
+        opacity: 0.85;
+        margin-bottom: 4px;
+      }
+      .tile-title {
+        font:
+          500 clamp(1rem, 1.5vw, 1.35rem)/1.05 "Playfair Display",
+          serif;
+        display: block;
+      }
+      .tile.active {
+        z-index: 8;
+        left: calc(50% - clamp(82px, 9vw, 122px));
+        transform: translateY(-16px) scale(1.25);
+        box-shadow: 0 30px 62px rgba(36, 28, 22, 0.34);
+        filter: none;
+        border-color: rgba(255, 255, 255, 0.98);
+      }
+      .tile.left {
+        z-index: 4;
+        left: 3%;
+        transform: translateY(10px) scale(0.88) rotateY(8deg);
+        filter: blur(1.8px) saturate(0.72);
+        opacity: 0.74;
+      }
+      .tile.right {
+        z-index: 3;
+        left: calc(100% - clamp(165px, 18vw, 245px) - 3%);
+        transform: translateY(12px) scale(0.88) rotateY(-8deg);
+        filter: blur(2.1px) saturate(0.66);
+        opacity: 0.68;
+      }
+      .tile.far {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(18px) scale(0.7);
+      }
+      .tile:focus-visible,
+      .navbtn:focus-visible,
+      .pause:focus-visible,
+      .enter-active:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+      .controls {
+        position: static;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        pointer-events: auto;
+        flex-shrink: 0;
+      }
+      .navbtn,
+      .pause {
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        background: rgba(48, 41, 35, 0.24);
+        backdrop-filter: blur(12px);
+        color: #fff;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        box-shadow: 0 5px 18px rgba(35, 29, 24, 0.12);
+        transition:
+          background 0.22s ease,
+          transform 0.22s ease,
+          border-color 0.22s ease;
+      }
+      .navbtn:hover,
+      .pause:hover {
+        background: rgba(255, 255, 255, 0.88);
+        color: #302b26;
+        border-color: #fff;
+        transform: scale(1.07);
+      }
+
+      .nav-prev,
+      .nav-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 15;
+        width: 36px;
+        height: 36px;
+
+        /* Aspecto de vidrio oscuro */
+        background: rgba(20, 20, 20, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #fff;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-prev {
+        left: 0;
+      }
+      .nav-next {
+        right: 0;
+      }
+      .nav-prev:hover,
+      .nav-next:hover {
+        transform: translateY(-50%) scale(1.06);
+      }
+      .navbtn svg {
+        width: 15px;
+        height: 15px;
+      }
+      .pause svg {
+        width: 11px;
+        height: 11px;
+      }
+      .service-note {
+        position: absolute;
+        right: clamp(22px, 4vw, 62px);
+        bottom: clamp(35px, 6vh, 66px);
+        max-width: 300px;
+        text-align: right;
+        color: wheat;
+        text-shadow: 0 1px 12px rgba(255, 255, 255, 0.45);
+        pointer-events: none;
+      }
+      .service-note strong {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .service-note span {
+        display: block;
+        font:
+          italic 500 clamp(1.1rem, 1.8vw, 1.5rem)/1.25 "Playfair Display",
+          serif;
+      }
+      .enter-active {
+        position: absolute;
+        z-index: 25;
+        left: 50%;
+        top: 50%;
+        bottom: auto;
+        transform: translate(-50%, -50%) scale(0.88);
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 64px;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, 0.86);
+        border-radius: 50%;
+        background: rgba(30, 27, 25, 0.48);
+        backdrop-filter: blur(9px);
+        color: #fff;
+        text-decoration: none;
+        opacity: 0;
+        pointer-events: none;
+        box-shadow:
+          0 8px 26px rgba(25, 20, 17, 0.25),
+          inset 0 0 0 5px rgba(255, 255, 255, 0.08);
+        transition:
+          opacity 0.24s ease,
+          background 0.24s ease,
+          transform 0.28s var(--ease),
+          box-shadow 0.24s ease;
+      }
+      .enter-active.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .enter-active:hover {
+        background: rgba(30, 27, 25, 0.78);
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow:
+          0 12px 32px rgba(25, 20, 17, 0.34),
+          inset 0 0 0 5px rgba(255, 255, 255, 0.13);
+      }
+      .enter-active svg {
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+        margin-left: 3px;
+      }
+      .enter-active .play-label {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-3px);
+        padding: 6px 10px;
+        border-radius: 3px;
+        background: rgba(30, 27, 25, 0.76);
+        backdrop-filter: blur(8px);
+        color: white;
+        font:
+          700 8px/1.2 "DM Sans",
+          sans-serif;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        opacity: 0;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+      }
+      .enter-active:hover .play-label,
+      .enter-active:focus-visible .play-label {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      .tile-play {
+        position: absolute;
+        z-index: 5;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, -50%) scale(0.88);
+        width: 48px;
+        height: 48px;
+        border: 1px solid rgba(255, 255, 255, 0.88);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(30, 27, 25, 0.48);
+        backdrop-filter: blur(8px);
+        color: #fff;
+        text-decoration: none;
+        opacity: 0.68;
+        box-shadow:
+          0 8px 26px rgba(25, 20, 17, 0.25),
+          inset 0 0 0 4px rgba(255, 255, 255, 0.08);
+        transition:
+          opacity 0.25s ease,
+          transform 0.28s var(--ease),
+          background 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .tile-play svg {
+        width: 19px;
+        height: 19px;
+        margin-left: 2px;
+      }
+      .tile-play span {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translate(-50%, -3px);
+        padding: 5px 8px;
+        background: rgba(30, 27, 25, 0.78);
+        border-radius: 3px;
+        font:
+          700 7px/1.2 "DM Sans",
+          sans-serif;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        opacity: 0;
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease;
+      }
+      .tile.active .tile-play {
+        width: 58px;
+        height: 58px;
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        background: rgba(30, 27, 25, 0.56);
+      }
+      .tile.active .tile-play svg {
+        width: 23px;
+        height: 23px;
+      }
+      .tile-play:hover,
+      .tile-play:focus-visible {
+        opacity: 1;
+        background: rgba(30, 27, 25, 0.82);
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow:
+          0 12px 32px rgba(25, 20, 17, 0.34),
+          inset 0 0 0 4px rgba(255, 255, 255, 0.13);
+      }
+      .tile-play:hover span,
+      .tile-play:focus-visible span {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      .tile.left .tile-play,
+      .tile.right .tile-play {
+        opacity: 0.38;
+        transform: translate(-50%, -50%) scale(0.82);
+      }
+      .tile.left .tile-play:hover,
+      .tile.right .tile-play:hover {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.96);
+      }
+      .progress {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 3px;
+        background: rgba(39, 34, 29, 0.15);
+        pointer-events: none;
+      }
+      .progress span {
+        display: block;
+        height: 100%;
+        width: 9%;
+        background: var(--accent);
+        transition:
+          width var(--motion) var(--ease),
+          background var(--motion);
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(9px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 760px) {
+        .topbar {
+          height: 70px;
+          margin: 0 18px;
+        }
+        .top-note {
+          display: none;
+        }
+        .headline {
+          top: 12%;
+          left: 22px;
+          right: 22px;
+          max-width: 440px;
+        }
+        .headline h1 {
+          font-size: clamp(2.5rem, 10vw, 4rem);
+          max-width: 430px;
+        }
+        .headline p {
+          max-width: 250px;
+          font-size: 11px;
+          margin-top: 12px;
+        }
+        .service-note {
+          right: 20px;
+          bottom: calc(clamp(150px, 23vh, 200px) + 105px);
+          max-width: 220px;
+        }
+        .service-note strong {
+          font-size: 8px;
+        }
+        .service-note span {
+          font-size: 1.05rem;
+        }
+        .gallery {
+          left: 20px;
+          bottom: 24px;
+          width: calc(100% - 40px);
+        }
+        .gallery-top {
+          margin-bottom: 8px;
+        }
+        .carousel-stage {
+          padding: 0 34px;
+        }
+        .gallery-bottom {
+          margin-top: 7px;
+        }
+        .gallery-hint {
+          display: none;
+        }
+        .rail {
+          height: clamp(150px, 23vh, 200px);
+        }
+        .tile {
+          width: clamp(125px, 34vw, 170px);
+        }
+        .tile.active {
+          left: calc(50% - clamp(62px, 17vw, 85px));
+          transform: translateY(-9px) scale(1.16);
+        }
+        .tile.left {
+          left: 0;
+          transform: translateY(7px) scale(0.82) rotateY(8deg);
+        }
+        .tile.right {
+          left: calc(100% - clamp(125px, 34vw, 170px));
+          transform: translateY(9px) scale(0.82) rotateY(-8deg);
+        }
+        .tile-copy {
+          left: 9px;
+          bottom: 9px;
+        }
+        .tile-title {
+          font-size: 1.05rem;
+        }
+        .tile-num {
+          font-size: 7px;
+        }
+        .controls {
+          gap: 5px;
+        }
+        .gallery-top {
+          margin-bottom: 8px;
+        }
+        .gallery-label {
+          font-size: 8px;
+        }
+        .navbtn,
+        .pause {
+          width: 29px;
+          height: 29px;
+        }
+        .nav-prev,
+        .nav-next {
+          width: 28px;
+          height: 28px;
+        }
+        .counter {
+          font-size: 10px;
+        }
+      }
+      @media (max-width: 390px) {
+        .service-note {
+          display: none;
+        }
+        .headline {
+          top: 11%;
+        }
+        .headline h1 {
+          font-size: 2.55rem;
+        }
+        .headline p {
+          max-width: 220px;
+        }
+        .gallery {
+          bottom: 20px;
+        }
+        .carousel-stage {
+          padding: 0 30px;
+        }
+        .rail {
+          height: 125px;
+        }
+        .tile {
+          width: 116px;
+        }
+        .tile.active {
+          left: calc(50% - 58px);
+          transform: translateY(-5px) scale(1.08);
+        }
+        .tile.left {
+          left: 0;
+        }
+        .tile.right {
+          left: calc(100% - 116px);
+        }
+        .tile-title {
+          font-size: 0.95rem;
+        }
+        .gallery-hint {
+          display: none;
+        }
+        .navbtn,
+        .pause {
+          width: 27px;
+          height: 27px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* =====================================================
+   PRO-FIESTA · MARIO APARECE AL HACER HOVER EN "ELLOS"
+===================================================== */
+
+      .tile[data-id="cumple-ellos"] {
+        overflow: visible;
+      }
+
+      /* Imagen de Mario */
+      .tile[data-id="cumple-ellos"]::after {
+        content: "";
+        position: absolute;
+        z-index: 10;
+
+        width: 85%;
+        height: 72%;
+
+        left: 50%;
+        bottom: 8%;
+
+        background-image: url("assets/img/book/mario-greeting.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: contain;
+
+        opacity: 0;
+        pointer-events: none;
+
+        transform: translate(-50%, 35px) scale(0.72);
+        transform-origin: center bottom;
+
+        transition:
+          opacity 350ms ease,
+          transform 550ms cubic-bezier(0.2, 1.4, 0.4, 1);
+      }
+
+      /* Mario salta cuando se apunta a la tarjeta */
+      .tile[data-id="cumple-ellos"]:hover::after {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
+
+      /* También funciona cuando la tarjeta está seleccionada */
+      .tile[data-id="cumple-ellos"].active:hover::after {
+        transform: translate(-50%, -8px) scale(1.04);
+      }
+
+      /* En celulares no hay hover real */
+      @media (hover: none) {
+        .tile[data-id="cumple-ellos"]::after {
+          display: none;
+        }
+      }
+
+      /* =====================================================
+   MARIO · SALTO SOBRE TODO EL BODY
+===================================================== */
+
+      #marioEasterEgg {
+        position: fixed;
+        z-index: 99999;
+
+        left: 50%;
+        bottom: 20px;
+
+        width: min(420px, 65vw);
+        height: min(520px, 75vh);
+
+        background-image: url("assets/img/book/mario-greeting.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: contain;
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: translate(-50%, 100%) scale(0.75);
+        transform-origin: center bottom;
+
+        transition:
+          opacity 250ms ease,
+          transform 650ms cubic-bezier(0.2, 1.3, 0.4, 1),
+          visibility 0s linear 650ms;
+      }
+
+      /* Mario entra en escena */
+      #marioEasterEgg.mario-visible {
+        opacity: 1;
+        visibility: visible;
+
+        transform: translate(-50%, -70px) scale(1);
+
+        transition:
+          opacity 250ms ease,
+          transform 650ms cubic-bezier(0.2, 1.3, 0.4, 1),
+          visibility 0s;
+      }
+
+      /* Evita la animación en dispositivos sin hover */
+      @media (hover: none) {
+        #marioEasterEgg {
+          display: none;
+        }
+      }
+
+      /* =====================================================
+   MARIO · ESCENARIO CON LUZ CENTRAL Y BORDES OSCUROS
+===================================================== */
+
+      #marioSpotlight {
+        position: fixed;
+        inset: 0;
+        z-index: 9998;
+
+        pointer-events: none;
+        opacity: 0;
+
+        background: radial-gradient(
+          ellipse at 50% 52%,
+          rgba(255, 255, 225, 0.2) 0%,
+          rgba(255, 244, 205, 0.12) 22%,
+          rgba(10, 12, 18, 0.2) 48%,
+          rgba(5, 7, 12, 0.72) 100%
+        );
+
+        transition: opacity 650ms ease;
+      }
+
+      /* Se activa junto con Mario */
+      #marioSpotlight.spotlight-visible {
+        opacity: 1;
+      }
+
+      /* Mario debe quedar por encima de la iluminación */
+      #marioEasterEgg {
+        z-index: 9999;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #marioSpotlight {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="worlds" aria-hidden="true">
+      <div id="fallback"></div>
+      <iframe
+        id="worldA"
+        title="Fondo de la experiencia"
+        loading="eager"
+      ></iframe
+      ><iframe
+        id="worldB"
+        title="Fondo de la experiencia siguiente"
+        loading="eager"
+      ></iframe>
+    </div>
+    <div class="interface">
+      <section class="headline" aria-live="polite">
+        <div class="eyebrow">Una experiencia para cada historia</div>
+        <h1 id="headline">
+          Tu celebración.<br /><em>Tu manera de contarla.</em>
+        </h1>
+      </section>
+      <div class="service-note">
+        <strong>Invitaciones digitales personalizadas</strong
+        ><span>Tu celebración, diseñada a tu manera.</span>
+      </div>
+      <section class="gallery" aria-label="Elegí una temática">
+        <div class="gallery-top">
+          <span class="gallery-label"></span
+          ><span class="counter" id="counter">01 / 11</span
+          ><span class="gallery-hint">Deslizá para explorar</span>
+        </div>
+        <div class="carousel-stage">
+          <button
+            class="navbtn nav-prev"
+            id="prev"
+            aria-label="Experiencia anterior"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <div class="rail" id="rail">
+            <a class="enter-active" id="enterActive" href="./invitacion.html"
+              >Personalizá tu invitación
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              >
+                <path d="M4 12h15M13 5l7 7-7 7" /></svg
+            ></a>
+          </div>
+          <button
+            class="navbtn nav-next"
+            id="next"
+            aria-label="Experiencia siguiente"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+        <div class="gallery-bottom">
+          <button
+            class="pause"
+            id="pause"
+            aria-label="Pausar avance automático"
+            title="Pausar o reanudar"
+          >
+            <svg id="pauseIcon" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M4 3h3v10H4zM9 3h3v10H9z" />
+            </svg></button
+          ><span class="gallery-hint">Avance automático</span>
+        </div>
+      </section>
+      <div class="progress"><span id="progress"></span></div>
+    </div>
+
+    <!-- MARIO · ANIMACIÓN GLOBAL -->
+    <div id="marioEasterEgg" aria-hidden="true"></div>
+
+    <div id="marioSpotlight" aria-hidden="true"></div>
+
+    <script>
+      (() => {
+        "use strict";
+        const experiences = [
+          {
+            id: "casamiento",
+            title: "Casamiento",
+            phrase: "Se renueva una historia.",
+            image: "assets/img/book/casamiento.webp",
+            url: "./invitacion.html",
+            accent: "#F08AB8",
+            rgb: "240,138,184",
+            headline: "Tu celebración.<br><em>Tu manera de contarla.</em>",
+          },
+          {
+            id: "cumple-ellos",
+            title: "Ellos",
+            phrase: "Una nueva aventura comienza.",
+            image: "assets/img/book/mario-rock.jpg",
+            url: "./temas/dinos.html",
+            accent: "#B5F35D",
+            rgb: "181,243,93",
+            headline: "Una fiesta.<br><em>Una gran aventura.</em>",
+          },
+          {
+            id: "15",
+            title: "Tus 15",
+            phrase: "Una nueva etapa comienza.",
+            image: "assets/img/book/15.webp",
+            url: "./evento.html?tema=15",
+            accent: "#D9A6FF",
+            rgb: "217,166,255",
+            headline: "Un día único.<br><em>Tu nueva historia.</em>",
+          },
+        ];
+        const $ = (id) => document.getElementById(id),
+          rail = $("rail"),
+          enterActive = $("enterActive"),
+          reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let current = Math.max(
+            0,
+            experiences.findIndex(
+              (e) => e.id === new URLSearchParams(location.search).get("tema"),
+            ),
+          ),
+          timer = null,
+          paused = false,
+          activeFrame = 0,
+          transitioning = false,
+          startX = null,
+          deltaX = 0;
+        const frames = [$("worldA"), $("worldB")];
+        function wrap(n) {
+          return (n + experiences.length) % experiences.length;
+        }
+
+        function backgroundUrl(item) {
+          if (item.id === "casamiento") {
+            return "./invitacion.html";
+          }
+
+          if (item.id === "cumple-ellos") {
+            return "./temas/dinos.html";
+          }
+
+          return `./evento.html?tema=${encodeURIComponent(item.id)}`;
+        }
+
+        // Tarjetas visuales pequeñas, ancladas al ángulo inferior izquierdo.
+        const tiles = experiences.map((e, i) => {
+          const b = document.createElement("div");
+          b.className = "tile";
+          b.setAttribute("role", "button");
+          b.setAttribute("aria-label", `Seleccionar ${e.title}`);
+          b.tabIndex = 0;
+          const img = document.createElement("img");
+          img.src = e.image;
+          img.alt = "";
+          img.draggable = false;
+          img.loading = i < 4 ? "eager" : "lazy";
+          img.onerror = () => {
+            b.style.background = `linear-gradient(140deg,rgba(${e.rgb},.9),#40372f)`;
+            img.style.display = "none";
+          };
+          const copy = document.createElement("span");
+          copy.className = "tile-copy";
+          const num = document.createElement("span");
+          num.className = "tile-num";
+          num.textContent = `EXPERIENCIA ${String(i + 1).padStart(2, "0")}`;
+          const title = document.createElement("span");
+          title.className = "tile-title";
+          title.textContent = e.title;
+          copy.append(num, title);
+          const play = document.createElement("a");
+          play.className = "tile-play";
+          play.href = e.url;
+          play.setAttribute("aria-label", `Abrir invitación: ${e.title}`);
+          play.innerHTML =
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.8c0-.8.9-1.3 1.6-.9l10.1 6.7a1.6 1.6 0 0 1 0 2.7L8.6 20c-.7.5-1.6 0-1.6-.9V4.8z"></path></svg><span>Ver invitación</span>';
+          play.addEventListener("click", (ev) => ev.stopPropagation());
+          b.append(img, copy, play);
+          b.addEventListener("click", () => goTo(i, true));
+          b.addEventListener("keydown", (ev) => {
+            if (ev.target === b && (ev.key === "Enter" || ev.key === " ")) {
+              ev.preventDefault();
+              goTo(i, true);
+            }
+          });
+          rail.append(b);
+          return b;
+        });
+        function renderTiles() {
+          tiles.forEach((tile, i) => {
+            let d = i - current;
+            if (d > experiences.length / 2) d -= experiences.length;
+            if (d < -experiences.length / 2) d += experiences.length;
+            tile.classList.remove("active", "left", "right", "far");
+            if (d === 0) tile.classList.add("active");
+            else if (d === -1) tile.classList.add("left");
+            else if (d === 1) tile.classList.add("right");
+            else tile.classList.add("far");
+            tile.style.zIndex = String(20 - Math.abs(d));
+            tile.setAttribute("aria-pressed", String(d === 0));
+            tile.tabIndex = Math.abs(d) <= 1 ? 0 : -1;
+            const link = tile.querySelector(".tile-play");
+            if (link) {
+              link.href = experiences[i].url;
+              link.setAttribute(
+                "aria-label",
+                `Abrir invitación: ${experiences[i].title}`,
+              );
+            }
+          });
+        }
+        function setWorld(item) {
+          document.documentElement.style.setProperty("--accent", item.accent);
+          document.documentElement.style.setProperty("--accent-rgb", item.rgb);
+          $("headline").innerHTML = item.headline;
+          $("counter").textContent =
+            `${String(current + 1).padStart(2, "0")} / ${String(experiences.length).padStart(2, "0")}`;
+          $("progress").style.width =
+            `${((current + 1) / experiences.length) * 100}%`;
+          document.title = `Pro-Fiesta · ${item.title}`;
+          renderTiles();
+        }
+
+        function cleanBackgroundPage(frame) {
+          try {
+            const doc = frame.contentDocument;
+            if (!doc || !doc.body) return;
+
+            let style = doc.getElementById("profiesta-carousel-cleanup");
+
+            if (!style) {
+              style = doc.createElement("style");
+              style.id = "profiesta-carousel-cleanup";
+
+              style.textContent = `
+              header, nav, .navbar, .topbar, .floating-topbar,
+              .site-header, .main-header,
+              .hero-content, .hero-copy, .hero-eyebrow,
+              .hero-title, .hero-text, .hero-button, .footer {
+                display: none !important;
+              }
+
+  body {
+    padding-top: 0 !important;
+    margin: 0 !important;
+  }
+
+  html, body {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* Ajustar el hero de casamiento al fondo completo */
+  body > main {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body > main > section.hero#inicio {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+  }
+
+  /* Ocultar las secciones que siguen al hero */
+  body > main > section.hero#inicio ~ * {
+    display: none !important;
+  }
+
+  .scroll-cue {
+    display: none !important;
+  }
+`;
+
+              doc.head.appendChild(style);
+            }
+
+            // Ocultar botones de entrada que no deben aparecer en el fondo.
+            const candidates = doc.querySelectorAll(
+              "a, button, [role='button']",
+            );
+
+            candidates.forEach((el) => {
+              const t = (el.innerText || el.textContent || "")
+                .replace(/\s+/g, " ")
+                .trim()
+                .toLocaleLowerCase("es");
+
+              if (
+                t.includes("entrar a la experiencia") ||
+                t.includes("descubrí los diseños") ||
+                t.includes("descubri los diseños")
+              ) {
+                el.style.setProperty("display", "none", "important");
+              }
+            });
+          } catch (e) {
+            console.warn("No se pudo adaptar el fondo del carrusel:", e);
+          }
+        }
+
+        function loadWorld(item) {
+          const nextFrame = 1 - activeFrame,
+            frame = frames[nextFrame],
+            src = backgroundUrl(item);
+          transitioning = true;
+          frame.classList.remove("active");
+          frame.onload = () => {
+            cleanBackgroundPage(frame);
+            frame.classList.add("active");
+            frames[activeFrame].classList.remove("active");
+            activeFrame = nextFrame;
+            transitioning = false;
+            $("fallback").classList.add("hidden");
+          };
+          frame.onerror = () => {
+            frame.classList.remove("active");
+            transitioning = false;
+            $("fallback").classList.remove("hidden");
+          };
+          if (
+            frame.src &&
+            new URL(frame.src, location.href).href ===
+              new URL(src, location.href).href
+          ) {
+            cleanBackgroundPage(frame);
+            frame.classList.add("active");
+            frames[activeFrame].classList.remove("active");
+            activeFrame = nextFrame;
+            transitioning = false;
+            return;
+          }
+          frame.src = src;
+        }
+        function goTo(n, manual = false) {
+          current = wrap(n);
+          const item = experiences[current];
+          setWorld(item);
+          loadWorld(item);
+          if (manual) restartTimer();
+        }
+        function next(manual = true) {
+          goTo(current + 1, manual);
+        }
+        function prev(manual = true) {
+          goTo(current - 1, manual);
+        }
+        function stopTimer() {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+        function startTimer() {
+          stopTimer();
+          if (paused || reduced || document.hidden) return;
+          timer = setInterval(() => next(false), 6000);
+        }
+        function restartTimer() {
+          startTimer();
+        }
+        function updatePause() {
+          $("pause").setAttribute(
+            "aria-label",
+            paused ? "Reanudar avance automático" : "Pausar avance automático",
+          );
+          $("pauseIcon").innerHTML = paused
+            ? '<path d="M5 3.5 13 8l-8 4.5z"/>'
+            : '<path d="M4 3h3v10H4zM9 3h3v10H9z"/>';
+        }
+        $("prev").addEventListener("click", () => prev());
+        $("next").addEventListener("click", () => next());
+        $("pause").addEventListener("click", () => {
+          paused = !paused;
+          updatePause();
+          startTimer();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (
+            ["INPUT", "TEXTAREA", "SELECT"].includes(
+              document.activeElement?.tagName,
+            )
+          )
+            return;
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            next();
+          }
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            prev();
+          }
+        });
+        rail.addEventListener("pointerdown", (e) => {
+          startX = e.clientX;
+          deltaX = 0;
+        });
+        rail.addEventListener("pointermove", (e) => {
+          if (startX !== null) deltaX = e.clientX - startX;
+        });
+        function endSwipe() {
+          if (startX === null) return;
+          if (Math.abs(deltaX) > 45) deltaX < 0 ? next() : prev();
+          startX = null;
+          deltaX = 0;
+        }
+        rail.addEventListener("pointerup", endSwipe);
+        rail.addEventListener("pointercancel", endSwipe);
+        document.addEventListener("visibilitychange", () =>
+          document.hidden ? stopTimer() : startTimer(),
+        );
+        // Inicializar fondo doble: se conserva la página carrousel.html durante los cambios.
+        setWorld(experiences[current]);
+        const first = frames[0];
+        first.onload = () => {
+          cleanBackgroundPage(first);
+          first.classList.add("active");
+          activeFrame = 0;
+          $("fallback").classList.add("hidden");
+        };
+        first.onerror = () => {
+          $("fallback").classList.remove("hidden");
+        };
+        first.src = backgroundUrl(experiences[current]);
+        frames[1].src = "about:blank";
+        renderTiles();
+        updatePause();
+        startTimer();
+      })();
+
+      const marioEasterEgg = document.getElementById("marioEasterEgg");
+
+      const marioSpotlight = document.getElementById("marioSpotlight");
+
+      function configurarMarioHover() {
+        const tiles = document.querySelectorAll(".tile");
+
+        tiles.forEach((tile) => {
+          tile.addEventListener("mouseenter", () => {
+            const esEllos = tile.querySelector('img[src*="mario-rock.jpg"]');
+
+            const estaActivo = tile.classList.contains("active");
+
+            if (esEllos && estaActivo) {
+              marioEasterEgg.classList.add("mario-visible");
+              marioSpotlight.classList.add("spotlight-visible");
+            }
+          });
+
+          tile.addEventListener("mouseleave", () => {
+            marioEasterEgg.classList.remove("mario-visible");
+            marioSpotlight.classList.remove("spotlight-visible");
+          });
+        });
+      }
+
+      configurarMarioHover();
+    </script>
+  </body>
+</html>

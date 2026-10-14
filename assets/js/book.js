@@ -15,7 +15,7 @@ const experiences = [
     id: "cumple-8",
     title: "Power Fiesta",
     phrase: "Una nueva aventura comienza.",
-    image: "assets/img/book/cumple-8.png",
+    image: "assets/img/book/mario-greeting.png",
   },
 
   {
