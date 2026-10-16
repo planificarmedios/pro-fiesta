@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#35302e" />
+    <meta
+      name="description"
+      content="Creá tu invitación digital personalizada desde tu propio dashboard: elegí diseño, editá las secciones, previsualizá y publicá tu enlace."
+    />
+    <title>Pro-Fiesta · Invitaciones digitales con identidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --accent: #d7a5b7;
+        --ink: #f8f3ec;
+        --muted: #d0c7bc;
+        --line: rgba(255, 255, 255, 0.17);
+        --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 85px;
+      }
+      body {
+        margin: 0;
+        background: #35302e;
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+        overflow-x: hidden;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      .background {
+        position: fixed;
+        inset: -2%;
+        z-index: -3;
+        background: url("assets/img/book/15.webp") center 30% / cover no-repeat;
+        filter: blur(1.5px);
+        animation: drift 28s ease-in-out infinite alternate;
+      }
+      .background:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(20, 17, 17, 0.62),
+            rgba(24, 20, 20, 0.34) 52%,
+            rgba(20, 17, 17, 0.48)
+          ),
+          linear-gradient(
+            180deg,
+            rgba(24, 20, 20, 0.18),
+            rgba(24, 20, 20, 0.52)
+          );
+      }
+      .container {
+        width: min(1180px, calc(100% - 56px));
+        margin: auto;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(38, 32, 31, 0.72);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav {
+        height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        flex-shrink: 0;
+      }
+      .brand-mark {
+        width: 39px;
+        height: 39px;
+        border: 1px solid var(--accent);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: var(--accent);
+        font:
+          24px "Playfair Display",
+          serif;
+      }
+      .brand-name {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+      }
+      .brand-sub {
+        display: block;
+        margin-top: 4px;
+        font-size: 9px;
+        color: #c9bfb5;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .navlinks {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        font-size: 12px;
+        color: #e0d7cd;
+      }
+      .navlinks a:hover {
+        color: var(--accent);
+      }
+      .nav-cta,
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        border-radius: 999px;
+        padding: 12px 18px;
+        font-size: 12px;
+        font-weight: 600;
+        transition:
+          transform 0.25s var(--ease),
+          background 0.25s,
+          border-color 0.25s;
+      }
+      .nav-cta,
+      .button-primary {
+        background: var(--accent);
+        color: #251b1e;
+        border-color: var(--accent);
+      }
+      .nav-cta:hover,
+      .button:hover {
+        transform: translateY(-2px);
+      }
+      .button-quiet {
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(12px);
+      }
+      .button-quiet:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+      .mobile-cta {
+        display: none;
+      }
+      .hero {
+        min-height: 620px;
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: center;
+        gap: 48px;
+        padding-top: 65px;
+        padding-bottom: 75px;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .eyebrow:before {
+        content: "";
+        width: 27px;
+        height: 1px;
+        background: currentColor;
+      }
+      .hero h1 {
+        font:
+          500 clamp(3.2rem, 6.1vw, 5.9rem)/0.98 "Playfair Display",
+          serif;
+        letter-spacing: -0.055em;
+        margin: 22px 0;
+        max-width: 700px;
+      }
+      .hero h1 em {
+        color: var(--accent);
+        font-weight: 500;
+      }
+      .hero-copy {
+        max-width: 560px;
+        color: #e0d7ce;
+        font-size: 14px;
+        line-height: 1.9;
+        margin: 0;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+      .trust-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 17px;
+        margin-top: 30px;
+        color: #d3c8bd;
+        font-size: 10px;
+      }
+      .trust-row b {
+        color: var(--accent);
+        font-size: 14px;
+        margin-right: 6px;
+      }
+      .hero-showcase {
+        position: relative;
+        min-height: 410px;
+        display: grid;
+        place-items: center;
+      }
+      .glow {
+        position: absolute;
+        width: 80%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: rgba(202, 135, 164, 0.2);
+        filter: blur(45px);
+      }
+      .mockup {
+        position: relative;
+        width: min(290px, 76%);
+        height: 380px;
+        border: 1px solid rgba(255, 255, 255, 0.38);
+        border-radius: 8px;
+        padding: 9px;
+        background: rgba(255, 255, 255, 0.09);
+        box-shadow: 0 32px 90px #0007;
+        transform: rotate(3deg);
+        animation: float 6s ease-in-out infinite;
+      }
+      .mockup-inner {
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(24, 18, 20, 0.06),
+            rgba(17, 14, 14, 0.72)
+          ),
+          url("assets/img/book/casamiento.webp") center/cover;
+      }
+      .mockup-content {
+        position: absolute;
+        inset: auto 20px 26px;
+        text-align: center;
+        text-shadow: 0 2px 20px #000;
+      }
+      .mockup-kicker {
+        font-size: 8px;
+        letter-spacing: 0.23em;
+        text-transform: uppercase;
+      }
+      .mockup-names {
+        font:
+          italic 38px/1.05 "Playfair Display",
+          serif;
+        margin: 14px 0;
+      }
+      .mockup-date {
+        font-size: 9px;
+        letter-spacing: 0.16em;
+      }
+      .floating-note {
+        position: absolute;
+        right: 0;
+        bottom: 28px;
+        max-width: 220px;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: rgba(28, 25, 23, 0.86);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 15px 45px #0005;
+      }
+      .floating-note strong {
+        display: block;
+        font:
+          500 19px "Playfair Display",
+          serif;
+      }
+      .floating-note span {
+        display: block;
+        margin-top: 6px;
+        color: #cfc4ba;
+        font-size: 10px;
+        line-height: 1.6;
+      }
+      .section {
+        padding: 82px 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 30px;
+        margin-bottom: 28px;
+      }
+      .section-head h2,
+      .steps-copy h2,
+      .closing h2 {
+        font:
+          500 clamp(2.2rem, 4.2vw, 3.7rem)/1.04 "Playfair Display",
+          serif;
+        letter-spacing: -0.04em;
+        margin: 14px 0 0;
+      }
+      .section-head p {
+        max-width: 420px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.8;
+        margin: 0;
+      }
+      .filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 28px 0 24px;
+      }
+      .filter {
+        color: #e7ddd3;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        padding: 10px 15px;
+        font-size: 11px;
+        transition: all 0.2s;
+      }
+      .filter:hover,
+      .filter.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #251b1e;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 17px;
+      }
+      .event-card {
+        min-width: 0;
+        position: relative;
+        min-height: 320px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #292320;
+        isolation: isolate;
+        transition:
+          transform 0.35s var(--ease),
+          border-color 0.3s;
+      }
+      .event-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      .event-card[hidden] {
+        display: none;
+      }
+      .card-image {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.65s var(--ease);
+      }
+      .event-card:hover .card-image {
+        transform: scale(1.06);
+      }
+      .card-image:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(17, 15, 14, 0.02) 12%,
+          rgba(17, 15, 14, 0.38) 45%,
+          rgba(17, 15, 14, 0.93) 100%
+        );
+      }
+      .card-body {
+        position: absolute;
+        inset: auto 20px 20px;
+      }
+      .card-tag {
+        display: inline-flex;
+        border: 1px solid rgba(255, 255, 255, 0.44);
+        background: rgba(24, 20, 19, 0.3);
+        backdrop-filter: blur(9px);
+        padding: 6px 9px;
+        border-radius: 999px;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .card-body h3 {
+        font:
+          500 27px/1.08 "Playfair Display",
+          serif;
+        margin: 13px 0 8px;
+      }
+      .card-body p {
+        font-size: 11px;
+        line-height: 1.7;
+        color: #e0d8d0;
+        max-width: 300px;
+        margin: 0 0 16px;
+      }
+      .card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .card-link span {
+        color: var(--accent);
+        transition: transform 0.2s;
+      }
+      .card-link:hover span {
+        transform: translateX(4px);
+      }
+      .empty-state {
+        display: none;
+        border: 1px dashed var(--line);
+        padding: 30px;
+        border-radius: 8px;
+        color: var(--muted);
+        text-align: center;
+      }
+      .benefits {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: rgba(18, 16, 14, 0.48);
+      }
+      .benefit-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .benefit {
+        padding: 23px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.045);
+      }
+      .benefit-icon {
+        width: 42px;
+        height: 42px;
+        border: 1px solid #d7a5b78c;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: var(--accent);
+        font-size: 19px;
+      }
+      .benefit h3 {
+        font:
+          500 23px "Playfair Display",
+          serif;
+        margin: 18px 0 9px;
+      }
+      .benefit p,
+      .steps-copy p {
+        font-size: 12px;
+        line-height: 1.85;
+        color: var(--muted);
+        margin: 0;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 70px;
+        align-items: start;
+      }
+      .steps-copy p {
+        max-width: 400px;
+        margin: 18px 0 22px;
+        font-size: 13px;
+      }
+      .steps-list {
+        border-top: 1px solid var(--line);
+      }
+      .step {
+        display: grid;
+        grid-template-columns: 45px 1fr;
+        gap: 18px;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .step-number {
+        font:
+          italic 24px "Playfair Display",
+          serif;
+        color: var(--accent);
+      }
+      .step h3 {
+        font-size: 14px;
+        margin: 0 0 7px;
+      }
+      .step p {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.8;
+        margin: 0;
+      }
+      .closing {
+        padding: 65px 0 78px;
+      }
+      .closing-panel {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        padding: clamp(28px, 5vw, 55px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 10px;
+        background:
+          linear-gradient(
+            110deg,
+            rgba(215, 165, 183, 0.2),
+            rgba(27, 23, 21, 0.85)
+          ),
+          url("assets/img/book/casamiento.webp") center/cover;
+      }
+      .closing h2 {
+        max-width: 650px;
+      }
+      .closing p {
+        color: #e0d7cf;
+        font-size: 13px;
+        line-height: 1.8;
+        max-width: 580px;
+      }
+      .footer {
+        border-top: 1px solid var(--line);
+        padding: 27px 0 34px;
+        color: #bdb2a7;
+        font-size: 10px;
+      }
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .footer .brand-name {
+        color: #f4ebe2;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(17px);
+        transition:
+          opacity 0.65s var(--ease),
+          transform 0.65s var(--ease);
+      }
+      .reveal.in-view {
+        opacity: 1;
+        transform: none;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: rotate(3deg) translateY(0);
+        }
+        50% {
+          transform: rotate(1deg) translateY(-10px);
+        }
+      }
+      @keyframes drift {
+        from {
+          transform: scale(1.03) translate3d(0, 0, 0);
+        }
+        to {
+          transform: scale(1.09) translate3d(-0.5%, 0.5%, 0);
+        }
+      }
+      @media (max-width: 900px) {
+        .container {
+          width: min(100% - 40px, 740px);
+        }
+        .navlinks {
+          gap: 15px;
+        }
+        .navlinks a:not(.nav-cta) {
+          display: none;
+        }
+        .hero {
+          grid-template-columns: 1fr 0.75fr;
+          gap: 20px;
+          min-height: 570px;
+        }
+        .mockup {
+          height: 330px;
+          width: 225px;
+        }
+        .mockup-names {
+          font-size: 31px;
+        }
+        .floating-note {
+          right: -5px;
+          bottom: 8px;
+          max-width: 180px;
+        }
+        .cards {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .section {
+          padding: 68px 0;
+        }
+        .steps {
+          gap: 35px;
+        }
+      }
+      @media (max-width: 620px) {
+        .container {
+          width: calc(100% - 36px);
+        }
+        .nav {
+          height: 66px;
+        }
+        .brand-mark {
+          width: 35px;
+          height: 35px;
+        }
+        .brand-name {
+          font-size: 10px;
+        }
+        .brand-sub {
+          font-size: 8px;
+        }
+        .navlinks {
+          display: none;
+        }
+        .mobile-cta {
+          display: inline-flex;
+          padding: 11px 13px;
+          font-size: 10px;
+        }
+        .hero {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 8px;
+          min-height: 0;
+          padding-top: 58px;
+          padding-bottom: 40px;
+        }
+        .hero h1 {
+          font-size: clamp(3rem, 13.5vw, 4.6rem);
+          margin: 19px 0;
+        }
+        .hero-copy {
+          font-size: 13px;
+          line-height: 1.85;
+        }
+        .hero-actions {
+          margin-top: 22px;
+        }
+        .button {
+          font-size: 11px;
+          padding: 12px 14px;
+        }
+        .trust-row {
+          gap: 12px;
+          margin-top: 22px;
+          font-size: 9px;
+        }
+        .hero-showcase {
+          min-height: 330px;
+          margin-top: 8px;
+        }
+        .mockup {
+          height: 300px;
+          width: 220px;
+        }
+        .floating-note {
+          right: 0;
+          bottom: 6px;
+        }
+        .section {
+          padding: 55px 0;
+        }
+        .section-head {
+          display: block;
+          margin-bottom: 20px;
+        }
+        .section-head p {
+          margin-top: 15px;
+        }
+        .section-head h2,
+        .steps-copy h2,
+        .closing h2 {
+          font-size: 2.5rem;
+        }
+        .filters {
+          gap: 7px;
+          margin: 21px 0;
+        }
+        .filter {
+          font-size: 10px;
+          padding: 9px 12px;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+          gap: 13px;
+        }
+        .event-card {
+          min-height: 330px;
+        }
+        .benefit-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .benefit {
+          padding: 20px;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        .closing {
+          padding: 48px 0;
+        }
+        .closing-panel {
+          display: block;
+          padding: 26px 22px;
+        }
+        .closing-panel .button {
+          margin-top: 9px;
+        }
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 12px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background" aria-hidden="true"></div>
+    <header class="topbar">
+      <div class="container nav">
+        <a class="brand" href="#inicio" aria-label="Pro-Fiesta, inicio"
+          ><span class="brand-mark">P</span
+          ><span
+            ><span class="brand-name">PRO-FIESTA</span
+            ><span class="brand-sub">Invitaciones digitales</span></span
+          ></a
+        >
+        <nav class="navlinks" aria-label="Navegación principal">
+          <a href="#experiencias">Celebraciones</a
+          ><a href="#como-funciona">Cómo funciona</a
+          ><a href="#ventajas">Qué incluye</a
+          ><a class="nav-cta" href="#contacto">Quiero mi invitación ↗</a>
+        </nav>
+        <a class="nav-cta mobile-cta" href="#contacto">Consultar ↗</a>
+      </div>
+    </header>
+    <main>
+      <section class="container hero" id="inicio">
+        <div class="hero-text reveal">
+          <div class="eyebrow">Tu historia merece una invitación especial</div>
+          <h1>Invitaciones digitales.<br /><em>Momentos inolvidables.</em></h1>
+          <p class="hero-copy">
+            Creá tu propia invitación digital de forma simple y a tu ritmo.
+            Elegí una temática, personalizá textos e imágenes, organizá los
+            detalles de tu evento y mirá la vista previa antes de publicarla.
+            Cuando esté lista, compartí tu propio enlace con todos tus
+            invitados.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#experiencias"
+              >Explorar celebraciones ↘</a
+            ><a class="button button-quiet" href="#como-funciona"
+              >¿Cómo funciona?</a
+            >
+          </div>
+          <div class="trust-row">
+            <span><b>✳</b> La personalizás vos</span
+            ><span><b>↗</b> Vista previa antes de publicar</span
+            ><span><b>♡</b> Tu propio enlace</span>
+          </div>
+        </div>
+        <div
+          class="hero-showcase reveal"
+          aria-label="Ejemplo visual de una invitación digital"
+        >
+          <div class="glow"></div>
+          <div class="mockup">
+            <div class="mockup-inner">
+              <div class="mockup-content">
+                <div class="mockup-kicker">Nos casamos</div>
+                <div class="mockup-names">Lucía<br />&amp; Mateo</div>
+                <div class="mockup-date">UNA FECHA · UN RECUERDO</div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-note">
+            <strong>No es solo una invitación.</strong
+            ><span
+              >Es el primer vistazo a la experiencia que estás preparando.</span
+            >
+          </div>
+        </div>
+      </section>
+      <section class="section" id="experiencias">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Encontrá tu estilo</div>
+              <h2>Una invitación para<br />cada forma de celebrar.</h2>
+            </div>
+            <p>
+              Elegí la celebración que estás preparando y encontrá el estilo que
+              más te representa. Después, desde tu cuenta, vas a poder
+              personalizar los contenidos y revisar tu invitación antes de
+              publicarla.
+            </p>
+          </div>
+          <div
+            class="filters reveal"
+            role="group"
+            aria-label="Filtrar invitaciones por tipo de celebración"
+          >
+            <button
+              class="filter active"
+              data-filter="todos"
+              aria-pressed="true"
+            >
+              Todas</button
+            ><button
+              class="filter"
+              data-filter="casamiento"
+              aria-pressed="false"
+            >
+              Casamientos</button
+            ><button class="filter" data-filter="quince" aria-pressed="false">
+              15 años</button
+            ><button class="filter" data-filter="infantil" aria-pressed="false">
+              Fiestas peques</button
+            ><button class="filter" data-filter="fiesta" aria-pressed="false">
+              Fiestas y despedidas</button
+            ><button
+              class="filter"
+              data-filter="temporada"
+              aria-pressed="false"
+            >
+              Navidad y fechas especiales
+            </button>
+          </div>
+          <div class="cards" id="eventCards">
+            <article class="event-card reveal" data-category="casamiento">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;assets/img/book/casamiento.webp&quot;);
+                "
+              ></div>
+              <div class="card-body">
+                <span class="card-tag">Amor · Elegancia</span>
+                <h3>Casamientos</h3>
+                <p>
+                  Una invitación que refleje su historia, su estilo y la emoción
+                  de ese gran día.
+                </p>
+                <a class="card-link" href="./invitacion.html"
+                  >Descubrir propuesta <span>↗</span></a
+                >
+              </div>
+            </article>
+            <article class="event-card reveal" data-category="quince">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;assets/img/book/15.webp&quot;);
+                "
+              ></div>
+              <div class="card-body">
+                <span class="card-tag">Una nueva etapa</span>
+                <h3>Quince años</h3>
+                <p>
+                  Un diseño con personalidad para anunciar una noche que se va a
+                  recordar.
+                </p>
+                <a class="card-link" href="./evento.html?tema=15"
+                  >Descubrir propuesta <span>↗</span></a
+                >
+              </div>
+            </article>
+            <article class="event-card reveal" data-category="infantil">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;assets/img/book/mario-rock-2.jpg&quot;);
+                "
+              ></div>
+              <div class="card-body">
+                <span class="card-tag">Juego · Aventura</span>
+                <h3>Fiestas peques</h3>
+                <p>
+                  Universos temáticos, colores y diversión desde el primer
+                  mensaje.
+                </p>
+                <a class="card-link" href="./evento.html?tema=cumple-8"
+                  >Descubrir propuesta <span>↗</span></a
+                >
+              </div>
+            </article>
+            <article class="event-card reveal" data-category="fiesta">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;assets/img/book/despedida.jpg&quot;);
+                "
+              ></div>
+              <div class="card-body">
+                <span class="card-tag">Que empiece la fiesta</span>
+                <h3>Despedidas y fiestas</h3>
+                <p>
+                  Una propuesta original para reunir a tu gente y anticipar una
+                  gran noche.
+                </p>
+                <a class="card-link" href="./evento.html?tema=despedida"
+                  >Descubrir propuesta <span>↗</span></a
+                >
+              </div>
+            </article>
+            <article class="event-card reveal" data-category="temporada">
+              <div
+                class="card-image"
+                style="
+                  background-image:
+                    linear-gradient(
+                      145deg,
+                      rgba(30, 65, 48, 0.25),
+                      rgba(30, 18, 20, 0.4)
+                    ),
+                    url(&quot;assets/img/book/fiesta.jpg&quot;);
+                "
+              ></div>
+              <div class="card-body">
+                <span class="card-tag">Ediciones especiales</span>
+                <h3>Navidad y fechas especiales</h3>
+                <p>
+                  Saludá, invitá y compartí momentos especiales con una pieza
+                  digital a medida.
+                </p>
+                <a class="card-link" href="#contacto"
+                  >Consultar diseño <span>↗</span></a
+                >
+              </div>
+            </article>
+            <article class="event-card reveal" data-category="infantil">
+              <div
+                class="card-image"
+                style="
+                  background-image: url(&quot;assets/img/book/mario-rock-2.jpg&quot;);
+                "
+              ></div>
+              <div class="card-body">
+                <span class="card-tag">Cumpleaños</span>
+                <h3>Un cumple con identidad</h3>
+                <p>
+                  Desde los primeros años hasta las fiestas temáticas, cada
+                  detalle habla de quien celebra.
+                </p>
+                <a class="card-link" href="./evento.html?tema=cumple-8"
+                  >Ver ejemplo <span>↗</span></a
+                >
+              </div>
+            </article>
+          </div>
+          <div class="empty-state" id="emptyState">
+            Estamos preparando nuevas propuestas para esta categoría.
+            ¡Consultanos por una invitación personalizada!
+          </div>
+        </div>
+      </section>
+      <section class="section benefits" id="ventajas">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <div class="eyebrow">Tu evento, tus decisiones</div>
+              <h2>Diseñá. Revisá.<br />Publicá a tu manera.</h2>
+            </div>
+            <p>
+              Tu invitación se arma desde un panel de edición pensado para que
+              tengas el control del contenido, puedas probar cambios y publiques
+              cuando estés conforme.
+            </p>
+          </div>
+          <div class="benefit-grid">
+            <article class="benefit reveal">
+              <div class="benefit-icon">✳</div>
+              <h3>Elegí y personalizá</h3>
+              <p>
+                Seleccioná una temática y un diseño. Editá los textos, la imagen
+                principal y los detalles para que la invitación refleje tu
+                celebración.
+              </p>
+            </article>
+            <article class="benefit reveal">
+              <div class="benefit-icon">↗</div>
+              <h3>Todo desde tu dashboard</h3>
+              <p>
+                Configurá fecha y cuenta regresiva, galería de fotos, regalos o
+                CBU, ubicación, dress code y contacto. Revisá la vista previa
+                antes de publicar.
+              </p>
+            </article>
+            <article class="benefit reveal">
+              <div class="benefit-icon">♡</div>
+              <h3>Publicá tu propia URL</h3>
+              <p>
+                Cuando estés conforme, publicá y obtené un enlace único para
+                compartir. Si el servicio lo permite, podrás volver a editar el
+                contenido desde tu cuenta.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="como-funciona">
+        <div class="container steps">
+          <div class="steps-copy reveal">
+            <div class="eyebrow">Autogestionada, paso a paso</div>
+            <h2>Vos la creás. Vos decidís cuándo publicar.</h2>
+            <p>
+              Después de contratar el servicio, accedés con tu correo y
+              contraseña a un panel privado. Desde ahí podés armar la
+              invitación, probar cómo se ve y publicarla cuando esté lista.
+            </p>
+            <a class="button button-quiet" href="#contacto"
+              >Quiero conocer el servicio ↗</a
+            >
+          </div>
+          <div class="steps-list reveal">
+            <div class="step">
+              <div class="step-number">01</div>
+              <div>
+                <h3>Contratás y entrás a tu cuenta</h3>
+                <p>
+                  Recibís acceso a tu dashboard con tu correo y contraseña para
+                  comenzar a configurar la invitación.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">02</div>
+              <div>
+                <h3>Personalizás y previsualizás</h3>
+                <p>
+                  Elegís tema y diseño; completás textos, imágenes, fecha,
+                  galería, regalos, ubicación, dress code y contacto. Podés
+                  revisar los cambios antes de publicar.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">03</div>
+              <div>
+                <h3>Publicás y compartís tu enlace</h3>
+                <p>
+                  Cuando tu invitación esté lista, tocás Publicar y obtenés una
+                  URL pública para enviar por WhatsApp o redes sociales.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="closing" id="contacto">
+        <div class="container">
+          <div class="closing-panel reveal">
+            <div>
+              <div class="eyebrow">Tu celebración empieza acá</div>
+              <h2>Creá una invitación que hable de vos.</h2>
+              <p>
+                Conocé el servicio autogestionado de Pro-Fiesta y descubrí cómo
+                convertir tu idea en una invitación digital lista para
+                compartir.
+              </p>
+            </div>
+            <a
+              class="button button-primary"
+              href="https://wa.me/?text=Hola%20Pro-Fiesta%2C%20quiero%20consultar%20por%20una%20invitaci%C3%B3n%20digital."
+              target="_blank"
+              rel="noopener"
+              >Consultar por WhatsApp ↗</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer-inner">
+        <a class="brand" href="#inicio"
+          ><span class="brand-mark">P</span
+          ><span
+            ><span class="brand-name">PRO-FIESTA</span
+            ><span class="brand-sub">Invitaciones digitales</span></span
+          ></a
+        ><span>Tu invitación. Tu estilo. Tu celebración.</span
+        ><span>© <span id="year"></span> Pro-Fiesta</span>
+      </div>
+    </footer>
+    <script>
+      (() => {
+        "use strict";
+        const buttons = [...document.querySelectorAll(".filter")],
+          cards = [...document.querySelectorAll(".event-card")],
+          empty = document.getElementById("emptyState");
+        buttons.forEach((button) =>
+          button.addEventListener("click", () => {
+            const filter = button.dataset.filter;
+            let shown = 0;
+            buttons.forEach((b) => {
+              const active = b === button;
+              b.classList.toggle("active", active);
+              b.setAttribute("aria-pressed", String(active));
+            });
+            cards.forEach((card) => {
+              const visible =
+                filter === "todos" || card.dataset.category === filter;
+              card.hidden = !visible;
+              if (visible) shown++;
+            });
+            empty.style.display = shown ? "none" : "block";
+          }),
+        );
+        document.getElementById("year").textContent = new Date().getFullYear();
+        const els = document.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries) =>
+              entries.forEach((e) => {
+                if (e.isIntersecting) {
+                  e.target.classList.add("in-view");
+                  observer.unobserve(e.target);
+                }
+              }),
+            { threshold: 0.12 },
+          );
+          els.forEach((el) => observer.observe(el));
+        } else els.forEach((el) => el.classList.add("in-view"));
+      })();
+    </script>
+  </body>
+</html>
