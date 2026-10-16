@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#35302e" />
     <meta
       name="description"
-      content="Creá tu invitación digital personalizada desde tu propio dashboard: elegí diseño, editá las secciones, previsualizá y publicá tu enlace."
+      content="Creá tu invitación digital personalizada desde tu propio panel personalizable: elegí diseño, editá las secciones, previsualizá y publicá tu enlace."
     />
     <title>Pro-Fiesta · Invitaciones digitales con identidad</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,10 +17,12 @@
     />
     <style>
       :root {
-        --accent: #d7a5b7;
-        --ink: #f8f3ec;
-        --muted: #d0c7bc;
-        --line: rgba(255, 255, 255, 0.17);
+        --accent: #f0a9c2;
+        --accent-gold: #f5d18b;
+        --accent-lilac: #c9b5ff;
+        --ink: #fffaf7;
+        --muted: #e8dce0;
+        --line: rgba(255, 255, 255, 0.24);
         --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
       }
       * {
@@ -32,7 +34,7 @@
       }
       body {
         margin: 0;
-        background: #35302e;
+        background: #382b38;
         color: var(--ink);
         font-family: "DM Sans", sans-serif;
         overflow-x: hidden;
@@ -50,7 +52,7 @@
         inset: -2%;
         z-index: -3;
         background: url("assets/img/book/15.webp") center 30% / cover no-repeat;
-        filter: blur(1.5px);
+        filter: blur(1px) saturate(1.12) brightness(1.08);
         animation: drift 28s ease-in-out infinite alternate;
       }
       .background:after {
@@ -60,14 +62,14 @@
         background:
           linear-gradient(
             90deg,
-            rgba(20, 17, 17, 0.62),
-            rgba(24, 20, 20, 0.34) 52%,
-            rgba(20, 17, 17, 0.48)
+            rgba(30, 18, 32, 0.48),
+            rgba(35, 22, 37, 0.25) 52%,
+            rgba(30, 18, 32, 0.42)
           ),
           linear-gradient(
             180deg,
-            rgba(24, 20, 20, 0.18),
-            rgba(24, 20, 20, 0.52)
+            rgba(35, 22, 37, 0.16),
+            rgba(28, 18, 32, 0.45)
           );
       }
       .container {
@@ -78,7 +80,7 @@
         position: sticky;
         top: 0;
         z-index: 20;
-        background: rgba(38, 32, 31, 0.72);
+        background: rgba(51, 35, 49, 0.7);
         backdrop-filter: blur(18px);
         border-bottom: 1px solid var(--line);
       }
@@ -782,6 +784,402 @@
           transform: none;
         }
       }
+
+      /* ── Pro-Fiesta: capa visual más luminosa y festiva ── */
+      :root {
+        --accent: #f5abc8;
+        --accent-gold: #f8d58f;
+        --accent-lilac: #cbbaff;
+        --line: rgba(255, 239, 249, 0.25);
+      }
+      body {
+        background: #382b3a;
+      }
+      .background:after {
+        background:
+          linear-gradient(
+            90deg,
+            rgba(37, 23, 43, 0.34),
+            rgba(44, 28, 48, 0.16) 48%,
+            rgba(44, 27, 44, 0.28)
+          ),
+          linear-gradient(
+            180deg,
+            rgba(42, 25, 45, 0.08),
+            rgba(36, 22, 39, 0.31)
+          );
+      }
+      .topbar {
+        background: rgba(55, 36, 55, 0.66);
+        border-bottom-color: rgba(255, 231, 245, 0.24);
+      }
+      .brand-mark {
+        transition:
+          color 0.35s,
+          border-color 0.35s,
+          background 0.35s,
+          transform 0.45s var(--ease),
+          box-shadow 0.35s;
+      }
+      .brand:hover .brand-mark {
+        color: #342336;
+        border-color: var(--accent-gold);
+        background: linear-gradient(135deg, var(--accent), var(--accent-gold));
+        transform: rotate(-12deg) scale(1.08);
+        box-shadow: 0 0 24px rgba(245, 171, 200, 0.38);
+      }
+      .brand-name {
+        transition: color 0.3s;
+      }
+      .brand:hover .brand-name {
+        color: var(--accent-gold);
+      }
+      .navlinks a {
+        transition:
+          color 0.25s,
+          text-shadow 0.25s;
+      }
+      .navlinks a:hover {
+        color: #ffd99b;
+        text-shadow: 0 0 16px rgba(255, 217, 155, 0.28);
+      }
+      .nav-cta,
+      .button-primary {
+        background: linear-gradient(115deg, #f5abc8, #f8d58f);
+        border-color: rgba(255, 239, 219, 0.7);
+        box-shadow: 0 7px 24px rgba(214, 126, 165, 0.18);
+        transition:
+          transform 0.3s var(--ease),
+          box-shadow 0.3s,
+          filter 0.3s;
+      }
+      .nav-cta:hover,
+      .button-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(236, 155, 191, 0.32);
+        filter: saturate(1.1);
+      }
+      .button-quiet {
+        background: rgba(255, 248, 252, 0.12);
+        border-color: rgba(255, 239, 249, 0.38);
+      }
+      .button-quiet:hover {
+        background: rgba(255, 248, 252, 0.22);
+        border-color: var(--accent-gold);
+      }
+      .eyebrow {
+        color: #ffd59c;
+      }
+      .hero h1 em {
+        background: linear-gradient(
+          100deg,
+          #f7b3ce 5%,
+          #f8d58f 55%,
+          #d9c5ff 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hero-copy,
+      .section-head p,
+      .closing p {
+        color: #f2e7ed;
+      }
+      .trust-row {
+        color: #f4e6ed;
+      }
+      .trust-row b {
+        color: #ffd59c;
+      }
+      .glow {
+        background: radial-gradient(
+          circle,
+          rgba(246, 168, 204, 0.38),
+          rgba(203, 186, 255, 0.18) 48%,
+          transparent 72%
+        );
+        filter: blur(36px);
+      }
+      .mockup {
+        border-color: rgba(255, 238, 247, 0.65);
+        background: rgba(255, 242, 249, 0.18);
+        box-shadow:
+          0 32px 90px rgba(22, 10, 25, 0.35),
+          0 0 36px rgba(245, 171, 200, 0.12);
+      }
+      .floating-note {
+        background: rgba(58, 38, 57, 0.78);
+        border-color: rgba(255, 230, 243, 0.35);
+        box-shadow: 0 15px 45px rgba(30, 12, 33, 0.22);
+      }
+      .floating-note span {
+        color: #f2e1eb;
+      }
+      .section-head h2,
+      .steps-copy h2,
+      .closing h2 {
+        color: #fff8fc;
+      }
+      .filters .filter {
+        background: rgba(255, 248, 252, 0.1);
+        border-color: rgba(255, 239, 249, 0.3);
+        color: #fff2f8;
+      }
+      .filter:hover,
+      .filter.active {
+        background: linear-gradient(110deg, #f5abc8, #f8d58f);
+        border-color: #f8d58f;
+        color: #35243a;
+        box-shadow: 0 6px 22px rgba(245, 171, 200, 0.2);
+      }
+      .event-card {
+        border-color: rgba(255, 236, 246, 0.3);
+        box-shadow: 0 12px 34px rgba(20, 10, 24, 0.12);
+        transition:
+          transform 0.42s var(--ease),
+          border-color 0.3s,
+          box-shadow 0.42s var(--ease);
+      }
+      .event-card:hover {
+        transform: translateY(-9px) scale(1.015);
+        border-color: rgba(255, 220, 236, 0.85);
+        box-shadow:
+          0 24px 50px rgba(19, 8, 23, 0.3),
+          0 0 0 1px rgba(245, 171, 200, 0.14);
+      }
+      .event-card:hover .card-image {
+        transform: scale(1.09);
+      }
+      .card-tag {
+        border-color: rgba(255, 238, 247, 0.6);
+        background: rgba(59, 35, 56, 0.42);
+      }
+      .card-link span {
+        color: #ffd59c;
+      }
+      .benefits {
+        position: relative;
+        isolation: isolate;
+        background: linear-gradient(
+          120deg,
+          rgba(91, 54, 83, 0.55),
+          rgba(53, 39, 67, 0.5),
+          rgba(83, 51, 72, 0.52)
+        );
+        border-color: rgba(255, 231, 245, 0.24);
+      }
+      .benefits:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            circle at 12% 20%,
+            rgba(245, 171, 200, 0.13),
+            transparent 34%
+          ),
+          radial-gradient(
+            circle at 85% 80%,
+            rgba(203, 186, 255, 0.15),
+            transparent 34%
+          );
+      }
+      .benefit-grid {
+        perspective: 1000px;
+        align-items: stretch;
+      }
+      .benefit {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        min-height: 245px;
+        padding: 28px 25px;
+        border: 1px solid rgba(255, 233, 245, 0.27);
+        border-radius: 14px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 248, 252, 0.12),
+          rgba(255, 248, 252, 0.045)
+        );
+        box-shadow: 0 10px 30px rgba(23, 10, 28, 0.1);
+        transform: translateY(0);
+        transition:
+          transform 0.42s var(--ease),
+          border-color 0.35s,
+          background 0.35s,
+          box-shadow 0.42s var(--ease);
+      }
+      .benefit:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        width: 190px;
+        height: 190px;
+        right: -85px;
+        top: -100px;
+        border-radius: 50%;
+        background: var(--benefit-glow, rgba(245, 171, 200, 0.25));
+        filter: blur(10px);
+        opacity: 0.45;
+        transition:
+          transform 0.55s var(--ease),
+          opacity 0.35s;
+      }
+      .benefit:nth-child(2) {
+        --benefit-glow: rgba(203, 186, 255, 0.34);
+      }
+      .benefit:nth-child(3) {
+        --benefit-glow: rgba(248, 213, 143, 0.34);
+      }
+      .benefit:hover,
+      .benefit:focus-within {
+        transform: translateY(-10px) scale(1.025);
+        border-color: rgba(255, 218, 236, 0.88);
+        background: linear-gradient(
+          145deg,
+          rgba(255, 248, 252, 0.2),
+          rgba(255, 248, 252, 0.085)
+        );
+        box-shadow:
+          0 22px 48px rgba(20, 8, 27, 0.25),
+          0 0 0 1px rgba(245, 171, 200, 0.12);
+      }
+      .benefit:hover:before,
+      .benefit:focus-within:before {
+        transform: scale(1.55);
+        opacity: 0.9;
+      }
+      .benefit-icon {
+        width: 48px;
+        height: 48px;
+        border-color: rgba(245, 171, 200, 0.7);
+        background: rgba(245, 171, 200, 0.1);
+        color: #ffd0e1;
+        font-size: 21px;
+        transition:
+          transform 0.45s var(--ease),
+          background 0.35s,
+          color 0.35s,
+          border-color 0.35s,
+          box-shadow 0.35s;
+      }
+      .benefit:hover .benefit-icon,
+      .benefit:focus-within .benefit-icon {
+        transform: rotate(-10deg) scale(1.12);
+        background: linear-gradient(135deg, #f5abc8, #f8d58f);
+        border-color: transparent;
+        color: #38253a;
+        box-shadow: 0 7px 24px rgba(245, 171, 200, 0.26);
+      }
+      .benefit h3 {
+        color: #fff8fc;
+        transition:
+          color 0.3s,
+          transform 0.3s;
+      }
+      .benefit:hover h3,
+      .benefit:focus-within h3 {
+        color: #ffdbac;
+        transform: translateX(3px);
+      }
+      .benefit p,
+      .steps-copy p {
+        color: #eadde7;
+      }
+      .step {
+        border-color: rgba(255, 231, 245, 0.24);
+      }
+      .step-number {
+        color: #ffd59c;
+      }
+      .step p {
+        color: #eadde7;
+      }
+      .closing-panel {
+        border-color: rgba(255, 231, 245, 0.4);
+        background:
+          linear-gradient(
+            105deg,
+            rgba(77, 45, 76, 0.66),
+            rgba(43, 31, 53, 0.48)
+          ),
+          url("assets/img/book/15.webp") center 30% / cover;
+        box-shadow: 0 18px 55px rgba(22, 10, 25, 0.15);
+      }
+      .footer {
+        border-top-color: rgba(255, 231, 245, 0.25);
+        color: #e2d3df;
+      }
+      .footer .brand-name {
+        color: #fff4fb;
+      }
+      .footer .brand-sub {
+        color: #e1cbdc;
+      }
+      .reveal {
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease);
+      }
+      @media (max-width: 620px) {
+        .benefit {
+          min-height: 0;
+        }
+        .benefit:hover,
+        .benefit:focus-within {
+          transform: translateY(-5px) scale(1.01);
+        }
+        .hero {
+          padding-top: 48px;
+        }
+        .background:after {
+          background:
+            linear-gradient(
+              90deg,
+              rgba(37, 23, 43, 0.43),
+              rgba(44, 28, 48, 0.27)
+            ),
+            linear-gradient(
+              180deg,
+              rgba(42, 25, 45, 0.1),
+              rgba(36, 22, 39, 0.37)
+            );
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Frase diferencial del hero */
+      .hero .hero-copy {
+        max-width: 540px;
+        margin-top: 26px;
+        font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+        line-height: 1.55;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: #fff8f2;
+        text-wrap: pretty;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+      }
+
+      @media (max-width: 600px) {
+        .hero .hero-copy {
+          font-size: 1.25rem;
+          line-height: 1.5;
+          margin-top: 22px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -807,33 +1205,42 @@
     <main>
       <section class="container hero" id="inicio">
         <div class="hero-text reveal">
-          <div class="eyebrow">Tu historia merece una invitación especial</div>
-          <h1>Invitaciones digitales.<br /><em>Momentos inolvidables.</em></h1>
-          <p class="hero-copy">
-            Creá tu propia invitación digital de forma simple y a tu ritmo.
-            Elegí una temática, personalizá textos e imágenes, organizá los
-            detalles de tu evento y mirá la vista previa antes de publicarla.
-            Cuando esté lista, compartí tu propio enlace con todos tus
-            invitados.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#experiencias"
-              >Explorar celebraciones ↘</a
-            ><a class="button button-quiet" href="#como-funciona"
-              >¿Cómo funciona?</a
-            >
+          <div class="eyebrow">
+            INVITACIONES DIGITALES · CELEBRACIONES ÚNICAS
           </div>
+
+          <h1>
+            Cada evento cuenta
+            <br />
+            <em>una historia.</em>
+          </h1>
+
+          <p class="hero-copy">
+            Personalizá tu invitación para contar la tuya.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#experiencias">
+              Explorar celebraciones ↘
+            </a>
+            <a class="button button-quiet" href="#como-funciona">
+              ¿Cómo funciona?
+            </a>
+          </div>
+
           <div class="trust-row">
-            <span><b>✳</b> La personalizás vos</span
-            ><span><b>↗</b> Vista previa antes de publicar</span
-            ><span><b>♡</b> Tu propio enlace</span>
+            <span><b>✳</b> A tu manera</span>
+            <span><b>✧</b> Diseños únicos</span>
+            <span><b>♡</b> Momentos inolvidables</span>
           </div>
         </div>
+
         <div
           class="hero-showcase reveal"
           aria-label="Ejemplo visual de una invitación digital"
         >
           <div class="glow"></div>
+
           <div class="mockup">
             <div class="mockup-inner">
               <div class="mockup-content">
@@ -843,14 +1250,14 @@
               </div>
             </div>
           </div>
+
           <div class="floating-note">
-            <strong>No es solo una invitación.</strong
-            ><span
-              >Es el primer vistazo a la experiencia que estás preparando.</span
-            >
+            <strong>No es solo una invitación.</strong>
+            <span> Es el comienzo de una historia para recordar. </span>
           </div>
         </div>
       </section>
+
       <section class="section" id="experiencias">
         <div class="container">
           <div class="section-head reveal">
@@ -1049,7 +1456,7 @@
             </article>
             <article class="benefit reveal">
               <div class="benefit-icon">↗</div>
-              <h3>Todo desde tu dashboard</h3>
+              <h3>Todo desde tu panel personalizable</h3>
               <p>
                 Configurá fecha y cuenta regresiva, galería de fotos, regalos o
                 CBU, ubicación, dress code y contacto. Revisá la vista previa
@@ -1088,8 +1495,8 @@
               <div>
                 <h3>Contratás y entrás a tu cuenta</h3>
                 <p>
-                  Recibís acceso a tu dashboard con tu correo y contraseña para
-                  comenzar a configurar la invitación.
+                  Recibís acceso a tu panel de diseño con tu correo y contraseña
+                  para comenzar a configurar la invitación.
                 </p>
               </div>
             </div>
