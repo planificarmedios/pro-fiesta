@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#35302e" />
     <meta
       name="description"
-      content="Creá tu invitación digital personalizada desde tu propio panel personalizable: elegí diseño, editá las secciones, previsualizá y publicá tu enlace."
+      content="Creá tu invitación digital personalizada desde tu propio dashboard: elegí diseño, editá las secciones, previsualizá y publicá tu enlace."
     />
     <title>Pro-Fiesta · Invitaciones digitales con identidad</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,7 +51,7 @@
         position: fixed;
         inset: -2%;
         z-index: -3;
-        background: url("assets/img/book/15.webp") center 35% / cover no-repeat;
+        background: url("assets/img/book/15.webp") center 30% / cover no-repeat;
         filter: blur(1px) saturate(1.12) brightness(1.08);
         animation: drift 28s ease-in-out infinite alternate;
       }
@@ -62,14 +62,14 @@
         background:
           linear-gradient(
             90deg,
-            rgba(30, 18, 32, 0.48),
-            rgba(35, 22, 37, 0.25) 52%,
-            rgba(30, 18, 32, 0.42)
+            rgba(36, 22, 36, 0.38),
+            rgba(42, 27, 43, 0.16) 52%,
+            rgba(37, 23, 37, 0.3)
           ),
           linear-gradient(
             180deg,
-            rgba(35, 22, 37, 0.16),
-            rgba(28, 18, 32, 0.45)
+            rgba(40, 25, 40, 0.08),
+            rgba(35, 22, 37, 0.34)
           );
       }
       .container {
@@ -206,6 +206,72 @@
         color: var(--accent);
         font-weight: 500;
       }
+      .hero h1 {
+        transition: none;
+        will-change: clip-path, opacity;
+        clip-path: inset(0 0 0 0);
+      }
+      .hero h1.hero-title-wipe-out {
+        animation: heroWipeOut 0.72s cubic-bezier(0.7, 0, 0.3, 1) both;
+      }
+      .hero h1.hero-title-wipe-in {
+        animation: heroWipeIn 0.82s cubic-bezier(0.2, 0.75, 0.25, 1) both;
+      }
+      @keyframes heroWipeOut {
+        0% {
+          clip-path: inset(0 0 0 0);
+          opacity: 1;
+          filter: blur(0);
+          transform: translateX(0);
+        }
+        100% {
+          clip-path: inset(0 100% 0 0);
+          opacity: 0.2;
+          filter: blur(3px);
+          transform: translateX(-8px);
+        }
+      }
+      @keyframes heroWipeIn {
+        0% {
+          /* Se revela de izquierda a derecha */
+          clip-path: inset(0 100% 0 0);
+          opacity: 0.35;
+          filter: blur(3px);
+          transform: translateX(8px);
+        }
+        100% {
+          clip-path: inset(0 0 0 0);
+          opacity: 1;
+          filter: blur(0);
+          transform: translateX(0);
+        }
+      }
+      .mockup-inner {
+        transition:
+          opacity 0.65s ease,
+          filter 0.65s ease,
+          transform 0.65s ease;
+        background-size: cover;
+      }
+      .mockup-inner.is-image-changing {
+        opacity: 0.22;
+        filter: blur(5px);
+        transform: scale(0.975);
+      }
+      .mockup-content {
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease,
+          filter 0.55s ease;
+      }
+      .mockup-content.is-changing {
+        opacity: 0;
+        transform: translateY(10px);
+        filter: blur(3px);
+      }
+      .hero h1:focus {
+        outline: none;
+      }
       .hero-copy {
         max-width: 560px;
         color: #e0d7ce;
@@ -269,7 +335,7 @@
             rgba(24, 18, 20, 0.06),
             rgba(17, 14, 14, 0.72)
           ),
-          url("assets/img/book/casamiento.webp") center/cover;
+          url("assets/img/book/flores.jpeg") center/cover;
       }
       .mockup-content {
         position: absolute;
@@ -295,7 +361,7 @@
       .floating-note {
         position: absolute;
         right: 0;
-        bottom: 28px;
+        bottom: -80px; /* Lo baja un poco más */
         max-width: 220px;
         padding: 16px 18px;
         border: 1px solid var(--line);
@@ -394,7 +460,7 @@
         inset: 0;
         z-index: -2;
         background-size: cover;
-        background-position: center;
+        background-position: center 10%;
         transition: transform 0.65s var(--ease);
       }
       .event-card:hover .card-image {
@@ -1106,7 +1172,7 @@
             rgba(77, 45, 76, 0.66),
             rgba(43, 31, 53, 0.48)
           ),
-          url("assets/img/book/15.webp") center 30% / cover;
+          url("assets/img/book/15.webp") center 35% / cover;
         box-shadow: 0 18px 55px rgba(22, 10, 25, 0.15);
       }
       .footer {
@@ -1160,176 +1226,9 @@
         }
       }
 
-      /* Frase diferencial del hero */
-      .hero .hero-copy {
-        max-width: 540px;
-        margin-top: 26px;
-        font-size: clamp(1.3rem, 2.2vw, 1.75rem);
-        line-height: 1.55;
-        font-weight: 500;
-        letter-spacing: -0.02em;
-        color: #fff8f2;
-        text-wrap: pretty;
-        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
-      }
-
-      @media (max-width: 600px) {
-        .hero .hero-copy {
-          font-size: 1.25rem;
-          line-height: 1.5;
-          margin-top: 22px;
-        }
-      }
-
-      /* ── Pro-Fiesta · Polvo y burbujas doradas ── */
-      #gold-particle-layer {
-        position: fixed;
-        inset: 0;
-        z-index: 99999;
-        overflow: hidden;
-        pointer-events: none;
-        contain: strict;
-      }
-
-      .gold-particle {
-        position: absolute;
-        left: 0;
-        top: 0;
-        pointer-events: none;
-        border-radius: 50%;
-        opacity: 0;
-        will-change: transform, opacity;
-        animation: gold-particle-flight var(--duration, 1600ms)
-          cubic-bezier(0.18, 0.62, 0.32, 1) forwards;
-      }
-
-      .gold-particle.dust {
-        background: radial-gradient(
-          circle,
-          #fffef0 0%,
-          #ffe6a6 28%,
-          rgba(255, 195, 75, 0.65) 60%,
-          transparent 100%
-        );
-        box-shadow:
-          0 0 6px rgba(255, 235, 170, 0.9),
-          0 0 13px rgba(255, 190, 65, 0.65);
-      }
-
-      .gold-particle.bubble {
-        border: 1.5px solid rgba(255, 231, 170, 0.95);
-        background: radial-gradient(
-          circle at 30% 25%,
-          rgba(255, 255, 240, 0.95),
-          rgba(255, 218, 139, 0.35) 40%,
-          rgba(224, 167, 76, 0.12) 75%,
-          transparent 100%
-        );
-        box-shadow:
-          inset 0 0 7px rgba(255, 245, 205, 0.45),
-          0 0 10px rgba(255, 220, 140, 0.45),
-          0 0 18px rgba(255, 190, 75, 0.25);
-      }
-
-      @keyframes gold-particle-flight {
-        0% {
-          opacity: 0;
-          transform: translate(-50%, -50%) scale(0.35);
-        }
-        15% {
-          opacity: var(--peak-opacity, 0.8);
-        }
-        65% {
-          opacity: var(--peak-opacity, 0.8);
-        }
-        100% {
-          opacity: 0;
-          transform: translate(
-              calc(-50% + var(--move-x)),
-              calc(-50% + var(--move-y))
-            )
-            scale(var(--end-scale, 0.4)) rotate(var(--rotation, 80deg));
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        #gold-particle-layer {
-          display: none;
-        }
-      }
-
-      /* ── Pro-Fiesta · Hero con degradado tornasolado ── */
-
-      .hero h1,
-      .hero .hero-title {
-        background: linear-gradient(
-          110deg,
-          #fffaf0 0%,
-          #f6dca0 15%,
-          #fffdf7 28%,
-          #e9b8cc 42%,
-          #fff4d6 54%,
-          #e7c27e 68%,
-          #fffdf8 82%,
-          #f2d6a0 100%
-        );
-
-        background-size: 250% 100%;
-        background-position: 100% 50%;
-
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-
-        animation: proFiestaIridescent 7s ease-in-out infinite alternate;
-      }
-
-      /* El reflejo también recorre los textos destacados del hero */
-      .hero p,
-      .hero .hero-copy,
-      .hero .hero-eyebrow {
-        background: linear-gradient(
-          100deg,
-          #fff8ef 0%,
-          #f5dba7 25%,
-          #fffdf7 42%,
-          #edc3d4 58%,
-          #fff4dd 74%,
-          #fff8ef 100%
-        );
-
-        background-size: 220% 100%;
-        background-position: 100% 50%;
-
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-
-        animation: proFiestaIridescent 9s ease-in-out infinite alternate;
-      }
-
-      @keyframes proFiestaIridescent {
-        0% {
-          background-position: 100% 50%;
-        }
-
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      /* Accesibilidad: respetar la preferencia de reducir movimiento */
-      @media (prefers-reduced-motion: reduce) {
-        .hero h1,
-        .hero .hero-title,
-        .hero p,
-        .hero .hero-copy,
-        .hero .hero-eyebrow {
-          animation: none;
-          background-position: 50% 50%;
-        }
+      .hero h1 {
+        line-height: 1.15;
+        min-height: 2.3em;
       }
     </style>
   </head>
@@ -1357,56 +1256,55 @@
       <section class="container hero" id="inicio">
         <div class="hero-text reveal">
           <div class="eyebrow">
-            INVITACIONES DIGITALES · CELEBRACIONES ÚNICAS
+            Invitaciones digitales para celebrar a tu manera
           </div>
-
-          <h1>
-            Cada fiesta cuenta
-            <br />
-            <em>una historia.</em>
+          <h1 id="heroTitle" aria-live="polite">
+            <em>Cada evento ... </em><br /><em>cuenta una historia.</em>
           </h1>
-
-          <p class="hero-copy">Personalizá tu invitación y contá la tuya...</p>
-
+          <p class="hero-copy">
+            Elegí una temática, personalizá textos e imágenes, organizá los
+            detalles de tu evento y revisá la vista previa antes de publicarla.
+            Cuando esté lista, compartí tu propio enlace con quienes más querés.
+          </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#experiencias">
-              Explorar celebraciones ↘
-            </a>
-            <a class="button button-quiet" href="#como-funciona">
-              ¿Cómo funciona?
-            </a>
+            <a class="button button-primary" href="#experiencias"
+              >Explorar celebraciones ↘</a
+            ><a class="button button-quiet" href="#como-funciona"
+              >¿Cómo funciona?</a
+            >
           </div>
-
           <div class="trust-row">
-            <span><b>✳</b> A tu manera</span>
-            <span><b>✧</b> Diseños únicos</span>
-            <span><b>♡</b> Momentos inolvidables</span>
+            <span><b>✳</b> La personalizás vos</span
+            ><span><b>✧</b> Vista previa antes de publicar</span
+            ><span><b>♡</b> Tu propio enlace</span>
           </div>
         </div>
-
         <div
           class="hero-showcase reveal"
           aria-label="Ejemplo visual de una invitación digital"
         >
           <div class="glow"></div>
-
           <div class="mockup">
-            <div class="mockup-inner">
-              <div class="mockup-content">
-                <div class="mockup-kicker">Nos casamos</div>
-                <div class="mockup-names">Lucía<br />&amp; Mateo</div>
-                <div class="mockup-date">UNA FECHA · UN RECUERDO</div>
+            <div class="mockup-inner" id="heroMockupImage">
+              <div class="mockup-content" id="heroMockupContent">
+                <div class="mockup-kicker" id="heroMockupKicker">
+                  Nos casamos
+                </div>
+                <div class="mockup-names" id="heroMockupNames">
+                  Lucía<br />&amp; Mateo
+                </div>
+                <div class="mockup-date" id="heroMockupDate">
+                  UNA FECHA · UN RECUERDO
+                </div>
               </div>
             </div>
           </div>
-
           <div class="floating-note">
-            <strong>Tu invitación inicia</strong>
-            <span> una nueva historia para contar. </span>
+            <strong>Una invitación única...</strong
+            ><span>para un evento único.</span>
           </div>
         </div>
       </section>
-
       <section class="section" id="experiencias">
         <div class="container">
           <div class="section-head reveal">
@@ -1539,7 +1437,7 @@
                       rgba(30, 65, 48, 0.25),
                       rgba(30, 18, 20, 0.4)
                     ),
-                    url(&quot;assets/img/book/fiesta.jpg&quot;);
+                    url(&quot;assets/img/book/bautismo.png&quot;);
                 "
               ></div>
               <div class="card-body">
@@ -1605,7 +1503,7 @@
             </article>
             <article class="benefit reveal">
               <div class="benefit-icon">↗</div>
-              <h3>Todo desde tu panel personalizable</h3>
+              <h3>Todo desde tu dashboard</h3>
               <p>
                 Configurá fecha y cuenta regresiva, galería de fotos, regalos o
                 CBU, ubicación, dress code y contacto. Revisá la vista previa
@@ -1644,8 +1542,8 @@
               <div>
                 <h3>Contratás y entrás a tu cuenta</h3>
                 <p>
-                  Recibís acceso a tu panel de diseño con tu correo y contraseña
-                  para comenzar a configurar la invitación.
+                  Recibís acceso a tu dashboard con tu correo y contraseña para
+                  comenzar a configurar la invitación.
                 </p>
               </div>
             </div>
@@ -1733,6 +1631,97 @@
           }),
         );
         document.getElementById("year").textContent = new Date().getFullYear();
+        const heroTitle = document.getElementById("heroTitle"),
+          mockupImage = document.getElementById("heroMockupImage"),
+          mockupContent = document.getElementById("heroMockupContent"),
+          mockupKicker = document.getElementById("heroMockupKicker"),
+          mockupNames = document.getElementById("heroMockupNames"),
+          mockupDate = document.getElementById("heroMockupDate");
+        const heroSlides = [
+          {
+            title: "<em>Cada evento...</em>",
+            image: "assets/img/book/casamiento.webp",
+            kicker: "Nos casamos",
+            names: "Lucía<br>&amp; Mateo",
+            date: "UNA FECHA · UN RECUERDO",
+          },
+          {
+            title: "<em>Tu <br> Casamiento...</em>",
+            image: "assets/img/book/casamiento.webp",
+            kicker: "Nos casamos",
+            names: "Lucía<br>&amp; Mateo",
+            date: "UNA FECHA · UN RECUERDO",
+          },
+          {
+            title: "<em>Su <br> Bautismo...</em>",
+            image: "assets/img/book/bautismo.png",
+            kicker: "Un día especial",
+            names: "Mi<br>bautismo",
+            date: "UN MOMENTO PARA RECORDAR",
+          },
+          {
+            title: "<em>Sus <br> Quinces...</em>",
+            image: "assets/img/book/15.webp",
+            kicker: "Mis quince",
+            names: "Una noche<br>inolvidable",
+            date: "EL COMIENZO DE UNA NUEVA HISTORIA",
+          },
+          {
+            title: "<em>Diseñá tu invitación </em>",
+            image: "assets/img/book/15.webp",
+            kicker: "Tu celebración",
+            names: "Tu historia<br>empieza acá",
+            date: "PRO-FIESTA · INVITACIONES DIGITALES",
+          },
+          {
+            title: "<em>... y contá </br> la tuya.</em>",
+            image: "assets/img/book/15.webp",
+            kicker: "Tu celebración",
+            names: "Tu historia<br>empieza acá",
+            date: "PRO-FIESTA · INVITACIONES DIGITALES",
+          },
+        ];
+        let heroSlideIndex = 0,
+          heroTimer = null;
+        const heroReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        function showHeroSlide(index) {
+          const slide = heroSlides[index];
+          if (heroReducedMotion) {
+            heroTitle.innerHTML = slide.title;
+            mockupImage.style.backgroundImage = `linear-gradient(180deg,rgba(24,18,20,.06),rgba(17,14,14,.72)),url('${slide.image}')`;
+            mockupKicker.textContent = slide.kicker;
+            mockupNames.innerHTML = slide.names;
+            mockupDate.textContent = slide.date;
+            return;
+          }
+          heroTitle.classList.remove("hero-title-wipe-in");
+          heroTitle.classList.add("hero-title-wipe-out");
+          mockupImage.classList.add("is-image-changing");
+          mockupContent.classList.add("is-changing");
+          window.setTimeout(() => {
+            heroTitle.innerHTML = slide.title;
+            mockupImage.style.backgroundImage = `linear-gradient(180deg,rgba(24,18,20,.06),rgba(17,14,14,.72)),url('${slide.image}')`;
+            mockupKicker.textContent = slide.kicker;
+            mockupNames.innerHTML = slide.names;
+            mockupDate.textContent = slide.date;
+            heroTitle.classList.remove("hero-title-wipe-out");
+            heroTitle.classList.add("hero-title-wipe-in");
+            mockupImage.classList.remove("is-image-changing");
+            mockupContent.classList.remove("is-changing");
+            window.setTimeout(
+              () => heroTitle.classList.remove("hero-title-wipe-in"),
+              850,
+            );
+          }, 720);
+        }
+        if (!heroReducedMotion) {
+          heroTimer = window.setInterval(() => {
+            heroSlideIndex = (heroSlideIndex + 1) % heroSlides.length;
+            showHeroSlide(heroSlideIndex);
+          }, 4600);
+        }
         const els = document.querySelectorAll(".reveal");
         if ("IntersectionObserver" in window) {
           const observer = new IntersectionObserver(
@@ -1747,115 +1736,6 @@
           );
           els.forEach((el) => observer.observe(el));
         } else els.forEach((el) => el.classList.add("in-view"));
-      })();
-
-      (() => {
-        "use strict";
-
-        // Respeta la preferencia de reducir animaciones.
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          return;
-        }
-
-        const layer = document.createElement("div");
-        layer.id = "gold-particle-layer";
-        layer.setAttribute("aria-hidden", "true");
-        document.body.appendChild(layer);
-
-        const isTouch = window.matchMedia("(pointer: coarse)").matches;
-        const maxParticles = isTouch ? 24 : 85;
-
-        let lastX = 0;
-        let lastY = 0;
-        let lastTime = 0;
-        let activeParticles = 0;
-
-        function createParticle(x, y) {
-          if (activeParticles >= maxParticles) return;
-
-          const particle = document.createElement("span");
-          const bubble = Math.random() < 0.25;
-          const size = bubble
-            ? 7 + Math.random() * 12
-            : 2.5 + Math.random() * 4.5;
-
-          const duration = 1200 + Math.random() * 900;
-          const angle = Math.random() * Math.PI * 2;
-          const distance = bubble
-            ? 18 + Math.random() * 45
-            : 12 + Math.random() * 42;
-
-          particle.className = "gold-particle " + (bubble ? "bubble" : "dust");
-
-          particle.style.left = `${x}px`;
-          particle.style.top = `${y}px`;
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-
-          particle.style.setProperty(
-            "--move-x",
-            `${Math.cos(angle) * distance}px`,
-          );
-          particle.style.setProperty(
-            "--move-y",
-            `${Math.sin(angle) * distance - 12}px`,
-          );
-          particle.style.setProperty("--duration", `${duration}ms`);
-          particle.style.setProperty(
-            "--peak-opacity",
-            bubble ? "0.55" : `${0.45 + Math.random() * 0.45}`,
-          );
-          particle.style.setProperty(
-            "--end-scale",
-            `${0.25 + Math.random() * 0.65}`,
-          );
-          particle.style.setProperty(
-            "--rotation",
-            `${Math.random() * 180 - 90}deg`,
-          );
-
-          layer.appendChild(particle);
-          activeParticles++;
-
-          window.setTimeout(() => {
-            particle.remove();
-            activeParticles--;
-          }, duration + 100);
-        }
-
-        document.addEventListener(
-          "pointermove",
-          (event) => {
-            if (event.pointerType === "touch") {
-              // Evita una estela demasiado intensa al desplazarse con el dedo.
-              if (isTouch && Math.random() > 0.35) return;
-            }
-
-            const now = performance.now();
-            const dx = event.clientX - lastX;
-            const dy = event.clientY - lastY;
-            const distance = Math.hypot(dx, dy);
-
-            if (distance < (isTouch ? 22 : 9)) return;
-            if (now - lastTime < 12) return;
-
-            lastX = event.clientX;
-            lastY = event.clientY;
-            lastTime = now;
-
-            const amount = isTouch ? 2 : 3 + (Math.random() < 0.5 ? 1 : 0);
-
-            for (let i = 0; i < amount; i++) {
-              const spread = isTouch ? 5 : 12;
-
-              createParticle(
-                event.clientX + (Math.random() - 0.5) * spread,
-                event.clientY + (Math.random() - 0.5) * spread,
-              );
-            }
-          },
-          { passive: true },
-        );
       })();
     </script>
   </body>
