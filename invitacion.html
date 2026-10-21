@@ -1595,6 +1595,78 @@
           letter-spacing: -0.5px;
         }
       }
+
+      /* =========================================
+   TRANSICIÓN CINEMATOGRÁFICA DE LA INVITACIÓN
+   Oscuridad desde los bordes y revelación
+========================================= */
+
+      #weddingTransition {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        pointer-events: none;
+        opacity: 0;
+
+        background: radial-gradient(
+          circle at center,
+          transparent 0%,
+          rgba(0, 0, 0, 0.25) 25%,
+          rgba(0, 0, 0, 0.78) 58%,
+          #000 100%
+        );
+
+        clip-path: circle(150% at 50% 50%);
+        transition: none;
+      }
+
+      #weddingTransition.wedding-closing {
+        opacity: 1;
+        clip-path: circle(0% at 50% 50%);
+        transition:
+          clip-path 1.8s cubic-bezier(0.65, 0, 0.35, 1),
+          opacity 0.5s ease;
+      }
+
+      /* Pantalla completamente oscura */
+      #weddingTransition.wedding-black {
+        opacity: 1;
+        clip-path: circle(0% at 50% 50%);
+        background: #000;
+      }
+
+      /* Apertura: la escena se revela desde el centro */
+      #weddingTransition.wedding-opening {
+        opacity: 1;
+        clip-path: circle(0% at 50% 50%);
+        background: radial-gradient(
+          circle at center,
+          transparent 0%,
+          rgba(0, 0, 0, 0.15) 35%,
+          rgba(0, 0, 0, 0.65) 72%,
+          #000 100%
+        );
+        transition: clip-path 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* Fin de la transición */
+      #weddingTransition.wedding-revealed {
+        opacity: 0;
+        clip-path: circle(150% at 50% 50%);
+        transition:
+          clip-path 1.25s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.15s ease 1.05s;
+      }
+
+      /* Accesibilidad: reducir movimiento si está configurado */
+      @media (prefers-reduced-motion: reduce) {
+        #weddingTransition,
+        #weddingTransition.wedding-closing,
+        #weddingTransition.wedding-opening,
+        #weddingTransition.wedding-revealed {
+          transition-duration: 0.01ms;
+        }
+      }
     </style>
   </head>
 
@@ -1615,7 +1687,7 @@
 
         <a href="#confirmacion">Confirmá tu asistencia</a>
 
-        <a href="/index-profiesta.html">Volver</a>
+        <a href="/">Volver</a>
       </nav>
 
       <a
@@ -1814,6 +1886,8 @@
         Con amor · 14.06.2027 · Sierra de los Padres
       </div>
     </footer>
+
+    <div id="weddingTransition" aria-hidden="true"></div>
 
     <audio
       id="weddingAudio"
@@ -2020,6 +2094,38 @@
           }, 1100);
         });
       })();
+
+      const weddingTransition = document.getElementById("weddingTransition");
+
+      // 1. Oscurecer desde los bordes hacia el centro.
+      weddingTransition.className = "wedding-closing";
+
+      // 2. Cuando la pantalla esté oscura, revelar la invitación.
+      setTimeout(() => {
+        weddingTransition.className = "wedding-black";
+
+        // IMPORTANTE:
+        // Aquí debe ejecutarse la lógica ORIGINAL que oculta
+        // #weddingIntro y muestra el resto de la invitación.
+        // Conservá también aquí la lógica original del audio,
+        // el contador u otras acciones que ya tengas.
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            weddingTransition.className = "wedding-opening";
+
+            // 3. Expandir el círculo y descubrir la escena.
+            setTimeout(() => {
+              weddingTransition.className = "wedding-revealed";
+
+              // Retirar la capa cuando termine la animación.
+              setTimeout(() => {
+                weddingTransition.className = "";
+              }, 1400);
+            }, 50);
+          });
+        });
+      }, 900);
     </script>
   </body>
 </html>
