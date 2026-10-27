@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#8c6d3d" />
+    <title>Eric & Li | Invitación de boda</title>
+    <style>
+      :root {
+        --brown: #8d6e40;
+        --brown-dark: #765a32;
+        --cream: #eee9d2;
+        --cream-light: #f5f0dd;
+        --ink: #29271f;
+        --muted: #6e6857;
+        --serif: "Bodoni MT", "Didot", "Times New Roman", serif;
+        --sans: Arial, Helvetica, sans-serif;
+        --content: 1120px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-weight: 400;
+        line-height: 1.6;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        font: inherit;
+      }
+
+      .section-inner {
+        width: min(var(--content), calc(100% - 64px));
+        margin-inline: auto;
+      }
+
+      /* PORTADA */
+      .hero {
+        min-height: min(780px, 88svh);
+        position: relative;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        isolation: isolate;
+        color: #fffdf4;
+        text-align: center;
+        background: #332c22;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(20, 18, 14, 0.35),
+            rgba(20, 18, 14, 0.46)
+          ),
+          url("assets/img/pruebas/1.jpg") center 42% / cover no-repeat;
+        transform: scale(1.015);
+        animation: heroZoom 18s ease-in-out infinite alternate;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.08),
+          transparent 45%,
+          rgba(0, 0, 0, 0.24)
+        );
+      }
+      .hero-content {
+        width: min(100%, 900px);
+        padding: 80px 24px 72px;
+        animation: riseIn 1.2s both;
+      }
+
+      .monogram {
+        width: 104px;
+        height: 64px;
+        margin: 0 auto 105px;
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fffdf4;
+        font-family: "Bodoni MT", "Didot", "Times New Roman", serif;
+        font-style: italic;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      }
+
+      .monogram-e,
+      .monogram-l {
+        position: absolute;
+        font-size: 25px;
+        line-height: 1;
+      }
+
+      .monogram-e {
+        top: 4px;
+        left: 42px;
+      }
+
+      .monogram-amp {
+        position: absolute;
+        top: 20px;
+        left: 43px;
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .monogram-l {
+        bottom: 3px;
+        left: 44px;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font: 400 clamp(3.2rem, 10vw, 8.8rem)/0.95 var(--serif);
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+        text-shadow: 0 3px 22px #0006;
+      }
+      .hero-date {
+        margin: 26px 0 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+      .scroll-cue {
+        position: absolute;
+        bottom: 26px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.85;
+      }
+      .scroll-cue::after {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 34px;
+        margin: 10px auto 0;
+        background: currentColor;
+        transform-origin: top;
+        animation: cue 1.6s ease-in-out infinite;
+      }
+
+      /* GALERÍA */
+      .gallery-section {
+        padding: clamp(38px, 6vw, 72px) 0;
+        background: var(--brown);
+      }
+      .gallery-grid {
+        width: min(780px, calc(100% - 48px));
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr 0.88fr;
+        grid-template-rows: repeat(2, minmax(150px, 240px));
+        gap: 24px;
+        align-items: center;
+      }
+      .gallery-photo {
+        position: relative;
+        overflow: hidden;
+        background: #6d583a;
+        min-height: 150px;
+      }
+      .gallery-photo:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        height: 100%;
+      }
+      .gallery-photo:nth-child(3) {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      .gallery-photo img {
+        width: 100%;
+        height: 100%;
+        min-height: inherit;
+        object-fit: cover;
+        transition:
+          transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+          filter 0.5s;
+      }
+      .gallery-photo:hover img {
+        transform: scale(1.055);
+        filter: saturate(1.08);
+      }
+      .gallery-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid #fff2;
+        pointer-events: none;
+      }
+
+      /* HISTORIA */
+      .story-section {
+        padding: clamp(72px, 10vw, 145px) 0;
+        background: var(--cream);
+        overflow: hidden;
+      }
+      .story-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(30px, 7vw, 100px);
+        align-items: center;
+      }
+      .eyebrow {
+        font-size: 0.65rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      h2 {
+        font: 400 clamp(2.3rem, 5.2vw, 4.5rem)/0.92 var(--serif);
+        text-transform: uppercase;
+        margin: 14px 0 24px;
+        letter-spacing: -0.025em;
+      }
+      .story-copy p,
+      .promise-copy p {
+        max-width: 410px;
+        font-size: 0.88rem;
+        line-height: 1.9;
+        color: #514d41;
+      }
+      .line-art {
+        position: relative;
+        min-height: 300px;
+        display: grid;
+        place-items: center;
+        color: #b6b39a;
+      }
+      .line-art img {
+        width: 100%;
+        max-width: 470px;
+        max-height: 360px;
+        object-fit: contain;
+        mix-blend-mode: multiply;
+        opacity: 0.72;
+      }
+      .line-art-placeholder {
+        width: 100%;
+        max-width: 430px;
+        aspect-ratio: 1.2;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        align-items: center;
+        justify-items: center;
+        color: #b4b097;
+        opacity: 0.8;
+        font: 42px var(--serif);
+      }
+      .line-art-placeholder span:nth-child(even) {
+        transform: rotate(-15deg) translateY(18px);
+      }
+      .line-art-placeholder span:nth-child(3n) {
+        transform: rotate(15deg) translateY(-12px);
+      }
+
+      /* PROMESA */
+      .promise-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: var(--brown);
+        color: var(--cream-light);
+        min-height: 450px;
+      }
+      .promise-image {
+        min-height: 450px;
+        overflow: hidden;
+      }
+      .promise-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .promise-copy {
+        align-self: center;
+        max-width: 610px;
+        padding: clamp(40px, 7vw, 95px);
+      }
+      .promise-copy p {
+        color: #f2ead7;
+      }
+
+      /* CRONOGRAMA */
+      .events-section {
+        padding: clamp(70px, 9vw, 120px) 0;
+        background: var(--cream);
+      }
+      .events-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.85fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .event-date {
+        margin: -8px 0 28px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+      }
+      .timeline {
+        border-top: 1px solid #9b927c;
+      }
+      .timeline-row {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 15px;
+        padding: 14px 4px;
+        border-bottom: 1px solid #9b927c;
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .timeline-row time {
+        color: #6e6049;
+      }
+      .events-art {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        align-items: center;
+        color: #b5b29a;
+        font: 42px var(--serif);
+        text-align: center;
+      }
+      .events-art span:nth-child(odd) {
+        transform: rotate(-12deg);
+      }
+      .events-art span:nth-child(even) {
+        transform: rotate(12deg) translateY(20px);
+      }
+
+      /* INFORMACIÓN */
+      .info-section {
+        background: var(--brown);
+        color: var(--cream-light);
+        padding: clamp(64px, 8vw, 105px) 0;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: clamp(35px, 8vw, 110px);
+        align-items: center;
+      }
+      .info-title h2 {
+        margin-bottom: 20px;
+      }
+      .gift-icon {
+        font: 70px var(--serif);
+        opacity: 0.8;
+      }
+      .info-list {
+        border-top: 1px solid #d5c6a8a8;
+      }
+      .info-item {
+        display: grid;
+        grid-template-columns: 135px 1fr;
+        gap: 20px;
+        padding: 18px 0;
+        border-bottom: 1px solid #d5c6a8a8;
+      }
+      .info-item h3 {
+        margin: 0;
+        font-size: 0.64rem;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .info-item p,
+      .info-item a {
+        margin: 0;
+        color: #f0e8d6;
+        font-size: 0.73rem;
+        line-height: 1.75;
+        overflow-wrap: anywhere;
+      }
+      .info-item a {
+        text-underline-offset: 3px;
+      }
+
+      /* CIERRE */
+      .closing-section {
+        padding: clamp(70px, 9vw, 110px) 0 55px;
+        text-align: center;
+        background: var(--cream);
+      }
+      .closing-section h2 {
+        font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+        margin-bottom: 4px;
+      }
+      .closing-script {
+        margin: 0 0 35px;
+        font: italic 1.4rem var(--serif);
+      }
+      .closing-photo {
+        width: min(350px, 78%);
+        aspect-ratio: 1.35;
+        margin: 0 auto;
+        object-fit: cover;
+      }
+      .rsvp-button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 13px 25px;
+        border: 1px solid var(--brown);
+        color: var(--brown-dark);
+        text-decoration: none;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        transition:
+          background 0.25s,
+          color 0.25s,
+          transform 0.25s;
+      }
+      .rsvp-button:hover {
+        background: var(--brown);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      footer {
+        border-top: 1px solid #b8ad91;
+        padding: 28px max(24px, calc((100% - var(--content)) / 2));
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1.3fr 1fr;
+        gap: 24px;
+        align-items: center;
+        background: var(--cream);
+      }
+      .footer-brand {
+        font: italic 1.5rem var(--serif);
+      }
+      .footer-brand small {
+        display: block;
+        font: 0.55rem var(--sans);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .footer-item {
+        font-size: 0.62rem;
+        overflow-wrap: anywhere;
+      }
+      .footer-item strong {
+        display: block;
+        font-weight: 400;
+        font-size: 0.58rem;
+        letter-spacing: 0.12em;
+        margin-bottom: 5px;
+      }
+
+      /* Aparición al desplazarse */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .gallery-photo.reveal {
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+      .gallery-photo.reveal.is-visible {
+        transform: translateY(0);
+      }
+
+      @keyframes heroZoom {
+        from {
+          transform: scale(1.015);
+        }
+        to {
+          transform: scale(1.08);
+        }
+      }
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes cue {
+        0%,
+        100% {
+          transform: scaleY(0.65);
+          opacity: 0.45;
+        }
+        50% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .section-inner {
+          width: min(100% - 40px, 560px);
+        }
+        .hero {
+          min-height: 76svh;
+        }
+        .hero::before {
+          background-position: center;
+        }
+        .monogram {
+          margin-bottom: 80px;
+        }
+        .gallery-grid {
+          width: calc(100% - 36px);
+          grid-template-rows: 145px 145px;
+          gap: 13px;
+        }
+        .story-grid,
+        .events-grid,
+        .info-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .story-section {
+          padding-block: 70px;
+        }
+        .line-art {
+          min-height: 180px;
+        }
+        .line-art img {
+          max-height: 240px;
+        }
+        .line-art-placeholder {
+          max-width: 320px;
+          font-size: 34px;
+        }
+        .promise-section {
+          grid-template-columns: 1fr;
+        }
+        .promise-image {
+          min-height: 300px;
+          height: 58vw;
+          max-height: 430px;
+        }
+        .promise-copy {
+          padding: 52px 28px 60px;
+        }
+        .events-grid {
+          gap: 36px;
+        }
+        .events-art {
+          max-width: 340px;
+          margin-inline: auto;
+        }
+        .info-grid {
+          gap: 24px;
+        }
+        .gift-icon {
+          font-size: 54px;
+        }
+        .info-item {
+          grid-template-columns: 105px 1fr;
+          gap: 14px;
+        }
+        footer {
+          grid-template-columns: 1fr 1fr;
+          padding: 25px 20px;
+          gap: 22px 16px;
+        }
+      }
+      @media (max-width: 390px) {
+        .hero h1 {
+          font-size: 3rem;
+        }
+        .gallery-grid {
+          grid-template-rows: 120px 120px;
+        }
+        .timeline-row {
+          grid-template-columns: 78px 1fr;
+          font-size: 0.61rem;
+        }
+        .info-item {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+        footer {
+          font-size: 0.6rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero" id="inicio">
+        <div class="hero-content">
+          <div class="monogram" aria-label="Eric y Li">
+            <span class="monogram-e">E</span>
+            <span class="monogram-amp">&</span>
+            <span class="monogram-l">L</span>
+          </div>
+
+          <h1>Eric <span>&amp;</span> Li</h1>
+          <p class="hero-date">Nuestra boda · 10 de octubre de 2030</p>
+        </div>
+        <a class="scroll-cue" href="#galeria">Descubrí nuestra historia</a>
+      </header>
+
+      <section
+        class="gallery-section"
+        id="galeria"
+        aria-label="Galería de fotografías"
+      >
+        <div class="gallery-grid">
+          <figure class="gallery-photo reveal">
+            <img
+              src="assets/img/pruebas/2.jpg"
+              alt="Retrato de Eric preparándose para la boda"
+              loading="lazy"
+            />
+          </figure>
+          <figure class="gallery-photo reveal">
+            <img
+              src="assets/img/pruebas/3.jpg"
+              alt="Eric y Li en el lugar de la celebración"
+              loading="lazy"
+            />
+          </figure>
+          <figure class="gallery-photo reveal">
+            <img
+              src="assets/img/pruebas/4.jpg"
+              alt="Li en un momento de preparación"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="story-section">
+        <div class="section-inner story-grid">
+          <div class="story-copy reveal">
+            <span class="eyebrow">Nuestra historia</span>
+            <h2>Un encuentro<br />inesperado</h2>
+            <p>
+              Hay encuentros que cambian el rumbo de nuestras vidas. Desde aquel
+              primer momento hasta hoy, cada paso nos trajo hasta esta historia
+              que queremos celebrar con vos.
+            </p>
+            <p>
+              Nos encantaría compartir este día tan especial con las personas
+              que forman parte de nuestra vida.
+            </p>
+          </div>
+          <div class="line-art reveal" aria-hidden="true">
+            <img
+              src="assets/img/pruebas/5.png"
+              alt=""
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'grid';
+              "
+            />
+            <div class="line-art-placeholder" style="display: none">
+              <span>♧</span><span>♧</span><span>◯</span><span>♜</span
+              ><span>♡</span><span>♧</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="promise-section">
+        <div class="promise-image reveal">
+          <img
+            src="assets/img/pruebas/6.jpg"
+            alt="La pareja caminando junta"
+            loading="lazy"
+          />
+        </div>
+        <div class="promise-copy reveal">
+          <span class="eyebrow" style="color: #e4d6b8">Nuestro compromiso</span>
+          <h2>Una promesa<br />para toda la vida</h2>
+          <p>
+            Nos preparamos para dar uno de los pasos más importantes de nuestra
+            historia. Queremos compartir con ustedes la emoción de nuestra
+            ceremonia y la alegría de celebrar juntos.
+          </p>
+          <p>Gracias por acompañarnos en el comienzo de esta nueva etapa.</p>
+        </div>
+      </section>
+
+      <section class="events-section" id="evento">
+        <div class="section-inner events-grid">
+          <div class="reveal">
+            <span class="eyebrow">Reservá la fecha</span>
+            <h2>Los eventos<br />del día</h2>
+            <p class="event-date">10 de octubre de 2030</p>
+            <div class="timeline">
+              <div class="timeline-row">
+                <time>15:00 h</time><span>Ceremonia y votos</span>
+              </div>
+              <div class="timeline-row">
+                <time>16:00 h</time><span>Recepción y brindis</span>
+              </div>
+              <div class="timeline-row">
+                <time>17:00 h</time><span>Cena y celebración</span>
+              </div>
+              <div class="timeline-row">
+                <time>20:00 h</time><span>Baile y despedida</span>
+              </div>
+            </div>
+          </div>
+          <div class="events-art reveal" aria-hidden="true">
+            <span>◯</span><span>❀</span><span>♧</span><span>♜</span
+            ><span>♧</span><span>◇</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-section" id="informacion">
+        <div class="section-inner info-grid">
+          <div class="info-title reveal">
+            <span class="eyebrow" style="color: #e4d6b8"
+              >Todo lo que necesitás saber</span
+            >
+            <h2>Información<br />para invitados</h2>
+            <div class="gift-icon" aria-hidden="true">♧</div>
+          </div>
+          <div class="info-list reveal">
+            <article class="info-item">
+              <h3>Vestimenta</h3>
+              <p>
+                Te invitamos a acompañarnos con vestimenta formal para celebrar
+                esta ocasión tan especial. Queremos que te sientas cómodo y
+                disfrutes de cada momento.
+              </p>
+            </article>
+            <article class="info-item">
+              <h3>Regalos</h3>
+              <p>
+                Tu presencia es nuestro mejor regalo. Si deseás hacernos un
+                obsequio, podés consultar los datos que compartiremos
+                próximamente.
+              </p>
+            </article>
+            <article class="info-item">
+              <h3>Ceremonia</h3>
+              <p>
+                Te pedimos que durante la ceremonia disfrutes del momento y
+                evites interrumpirlo con el teléfono. ¡Gracias por acompañarnos!
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing-section" id="confirmacion">
+        <div class="section-inner reveal">
+          <span class="eyebrow">Un día para recordar</span>
+          <h2>¡No vemos la hora!</h2>
+          <p class="closing-script">de celebrar con vos</p>
+          <img
+            class="closing-photo"
+            src="assets/img/pruebas/7.jpg"
+            alt="La pareja en un momento especial"
+            loading="lazy"
+          />
+          <p>Tu presencia hará que este día sea aún más especial.</p>
+          <a
+            class="rsvp-button"
+            id="rsvpLink"
+            href="https://wa.me/"
+            target="_blank"
+            rel="noopener"
+            >Confirmar asistencia</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">
+        Eric &amp; Li<small>Con amor, para siempre</small>
+      </div>
+      <div class="footer-item">
+        <strong>CONTACTO</strong><span>Organización del evento</span>
+      </div>
+      <div class="footer-item">
+        <strong>EMAIL</strong><span>hola@ejemplo.com</span>
+      </div>
+      <div class="footer-item">
+        <strong>REDES</strong><span>Compartí este día con nosotros</span>
+      </div>
+    </footer>
+
+    <script>
+      // Animaciones de aparición al entrar cada sección en pantalla.
+      (() => {
+        const items = document.querySelectorAll(".reveal");
+        const reducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        if (reducedMotion || !("IntersectionObserver" in window)) {
+          items.forEach((item) => item.classList.add("is-visible"));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.14 },
+        );
+
+        items.forEach((item) => observer.observe(item));
+      })();
+
+      // Personalización rápida: reemplazá el número por el WhatsApp real,
+      // incluyendo código de país y área, sin +, espacios ni guiones.
+      const whatsappNumber = ""; // Ejemplo: "5492231234567"
+      const whatsappMessage =
+        "¡Hola! Confirmo mi asistencia a la boda de Eric y Li.";
+      const rsvpLink = document.getElementById("rsvpLink");
+
+      rsvpLink.addEventListener("click", (event) => {
+        if (!whatsappNumber) {
+          event.preventDefault();
+          alert(
+            "Para activar la confirmación, completá la variable whatsappNumber al final del archivo prueba-1.html.",
+          );
+          return;
+        }
+        rsvpLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+      });
+    </script>
+  </body>
+</html>

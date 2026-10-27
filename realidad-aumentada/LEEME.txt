@@ -1,0 +1,24 @@
+PRO-FIESTA — DEMO DE REALIDAD AUMENTADA CON DINOSAURIO
+
+Incluye:
+- index.html: experiencia de realidad aumentada.
+- preparar-tarjeta.html: herramienta para generar el archivo de reconocimiento.
+- assets/tarjeta-dino.jpg: ilustración de prueba.
+
+PUBLICACIÓN
+1. En tu repositorio planificarmedios/pro-fiesta, creá la carpeta realidad-aumentada.
+2. Copiá allí index.html y preparar-tarjeta.html.
+3. Copiá la carpeta assets completa dentro de realidad-aumentada.
+4. Publicá los cambios en GitHub Pages.
+5. Abrí https://planificarmedios.github.io/pro-fiesta/realidad-aumentada/preparar-tarjeta.html
+6. En la herramienta, elegí tarjeta-dino.jpg (descargala de assets si no la tenés local).
+7. Tocá Generar archivo tarjeta.mind. Subí el archivo descargado a realidad-aumentada/assets/ en GitHub.
+8. Abrí https://planificarmedios.github.io/pro-fiesta/realidad-aumentada/
+
+PRUEBA
+- Abrí la tarjeta en una computadora o imprimila.
+- Desde el celular, abrí la URL y pulsá Activar realidad aumentada.
+- Aceptá el permiso de cámara y apuntá a la tarjeta.
+
+IMPORTANTE
+El archivo assets/tarjeta.mind es obligatorio y se genera en los pasos 5–7. El dinosaurio 3D de esta primera prueba está construido con geometrías de Three.js: es una maqueta animada, no un modelo cinematográfico. La experiencia requiere conexión a internet para cargar MindAR y Three.js.
